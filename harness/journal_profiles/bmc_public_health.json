@@ -1,0 +1,44 @@
+{
+  "id": "bmc-public-health",
+  "name": "BMC Public Health",
+  "publisher": "Springer Nature",
+  "sourceUrl": "https://link.springer.com/journal/12889",
+  "sourceChecked": "2026-06-11",
+  "sourceVerifiedFacts": [
+    "Open access journal",
+    "Publishes research in public health, including social determinants, environmental, behavioral, and occupational correlates of health and disease",
+    "Author menu includes pre-submission checklist and submission guidelines",
+    "Indexed in MEDLINE, PubMedCentral, SCOPUS, and Science Citation Index Expanded according to journal page"
+  ],
+  "articleTypes": ["Research", "Systematic Review", "Study protocol"],
+  "defaultArticleType": "Research",
+  "limits": {
+    "wordCount": {"min": 2500, "max": 9000, "hard": false, "note": "Use target journal author instructions for final hard limit because public journal pages can change."},
+    "abstractWordCount": {"max": 350, "hard": false},
+    "tablesAndFigures": {"max": 10, "hard": false},
+    "references": {"max": 80, "hard": false}
+  },
+  "formatting": {
+    "referenceStyle": "Vancouver / BMC numeric style",
+    "structuredAbstract": true,
+    "titlePageRequired": true,
+    "submissionSystem": "Springer Nature submissions"
+  },
+  "requiredStatements": [
+    "funding",
+    "conflicts_of_interest",
+    "data_availability",
+    "ethics_statement",
+    "author_contributions",
+    "acknowledgements",
+    "consent_for_publication"
+  ],
+  "reportingGuidelinePolicy": {
+    "observational": "STROBE",
+    "randomized_trial": "CONSORT",
+    "systematic_review": "PRISMA",
+    "prediction_model": "TRIPOD",
+    "real_world_evidence": "RECORD",
+    "diagnostic_accuracy": "STARD"
+  }
+}

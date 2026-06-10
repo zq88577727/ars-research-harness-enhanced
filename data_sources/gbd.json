@@ -1,0 +1,13 @@
+{
+  "id": "gbd",
+  "name": "Global Burden of Disease Results",
+  "steward": "Institute for Health Metrics and Evaluation / GHDx",
+  "officialUrl": "https://vizhub.healthdata.org/gbd-results/",
+  "sourceChecked": "2026-06-11",
+  "accessMode": "GBD Results Tool export or approved API/data download route",
+  "rawDataPolicy": "Do not assume unrestricted API access. Commit only query manifests and small derived tables when licensing and citation requirements allow.",
+  "supportedStudyDesigns": ["descriptive burden analysis", "trend analysis", "comparative disease burden analysis"],
+  "expectedRawLayout": "data/gbd/raw/<gbd_release>/",
+  "requiredHarnessStages": ["S1 metric/cause/location/year question", "S2 GBD query manifest", "S3 exported results validation", "S4 uncertainty interval interpretation", "S7 source citation audit"],
+  "minimumQueryDimensions": ["gbd_release", "measure", "metric", "cause", "location", "age", "sex", "year"]
+}

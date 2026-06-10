@@ -21,6 +21,9 @@ Core properties:
 - complete NHANES example that can be reused as a template
 - enhanced manuscript-number, reference, reporting-checklist, journal-profile,
   environment-lock, and reviewer-response trace validators
+- CI validation, optional Crossref/PubMed literature checks, structured claim
+  registries, automatic revision diff reports, and source-aware NHANES/CHARLS/GBD
+  adapter manifests
 
 ## Quick Start
 
@@ -50,6 +53,8 @@ Key outputs:
 
 Enhanced validation details are documented in
 [docs/08-enhanced-validation-roadmap.md](docs/08-enhanced-validation-roadmap.md).
+Production feasibility and public-database access boundaries are documented in
+[docs/09-production-feasibility-matrix.md](docs/09-production-feasibility-matrix.md).
 
 ## Workflow
 

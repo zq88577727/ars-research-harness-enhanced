@@ -1,0 +1,54 @@
+{
+  "id": "nhanes-undiagnosed-diabetes-claim-registry",
+  "manuscript": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+  "claims": [
+    {
+      "id": "sample-final-n",
+      "type": "sample-size",
+      "expectedText": "4,004 remained",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/flow_counts.csv",
+      "sourceFields": ["After excluding pregnant participants"],
+      "interpretationBoundary": "descriptive sample construction"
+    },
+    {
+      "id": "primary-prevalence",
+      "type": "weighted-prevalence",
+      "expectedText": "2.17% (95% CI, 1.74%-2.70%)",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/weighted_prevalence_overall.csv",
+      "sourceFields": ["weighted_percent", "ci_low", "ci_high"],
+      "interpretationBoundary": "weighted cross-sectional estimate, not clinical diagnosis"
+    },
+    {
+      "id": "prediabetes-prevalence",
+      "type": "weighted-prevalence",
+      "expectedText": "24.76% (95% CI, 22.63%-27.02%)",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/weighted_prevalence_overall.csv",
+      "sourceFields": ["weighted_percent", "ci_low", "ci_high"],
+      "interpretationBoundary": "single HbA1c epidemiologic definition"
+    },
+    {
+      "id": "fasting-sensitivity",
+      "type": "sensitivity-analysis",
+      "expectedText": "1.84% (95% CI, 1.29%-2.62%) using HbA1c alone to 4.06% (95% CI, 3.12%-5.28%)",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/fasting_weighted_sensitivity_prevalence.csv",
+      "sourceFields": ["weighted_percent", "ci_low", "ci_high", "weight"],
+      "interpretationBoundary": "fasting subsample, not replacement for primary analysis"
+    },
+    {
+      "id": "waist-or",
+      "type": "model-estimate",
+      "expectedText": "1.051; 95% CI, 1.030-1.073",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
+      "sourceFields": ["Waist circumference, per cm"],
+      "interpretationBoundary": "association, not causal effect"
+    },
+    {
+      "id": "non-hdl-or",
+      "type": "model-estimate",
+      "expectedText": "1.016; 95% CI, 1.008-1.023",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
+      "sourceFields": ["Non-HDL cholesterol, per mg/dL"],
+      "interpretationBoundary": "association, not clinical rule"
+    }
+  ]
+}

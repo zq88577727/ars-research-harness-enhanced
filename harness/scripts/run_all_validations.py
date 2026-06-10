@@ -16,10 +16,14 @@ COMMANDS = [
     ["python3", "harness/scripts/validate_checkpoint_workflow.py", "examples/nhanes-undiagnosed-diabetes/workflow-run.json"],
     ["python3", "harness/validators/validate_manuscript_numbers.py"],
     ["python3", "harness/validators/validate_references.py"],
+    ["python3", "harness/validators/validate_external_literature.py"],
+    ["python3", "harness/validators/validate_claims.py"],
     ["python3", "harness/validators/validate_environment_lock.py"],
     ["python3", "harness/validators/validate_reporting_checklist.py"],
     ["python3", "harness/validators/validate_journal_profile.py"],
     ["python3", "harness/validators/validate_revision_trace.py"],
+    ["python3", "harness/validators/validate_revision_diff_report.py"],
+    ["python3", "harness/validators/validate_data_source_manifests.py"],
 ]
 
 

@@ -16,7 +16,7 @@ WORKDIR /workspace
 COPY requirements.txt /workspace/requirements.txt
 RUN python3 -m pip install --no-cache-dir -r /workspace/requirements.txt
 
-RUN Rscript -e 'install.packages(c("haven","dplyr","readr","survey","ggplot2"), repos="https://cloud.r-project.org")'
+RUN Rscript -e 'install.packages(c("haven","dplyr","readr","survey","ggplot2"), repos="https://packagemanager.posit.co/cran/2026-06-10")'
 
 COPY . /workspace
 

@@ -13,6 +13,10 @@ tmp/
 *.log
 *.tmp
 .workflow/
+data/charls/raw/
+data/gbd/raw/
+data/**/restricted/
+data/**/sensitive/
 NHANES_SCI投稿包_可见版/
 analysis/
 articles/

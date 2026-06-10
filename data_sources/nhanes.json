@@ -1,0 +1,14 @@
+{
+  "id": "nhanes",
+  "name": "National Health and Nutrition Examination Survey",
+  "steward": "CDC/NCHS",
+  "accessMode": "public-use files",
+  "rawDataPolicy": "Small public-use example files may be stored when source reuse rules permit; cite CDC/NCHS source pages.",
+  "supportedStudyDesigns": ["cross-sectional", "trend analysis with multiple cycles"],
+  "weighting": {
+    "primaryWeights": ["WTMEC2YR", "WTSAF2YR"],
+    "designVariables": ["SDMVPSU", "SDMVSTRA"]
+  },
+  "requiredHarnessStages": ["S1 research question", "S2 survey-weighted analysis plan", "S3 analysis execution", "S7 number and citation audit"],
+  "exampleRun": "examples/nhanes-undiagnosed-diabetes"
+}

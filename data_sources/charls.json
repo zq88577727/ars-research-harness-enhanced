@@ -1,0 +1,19 @@
+{
+  "id": "charls",
+  "name": "China Health and Retirement Longitudinal Study",
+  "steward": "Peking University",
+  "officialUrl": "https://charls.pku.edu.cn/en/",
+  "sourceChecked": "2026-06-11",
+  "accessMode": "registered user download through CHARLS data portal",
+  "rawDataPolicy": "Do not commit raw CHARLS data to this repository. Store user-downloaded files under a local ignored directory and keep only derived non-identifiable outputs that comply with CHARLS terms.",
+  "officialFacts": [
+    "Nationally representative sample of Chinese residents ages 45 and older",
+    "Baseline national wave fielded in 2011 with about 10,000 households and 17,500 individuals",
+    "Website exposes sign in/sign up and data portal links",
+    "News page reports Wave 5 (2020) National Followup Survey Data released on 2023-11-16"
+  ],
+  "supportedStudyDesigns": ["longitudinal cohort", "cross-sectional wave analysis", "aging and chronic disease analysis"],
+  "expectedRawLayout": "data/charls/raw/<wave>/",
+  "requiredHarnessStages": ["S1 longitudinal estimand", "S2 attrition and wave-linkage plan", "S3 reproducible cleaning scripts", "S7 ethics/data-use audit"],
+  "minimumVariablesToMap": ["respondent_id", "wave", "age", "sex", "education", "residence", "health_outcome", "sample_weight"]
+}
