@@ -1,0 +1,13 @@
+{
+  "id": "observational-cross-sectional",
+  "name": "Observational cross-sectional medical manuscript",
+  "reportingGuideline": "STROBE",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["answerable research question", "population", "outcome", "exposures/correlates", "non-causal interpretation boundary"],
+    "S2": ["data source", "eligibility criteria", "variable definitions", "survey/cluster/weight handling if applicable", "missing data plan"],
+    "S3": ["analysis log", "raw outputs", "derived tables", "figures", "session/package versions"],
+    "S4": ["effect estimate interpretation", "precision and uncertainty", "bias risks", "causality guardrails"],
+    "S7": ["claim-to-source map", "number-to-result audit", "reporting checklist audit"]
+  }
+}

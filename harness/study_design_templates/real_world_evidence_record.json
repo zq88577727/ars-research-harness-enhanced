@@ -1,0 +1,12 @@
+{
+  "id": "real-world-evidence-record",
+  "name": "Routinely collected health data manuscript",
+  "reportingGuideline": "RECORD",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["data source", "population", "exposure", "outcome", "causal or descriptive estimand"],
+    "S2": ["code lists", "data linkage", "privacy constraints", "missing data", "confounding strategy"],
+    "S3": ["cohort construction log", "code list appendix", "balance diagnostics", "primary and sensitivity outputs"],
+    "S7": ["RECORD checklist", "code-list reproducibility", "linkage bias audit", "data provenance audit"]
+  }
+}

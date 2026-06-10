@@ -1,0 +1,12 @@
+{
+  "id": "prediction-model-tripod",
+  "name": "Prediction model development or validation manuscript",
+  "reportingGuideline": "TRIPOD",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["target population", "prediction horizon", "outcome", "candidate predictors", "intended use"],
+    "S2": ["sample size/event count", "missing data", "model specification", "validation strategy", "calibration/discrimination metrics"],
+    "S3": ["model coefficients", "performance metrics", "calibration plots", "internal/external validation outputs"],
+    "S7": ["TRIPOD checklist", "overfitting audit", "data leakage audit", "clinical utility boundary"]
+  }
+}

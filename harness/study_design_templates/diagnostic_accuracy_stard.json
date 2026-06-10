@@ -1,0 +1,12 @@
+{
+  "id": "diagnostic-accuracy-stard",
+  "name": "Diagnostic accuracy manuscript",
+  "reportingGuideline": "STARD",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["index test", "reference standard", "target condition", "clinical setting", "intended role"],
+    "S2": ["participant sampling", "blinding", "test thresholds", "indeterminate results", "accuracy metrics"],
+    "S3": ["2x2 tables", "sensitivity/specificity", "predictive values", "ROC/AUC if applicable", "flow diagram"],
+    "S7": ["STARD checklist", "threshold audit", "reference-standard bias audit", "clinical-use boundary"]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "nhanes-s8-major-revision-trace",
+  "sourceReview": "examples/nhanes-undiagnosed-diabetes/checkpoints/stage-S8-review-revision.md",
+  "revisedManuscript": "examples/nhanes-undiagnosed-diabetes/checkpoints/stage-S8b-revised-manuscript.md",
+  "items": [
+    {
+      "reviewerItem": "Replace placeholder tables and figures with generated final artifacts.",
+      "priority": "major",
+      "response": "Generated Table 1, Table 2, supplementary tables, and flow/subgroup figures.",
+      "evidenceFiles": [
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/table1_formatted.md",
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.md",
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure1_flow.png",
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure2_subgroup_prevalence.png"
+      ],
+      "manuscriptAnchors": ["# Tables and Figures", "## Table 1", "## Table 2"],
+      "status": "implemented"
+    },
+    {
+      "reviewerItem": "Use fasting subsample weights for fasting-glucose sensitivity analysis.",
+      "priority": "major",
+      "response": "Recalculated fasting sensitivity with WTSAF2YR and updated manuscript language.",
+      "evidenceFiles": [
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/fasting_weighted_sensitivity_prevalence.csv",
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/s8b_fasting_weighted_sensitivity_log.txt"
+      ],
+      "manuscriptAnchors": ["fasting subsample weights", "WTSAF2YR", "4.06%"],
+      "status": "implemented"
+    },
+    {
+      "reviewerItem": "Clarify missingness and model degrees of freedom.",
+      "priority": "major",
+      "response": "Added model n, design df, and key covariate missingness.",
+      "evidenceFiles": [
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/covariate_missingness.md",
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.md"
+      ],
+      "manuscriptAnchors": ["final survey design had 15 design degrees of freedom", "model included 3,621 participants", "Key covariate missingness"],
+      "status": "implemented"
+    },
+    {
+      "reviewerItem": "Strengthen equity-oriented interpretation of race/ethnicity results.",
+      "priority": "moderate",
+      "response": "Expanded interpretation boundaries and added targeted references.",
+      "evidenceFiles": [
+        "examples/nhanes-undiagnosed-diabetes/checkpoints/stage-S8b-revised-manuscript.md"
+      ],
+      "manuscriptAnchors": ["screening equity", "not to assign individual risk on the basis of race or ethnicity alone"],
+      "status": "implemented"
+    }
+  ]
+}

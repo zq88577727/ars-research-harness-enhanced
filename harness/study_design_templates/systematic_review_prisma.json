@@ -1,0 +1,12 @@
+{
+  "id": "systematic-review-prisma",
+  "name": "Systematic review or meta-analysis manuscript",
+  "reportingGuideline": "PRISMA",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["review question", "PICO/PECO", "eligibility criteria", "review type"],
+    "S2": ["protocol registration", "databases", "search strategy", "screening process", "risk-of-bias tool", "synthesis plan"],
+    "S3": ["search records", "screening decisions", "extraction table", "risk-of-bias ratings", "meta-analysis outputs if applicable"],
+    "S7": ["PRISMA checklist", "search reproducibility", "study inclusion trace", "effect-size extraction audit"]
+  }
+}

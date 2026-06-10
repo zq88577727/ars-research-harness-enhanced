@@ -1,0 +1,12 @@
+{
+  "id": "randomized-trial-consort",
+  "name": "Randomized controlled trial manuscript",
+  "reportingGuideline": "CONSORT",
+  "requiredStages": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"],
+  "stageContracts": {
+    "S1": ["trial question", "PICO", "primary outcome", "secondary outcomes", "clinical equipoise"],
+    "S2": ["randomization", "allocation concealment", "blinding", "sample size rationale", "analysis population", "trial registration"],
+    "S3": ["participant flow", "baseline table", "primary outcome analysis", "harms/adverse events", "protocol deviations"],
+    "S7": ["CONSORT checklist", "trial registration match", "protocol-to-manuscript consistency", "harms completeness"]
+  }
+}

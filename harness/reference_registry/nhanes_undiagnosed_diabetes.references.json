@@ -1,0 +1,158 @@
+{
+  "manuscript": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+  "verificationDate": "2026-06-10",
+  "references": [
+    {
+      "number": 1,
+      "type": "official-web",
+      "must_contain": ["Centers for Disease Control and Prevention", "NHANES Survey Methods and Analytic Guidelines", "Accessed June 10, 2026"],
+      "url": "https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx"
+    },
+    {
+      "number": 2,
+      "type": "official-web",
+      "must_contain": ["Centers for Disease Control and Prevention", "NHANES Weighting Module", "Accessed June 10, 2026"],
+      "url": "https://wwwn.cdc.gov/nchs/nhanes/tutorials/weighting.aspx"
+    },
+    {
+      "number": 3,
+      "type": "official-web",
+      "must_contain": ["Glycohemoglobin", "GHB_J", "NHANES 2017-2018"],
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/GHB_J.htm"
+    },
+    {
+      "number": 4,
+      "type": "official-web",
+      "must_contain": ["NHANES 2017-2018 Laboratory Data", "Accessed June 10, 2026"],
+      "url": "https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Laboratory&Cycle=2017-2018"
+    },
+    {
+      "number": 5,
+      "type": "official-web",
+      "must_contain": ["American Diabetes Association", "Diabetes Diagnosis", "Accessed June 10, 2026"],
+      "url": "https://diabetes.org/about-diabetes/diagnosis"
+    },
+    {
+      "number": 6,
+      "type": "official-web",
+      "must_contain": ["National Institute of Diabetes and Digestive and Kidney Diseases", "The A1C Test & Diabetes"],
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test"
+    },
+    {
+      "number": 7,
+      "type": "official-web",
+      "must_contain": ["NCHS Data Brief No. 516", "August 2021-August 2023"],
+      "url": "https://www.cdc.gov/nchs/products/databriefs/db516.htm"
+    },
+    {
+      "number": 8,
+      "type": "official-web",
+      "must_contain": ["Healthy People 2030", "D-02"],
+      "url": "https://odphp.health.gov/healthypeople/objectives-and-data/browse-objectives/diabetes/reduce-proportion-adults-who-dont-know-they-have-prediabetes-d-02/data-methodology"
+    },
+    {
+      "number": 9,
+      "type": "journal-article",
+      "must_contain": ["Menke A", "JAMA", "2015", "314(10):1021-1029"],
+      "doi": "10.1001/jama.2015.10029"
+    },
+    {
+      "number": 10,
+      "type": "journal-article",
+      "must_contain": ["Fang M", "Diabetes Care", "2022", "45(9):1994-2002"],
+      "doi": "10.2337/dc22-0242"
+    },
+    {
+      "number": 11,
+      "type": "journal-article",
+      "must_contain": ["Gupta K", "Am J Cardiol", "2022", "175:184-185"],
+      "doi": "10.1016/j.amjcard.2022.04.032"
+    },
+    {
+      "number": 12,
+      "type": "journal-article",
+      "must_contain": ["Kiefer MM", "J Gen Intern Med", "2015", "30(5):612-618"],
+      "doi": "10.1007/s11606-014-3147-8"
+    },
+    {
+      "number": 13,
+      "type": "journal-article",
+      "must_contain": ["Staimez LR", "Diabetes Res Clin Pract", "2022", "189:109935"],
+      "doi": "10.1016/j.diabres.2022.109935"
+    },
+    {
+      "number": 14,
+      "type": "journal-article",
+      "must_contain": ["Firouzi SA", "J Diabetes Res", "2018", "3604108"],
+      "doi": "10.1155/2018/3604108"
+    },
+    {
+      "number": 15,
+      "type": "journal-article",
+      "must_contain": ["Tan MY", "Lipids Health Dis", "2024", "23(1):151"],
+      "doi": "10.1186/s12944-024-02143-8"
+    },
+    {
+      "number": 16,
+      "type": "journal-article",
+      "must_contain": ["Seo IH", "Transl Res", "2022", "243:52-59"],
+      "doi": "10.1016/j.trsl.2021.12.008"
+    },
+    {
+      "number": 17,
+      "type": "journal-article",
+      "must_contain": ["Ley SH", "Diabetes Obes Metab", "2012", "14(9):821-825"],
+      "doi": "10.1111/j.1463-1326.2012.01607.x"
+    },
+    {
+      "number": 18,
+      "type": "journal-article",
+      "must_contain": ["Hunt KJ", "J Gen Intern Med", "2012", "27(8):893-900"],
+      "doi": "10.1007/s11606-012-2023-7"
+    },
+    {
+      "number": 19,
+      "type": "journal-article",
+      "must_contain": ["Sheehy A", "Diabetes Care", "2011", "34(6):1289-1294"],
+      "doi": "10.2337/dc10-1785"
+    }
+  ],
+  "claim_map": [
+    {
+      "claim": "NHANES complex survey design and weighting requirements",
+      "references": [1, 2]
+    },
+    {
+      "claim": "NHANES 2017-2018 glycohemoglobin and laboratory provenance",
+      "references": [3, 4]
+    },
+    {
+      "claim": "Diabetes-range HbA1c, prediabetes, and fasting plasma glucose thresholds",
+      "references": [5, 6]
+    },
+    {
+      "claim": "National context for diagnosed and undiagnosed diabetes",
+      "references": [7, 9, 10, 11]
+    },
+    {
+      "claim": "Screening gap and prediabetes awareness framing",
+      "references": [8, 12, 19]
+    },
+    {
+      "claim": "HbA1c and glucose mismatch interpretation",
+      "references": [13]
+    },
+    {
+      "claim": "Adiposity and glycemic outcomes",
+      "references": [14]
+    },
+    {
+      "claim": "Non-HDL cholesterol and diabetes risk literature",
+      "references": [15, 16, 17]
+    },
+    {
+      "claim": "Race, ethnicity, and screening equity interpretation",
+      "references": [9, 10, 18, 19]
+    }
+  ]
+}

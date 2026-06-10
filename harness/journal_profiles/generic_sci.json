@@ -1,0 +1,34 @@
+{
+  "id": "generic-sci",
+  "name": "Generic SCI medical journal profile",
+  "articleTypes": ["Original Research", "Brief Report", "Review"],
+  "defaultArticleType": "Original Research",
+  "limits": {
+    "wordCount": {"min": 3500, "max": 8500},
+    "abstractWordCount": {"max": 350},
+    "tablesAndFigures": {"max": 8},
+    "references": {"max": 60}
+  },
+  "formatting": {
+    "referenceStyle": "Vancouver",
+    "lineSpacing": "double preferred for submission, single acceptable for internal draft",
+    "titlePageRequired": true,
+    "structuredAbstract": true
+  },
+  "requiredStatements": [
+    "funding",
+    "conflicts_of_interest",
+    "data_availability",
+    "ethics_statement",
+    "author_contributions",
+    "acknowledgements"
+  ],
+  "reportingGuidelinePolicy": {
+    "observational": "STROBE",
+    "randomized_trial": "CONSORT",
+    "systematic_review": "PRISMA",
+    "prediction_model": "TRIPOD",
+    "real_world_evidence": "RECORD",
+    "diagnostic_accuracy": "STARD"
+  }
+}
