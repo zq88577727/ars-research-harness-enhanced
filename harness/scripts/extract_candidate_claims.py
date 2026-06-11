@@ -32,6 +32,11 @@ def compact_text(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def sentence_parts(text: str) -> list[str]:
+    protected = text.replace("U.S.", "US_ABBREV")
+    return [part.replace("US_ABBREV", "U.S.").strip() for part in re.split(r"(?<=[.!?])\s+", protected) if part.strip()]
+
+
 def split_sentences(text: str) -> list[str]:
     sentences = []
     metadata_prefixes = (
@@ -54,7 +59,7 @@ def split_sentences(text: str) -> list[str]:
         if any(line.startswith(prefix) for prefix in metadata_prefixes):
             continue
         compact = compact_text(line)
-        sentences.extend(part.strip() for part in re.split(r"(?<=[.!?])\s+", compact) if part.strip())
+        sentences.extend(sentence_parts(compact))
     return sentences
 
 

@@ -8,6 +8,7 @@
   "rawDataDirectory": "data/gbd/raw",
   "derivedDataDirectory": "examples/<project-slug>/derived",
   "queryManifest": "examples/<project-slug>/gbd_query_manifest.csv",
+  "analysisManifest": "examples/<project-slug>/gbd_analysis_manifest.json",
   "accessStatus": {
     "accountRegistered": true,
     "queryDefined": false,

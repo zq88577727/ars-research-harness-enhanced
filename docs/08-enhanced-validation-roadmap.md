@@ -23,6 +23,9 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
 - `harness/scripts/extract_candidate_claims.py` and
   `harness/validators/validate_candidate_claims.py` create and validate a
   human-review queue of numeric candidate claims before registry expansion.
+- `harness/scripts/prepare_claim_registry_review.py` turns that queue into a
+  Markdown review worksheet with draft registry objects. The worksheet still
+  requires human source-file, source-field, and interpretation-boundary review.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 

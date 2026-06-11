@@ -19,7 +19,11 @@ derived burden summary and source-backed claims?
 
 ## What Is Included
 
-- `gbd_query_manifest.csv`: exact query dimensions for the teaching fixture.
+- `gbd_query_manifest.csv`: exact query dimensions for the teaching fixture and
+  real default endpoint rows.
+- `gbd_analysis_manifest.json`: manifest-driven analysis control file that
+  declares source exports, output artifacts, dimension filters, years, and
+  interpretation boundaries used by the generator and validator.
 - `source_exports/gbd_results_minimal_fixture.csv`: small committed fixture in a
   GBD Results-style table shape.
 - `source_exports/gbd_results_real_default_data.csv`: real GBD Results Tool

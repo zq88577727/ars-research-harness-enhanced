@@ -8,6 +8,8 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -19,4 +21,3 @@ jobs:
 
       - name: Run local validation gates
         run: python3 harness/scripts/run_all_validations.py
-

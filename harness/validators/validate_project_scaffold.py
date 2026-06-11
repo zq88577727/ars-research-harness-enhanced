@@ -78,6 +78,7 @@ def validate_project(path: Path) -> dict:
                 failures.append({"check": "charls_required_variables_present"})
     elif data_source == "gbd":
         query_manifest = path / "gbd_query_manifest.csv"
+        analysis_manifest = path / "gbd_analysis_manifest.json"
         if not query_manifest.exists():
             failures.append({"check": "gbd_query_manifest_exists"})
         else:
@@ -86,6 +87,14 @@ def validate_project(path: Path) -> dict:
             missing_cols = sorted(required_cols - set(rows[0].keys())) if rows else sorted(required_cols)
             if missing_cols:
                 failures.append({"check": "gbd_query_manifest_columns", "missing": missing_cols})
+        if not manifest.get("analysisManifest"):
+            failures.append({"check": "gbd_analysis_manifest_declared"})
+        if not analysis_manifest.exists():
+            failures.append({"check": "gbd_analysis_manifest_exists"})
+        else:
+            analysis = json.loads(analysis_manifest.read_text(encoding="utf-8"))
+            if not analysis.get("analyses"):
+                failures.append({"check": "gbd_analysis_manifest_analyses"})
     else:
         failures.append({"check": "supported_data_source", "dataSource": data_source})
 

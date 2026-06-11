@@ -20,20 +20,47 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def matches(row: dict[str, str], dimensions: dict[str, str]) -> bool:
+    return all(row.get(key) == value for key, value in dimensions.items() if value)
+
+
+def find_row(rows: list[dict[str, str]], dimensions: dict[str, str], measure: dict[str, str], year: str | None = None) -> dict[str, str] | None:
+    filters = dict(dimensions)
+    filters.update(measure)
+    if year:
+        filters["year"] = year
+    return next((row for row in rows if matches(row, filters)), None)
+
+
+def validate_analysis_config(root: Path, config: dict, failures: list[dict], label: str) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    source = root / config["sourceFile"]
+    output_csv = root / config["outputCsv"]
+    output_md = root / config["outputMarkdown"]
+    for required in [source, output_csv, output_md]:
+        if not required.exists():
+            failures.append({"check": "analysis_file_exists", "analysis": label, "path": str(required.relative_to(root))})
+    source_rows = read_csv(source) if source.exists() else []
+    summary_rows = read_csv(output_csv) if output_csv.exists() else []
+    if source.exists() and not source_rows:
+        failures.append({"check": "analysis_source_rows_present", "analysis": label})
+    if output_csv.exists() and not summary_rows:
+        failures.append({"check": "analysis_summary_rows_present", "analysis": label})
+    dimensions = config.get("dimensionFilter", {})
+    for column in ["cause", "location", "age", "sex"]:
+        if not dimensions.get(column):
+            failures.append({"check": "analysis_dimension_present", "analysis": label, "column": column})
+    return source_rows, summary_rows
+
+
 def validate(root: Path, demo: Path) -> dict:
     path = root / demo
     failures = []
     manifest_path = path / "project_manifest.json"
+    analysis_manifest_path = path / "gbd_analysis_manifest.json"
     query_path = path / "gbd_query_manifest.csv"
-    source_path = path / "source_exports/gbd_results_minimal_fixture.csv"
-    summary_csv_path = path / "results/gbd_minimal_summary.csv"
-    summary_md_path = path / "results/gbd_minimal_summary.md"
-    real_source_path = path / "source_exports/gbd_results_real_default_data.csv"
-    real_summary_csv_path = path / "results/gbd_real_default_summary.csv"
-    real_summary_md_path = path / "results/gbd_real_default_summary.md"
     registry_path = path / "claim_registry.json"
 
-    required_files = [manifest_path, query_path, source_path, summary_csv_path, summary_md_path, registry_path]
+    required_files = [manifest_path, analysis_manifest_path, query_path, registry_path]
     for required in required_files:
         if not required.exists():
             failures.append({"check": "file_exists", "path": str(required.relative_to(root))})
@@ -41,8 +68,18 @@ def validate(root: Path, demo: Path) -> dict:
         return {"ok": False, "demo": str(demo), "failures": failures}
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    analysis_manifest = json.loads(analysis_manifest_path.read_text(encoding="utf-8"))
+    analyses = analysis_manifest.get("analyses", {})
+    fixture_config = analyses.get("fixture")
+    real_config = analyses.get("realDefault")
+    if not fixture_config:
+        failures.append({"check": "analysis_manifest_fixture"})
+    if not real_config and manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export":
+        failures.append({"check": "analysis_manifest_real_default"})
     if manifest.get("capabilityStatus") not in {"minimal-demo", "minimal-demo-plus-real-default-export"}:
         failures.append({"check": "capability_status", "actual": manifest.get("capabilityStatus")})
+    if manifest.get("analysisManifest") != str(analysis_manifest_path.relative_to(root)):
+        failures.append({"check": "analysis_manifest_link", "actual": manifest.get("analysisManifest")})
     if not manifest.get("teachingFixture"):
         failures.append({"check": "teaching_fixture_declared"})
 
@@ -58,47 +95,48 @@ def validate(root: Path, demo: Path) -> dict:
                 if not row.get(column):
                     failures.append({"check": "query_dimension_filled", "column": column, "row": row.get("measure")})
 
-    source_rows = read_csv(source_path)
-    measures = {row.get("measure") for row in source_rows}
-    if measures != {"Deaths", "DALYs"}:
-        failures.append({"check": "source_measures", "expected": ["Deaths", "DALYs"], "actual": sorted(measures)})
-    if any(row.get("metric") != "Number" for row in source_rows):
-        failures.append({"check": "metric_number_only"})
-    if not all(row.get("fixture_note") for row in source_rows):
-        failures.append({"check": "fixture_note_present"})
-
-    if {"Deaths", "DALYs"}.issubset(measures):
-        deaths = Decimal(next(row["val"] for row in source_rows if row["measure"] == "Deaths"))
-        dalys = Decimal(next(row["val"] for row in source_rows if row["measure"] == "DALYs"))
-        expected_ratio = (dalys / deaths).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
-        summary_rows = read_csv(summary_csv_path)
-        if not summary_rows:
-            failures.append({"check": "summary_rows_present"})
-        else:
+    manuscript_parts = []
+    if fixture_config:
+        source_rows, summary_rows = validate_analysis_config(root, fixture_config, failures, "fixture")
+        measures = {row.get("measure") for row in source_rows}
+        if measures != {"Deaths", "DALYs"}:
+            failures.append({"check": "source_measures", "expected": ["Deaths", "DALYs"], "actual": sorted(measures)})
+        if any(row.get("metric") != "Number" for row in source_rows):
+            failures.append({"check": "metric_number_only"})
+        if not all(row.get("fixture_note") for row in source_rows):
+            failures.append({"check": "fixture_note_present"})
+        deaths = find_row(source_rows, fixture_config["dimensionFilter"], fixture_config["numberMeasures"]["deaths"])
+        dalys = find_row(source_rows, fixture_config["dimensionFilter"], fixture_config["numberMeasures"]["dalys"])
+        if not all([deaths, dalys]):
+            failures.append({"check": "fixture_required_rows_present"})
+        elif summary_rows:
+            death_value = Decimal(deaths["val"])
+            daly_value = Decimal(dalys["val"])
+            expected_ratio = (daly_value / death_value).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
             summary = summary_rows[0]
-            if Decimal(summary["deaths_number"]) != deaths:
+            if Decimal(summary["deaths_number"]) != death_value:
                 failures.append({"check": "deaths_match_source"})
-            if Decimal(summary["dalys_number"]) != dalys:
+            if Decimal(summary["dalys_number"]) != daly_value:
                 failures.append({"check": "dalys_match_source"})
             if Decimal(summary["dalys_per_death"]) != expected_ratio:
                 failures.append({"check": "derived_ratio", "expected": str(expected_ratio), "actual": summary["dalys_per_death"]})
-            if "not a publishable burden estimate" not in summary.get("interpretation_boundary", ""):
+            if fixture_config["interpretationBoundary"] != summary.get("interpretation_boundary", ""):
                 failures.append({"check": "summary_boundary"})
+        if (root / fixture_config["outputMarkdown"]).exists():
+            manuscript_parts.append((root / fixture_config["outputMarkdown"]).read_text(encoding="utf-8"))
 
-    if manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export":
-        for required in [real_source_path, real_summary_csv_path, real_summary_md_path]:
-            if not required.exists():
-                failures.append({"check": "real_default_file_exists", "path": str(required.relative_to(root))})
-        if real_source_path.exists() and real_summary_csv_path.exists():
-            real_rows = read_csv(real_source_path)
-            real_summary = read_csv(real_summary_csv_path)[0]
+    if manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export" and real_config:
+        real_rows, real_summary_rows = validate_analysis_config(root, real_config, failures, "realDefault")
+        if real_rows:
             for field in ["source_endpoint", "downloaded_on", "source_note"]:
                 if not all(row.get(field) for row in real_rows):
                     failures.append({"check": "real_source_metadata", "field": field})
-            deaths_2023 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Number" and row["year"] == "2023"), None)
-            dalys_2023 = next((row for row in real_rows if row["measure"] == "DALYs" and row["metric"] == "Number" and row["year"] == "2023"), None)
-            rate_1990 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Rate" and row["year"] == "1990"), None)
-            rate_2023 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Rate" and row["year"] == "2023"), None)
+        if real_summary_rows:
+            real_summary = real_summary_rows[0]
+            deaths_2023 = find_row(real_rows, real_config["dimensionFilter"], real_config["numberMeasures"]["deaths"], real_config["numberYear"])
+            dalys_2023 = find_row(real_rows, real_config["dimensionFilter"], real_config["numberMeasures"]["dalys"], real_config["numberYear"])
+            rate_1990 = find_row(real_rows, real_config["dimensionFilter"], real_config["rateMeasure"], real_config["rateBaselineYear"])
+            rate_2023 = find_row(real_rows, real_config["dimensionFilter"], real_config["rateMeasure"], real_config["rateComparisonYear"])
             if not all([deaths_2023, dalys_2023, rate_1990, rate_2023]):
                 failures.append({"check": "real_required_rows_present"})
             else:
@@ -106,12 +144,12 @@ def validate(root: Path, demo: Path) -> dict:
                     failures.append({"check": "real_deaths_match_source"})
                 if Decimal(real_summary["dalys_number"]) != Decimal(dalys_2023["val"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP):
                     failures.append({"check": "real_dalys_match_source"})
-                if "Real GBD Results Tool default endpoint output" not in real_summary.get("interpretation_boundary", ""):
+                if real_config["interpretationBoundary"] != real_summary.get("interpretation_boundary", ""):
                     failures.append({"check": "real_summary_boundary"})
+        if (root / real_config["outputMarkdown"]).exists():
+            manuscript_parts.append((root / real_config["outputMarkdown"]).read_text(encoding="utf-8"))
 
-    manuscript = summary_md_path.read_text(encoding="utf-8")
-    if real_summary_md_path.exists():
-        manuscript += "\n" + real_summary_md_path.read_text(encoding="utf-8")
+    manuscript = "\n".join(manuscript_parts)
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     claim_checks = []
     for claim in registry.get("claims", []):

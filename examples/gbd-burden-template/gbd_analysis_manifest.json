@@ -1,0 +1,37 @@
+{
+  "id": "gbd-burden-template-analysis",
+  "description": "Scaffold-only GBD analysis manifest. Fill source files, exact dimensions, years, and interpretation boundaries after exporting data from the GBD Results Tool.",
+  "analyses": {
+    "primary": {
+      "sourceFile": "examples/gbd-burden-template/source_exports/<approved-gbd-export>.csv",
+      "outputCsv": "examples/gbd-burden-template/results/gbd_primary_summary.csv",
+      "outputMarkdown": "examples/gbd-burden-template/results/gbd_primary_summary.md",
+      "dimensionFilter": {
+        "gbd_release": "GBD 2023",
+        "version_id": "<version id if available>",
+        "cause": "<cause>",
+        "location": "<location>",
+        "age": "<age group>",
+        "sex": "<sex>"
+      },
+      "numberYear": "<comparison year>",
+      "rateBaselineYear": "<baseline year>",
+      "rateComparisonYear": "<comparison year>",
+      "numberMeasures": {
+        "deaths": {
+          "measure": "Deaths",
+          "metric": "Number"
+        },
+        "dalys": {
+          "measure": "DALYs",
+          "metric": "Number"
+        }
+      },
+      "rateMeasure": {
+        "measure": "Deaths",
+        "metric": "Rate"
+      },
+      "interpretationBoundary": "Document query dimensions, uncertainty intervals, metric scale, citation, and reuse terms before manuscript use."
+    }
+  }
+}

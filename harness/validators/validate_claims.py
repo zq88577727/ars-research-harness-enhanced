@@ -21,6 +21,11 @@ NUMERIC_PATTERN = re.compile(r"(\d[\d,]*(?:\.\d+)?%?|\bOR\b|95% CI)", re.IGNOREC
 ALLOWED_TIERS = {"core", "supporting", "background"}
 
 
+def sentence_parts(text: str) -> list[str]:
+    protected = text.replace("U.S.", "US_ABBREV")
+    return [part.replace("US_ABBREV", "U.S.").strip() for part in re.split(r"(?<=[.!?])\s+", protected) if part.strip()]
+
+
 def split_sentences(text: str) -> list[str]:
     sentences = []
     metadata_prefixes = (
@@ -43,7 +48,7 @@ def split_sentences(text: str) -> list[str]:
         if any(line.startswith(prefix) for prefix in metadata_prefixes):
             continue
         compact = re.sub(r"\s+", " ", line)
-        sentences.extend(part.strip() for part in re.split(r"(?<=[.!?])\s+", compact) if part.strip())
+        sentences.extend(sentence_parts(compact))
     return sentences
 
 

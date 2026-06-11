@@ -41,6 +41,7 @@ python3 harness/scripts/extract_candidate_claims.py \
   --registry harness/claims/nhanes_claim_registry.json \
   --prefix nhanes --limit 40 \
   --output harness/claims/nhanes_candidate_claims.json
+python3 harness/scripts/prepare_claim_registry_review.py
 ```
 
 运行后重点查看：

@@ -16,3 +16,9 @@ Each project manifest references a source-of-truth adapter through
 harness stages live in `data_sources/*.json`; project manifests should keep only
 run-specific state such as access progress, local paths, variable maps, and query
 manifests.
+
+GBD runs should pair `gbd_query_manifest.template.csv` with
+`gbd_analysis_manifest.template.json`: the query manifest records exported
+dimensions row by row, while the analysis manifest controls source files,
+outputs, comparison years, and interpretation boundaries for generation and
+validation.

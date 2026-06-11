@@ -1,0 +1,63 @@
+{
+  "id": "gbd-burden-minimal-demo-analysis",
+  "description": "Manifest-driven analysis plan for the GBD minimal demo. This controls source exports, required dimensions, outputs, and interpretation boundaries.",
+  "analyses": {
+    "fixture": {
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
+      "outputCsv": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.csv",
+      "outputMarkdown": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
+      "dimensionFilter": {
+        "gbd_release": "GBD 2023",
+        "cause": "All causes",
+        "location": "Global",
+        "age": "All ages",
+        "sex": "Both",
+        "year": "2023"
+      },
+      "numberMeasures": {
+        "deaths": {
+          "measure": "Deaths",
+          "metric": "Number"
+        },
+        "dalys": {
+          "measure": "DALYs",
+          "metric": "Number"
+        }
+      },
+      "interpretationBoundary": "Teaching fixture for workflow traceability; not a publishable burden estimate until replaced with an approved GBD export and full citation."
+    },
+    "realDefault": {
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
+      "outputCsv": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.csv",
+      "outputMarkdown": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
+      "endpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
+      "downloadedOn": "2026-06-11",
+      "dimensionFilter": {
+        "gbd_release": "GBD 2023",
+        "version_id": "8352",
+        "cause": "All causes",
+        "location": "Global",
+        "age": "All ages",
+        "sex": "Both"
+      },
+      "numberYear": "2023",
+      "rateBaselineYear": "1990",
+      "rateComparisonYear": "2023",
+      "numberMeasures": {
+        "deaths": {
+          "measure": "Deaths",
+          "metric": "Number"
+        },
+        "dalys": {
+          "measure": "DALYs",
+          "metric": "Number"
+        }
+      },
+      "rateMeasure": {
+        "measure": "Deaths",
+        "metric": "Rate"
+      },
+      "interpretationBoundary": "Real GBD Results Tool default endpoint output for workflow demonstration; verify query dimensions, citation, and redistribution terms before manuscript use."
+    }
+  }
+}

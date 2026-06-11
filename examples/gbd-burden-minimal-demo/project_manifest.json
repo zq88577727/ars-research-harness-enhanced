@@ -8,6 +8,7 @@
   "rawDataDirectory": "examples/gbd-burden-minimal-demo/source_exports",
   "derivedDataDirectory": "examples/gbd-burden-minimal-demo/results",
   "queryManifest": "examples/gbd-burden-minimal-demo/gbd_query_manifest.csv",
+  "analysisManifest": "examples/gbd-burden-minimal-demo/gbd_analysis_manifest.json",
   "claimRegistry": "examples/gbd-burden-minimal-demo/claim_registry.json",
   "accessStatus": {
     "accountRegistered": true,

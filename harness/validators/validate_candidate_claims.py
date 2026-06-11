@@ -21,7 +21,7 @@ ALLOWED_TYPES = {
 }
 
 
-def validate(path: Path) -> dict:
+def validate(path: Path, review_path: Path | None) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
     failures = []
     candidates = data.get("candidates", [])
@@ -39,6 +39,16 @@ def validate(path: Path) -> dict:
         if "interpretationBoundaryNeeded" not in candidate:
             failures.append({"check": "interpretation_boundary_flag", "id": candidate.get("id")})
     needs_review = [candidate for candidate in candidates if candidate.get("status") == "needs-human-review"]
+    if review_path:
+        if not review_path.exists():
+            failures.append({"check": "review_file_exists", "path": str(review_path)})
+        else:
+            review = review_path.read_text(encoding="utf-8")
+            if "human review queue" not in review:
+                failures.append({"check": "review_file_boundary"})
+            for candidate in needs_review:
+                if candidate["id"] not in review:
+                    failures.append({"check": "review_candidate_present", "id": candidate["id"]})
     tiers = {tier: 0 for tier in sorted(ALLOWED_TIERS)}
     for candidate in candidates:
         tier = candidate.get("suggestedTier")
@@ -47,6 +57,7 @@ def validate(path: Path) -> dict:
     return {
         "ok": not failures,
         "candidateFile": str(path),
+        "reviewFile": str(review_path) if review_path else None,
         "candidateCount": len(candidates),
         "needsHumanReviewCount": len(needs_review),
         "suggestedTiers": tiers,
@@ -57,8 +68,9 @@ def validate(path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--candidates", default="harness/claims/nhanes_candidate_claims.json")
+    parser.add_argument("--review", default="harness/claims/nhanes_candidate_claim_review.md")
     args = parser.parse_args()
-    result = validate(Path(args.candidates))
+    result = validate(Path(args.candidates), Path(args.review) if args.review else None)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 1
 
