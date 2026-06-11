@@ -16,6 +16,7 @@ production boundary must be stated honestly.
 | NHANES adapter | Implemented with data example | Full NHANES teaching case remains reproducible. |
 | CHARLS adapter | Implemented as access-aware manifest | Raw CHARLS data are not committed; user must download through official registered portal. |
 | GBD adapter | Implemented as query/export-aware manifest | Raw GBD exports are not assumed; use approved Results Tool/API/export route. |
+| CHARLS/GBD project scaffolding | Implemented | `init_public_database_project.py` creates local run folders, workflow state, variable maps, and query manifests. |
 
 ## What still requires external action
 
@@ -34,4 +35,16 @@ public-database medical manuscripts if the team accepts an access-aware adapter
 model: NHANES can be packaged as a reproducible example, while CHARLS and GBD
 should be represented by manifests, query plans, local raw-data contracts, and
 derived-output audits rather than committed raw data.
+
+Example project initialization:
+
+```bash
+python3 harness/scripts/init_public_database_project.py charls charls-frailty-demo \
+  --title "CHARLS frailty and chronic disease analysis" \
+  --research-question "To be refined in S1"
+
+python3 harness/scripts/init_public_database_project.py gbd gbd-diabetes-burden-demo \
+  --title "GBD diabetes burden trend analysis" \
+  --research-question "To be refined in S1"
+```
 

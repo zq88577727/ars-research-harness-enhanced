@@ -1,0 +1,31 @@
+{
+  "projectType": "gbd-burden-project",
+  "dataSource": "gbd",
+  "title": "",
+  "researchQuestion": "",
+  "rawDataDirectory": "data/gbd/raw",
+  "derivedDataDirectory": "examples/<project-slug>/derived",
+  "queryManifest": "examples/<project-slug>/gbd_query_manifest.csv",
+  "accessStatus": {
+    "accountRegistered": true,
+    "queryDefined": false,
+    "csvExportDownloaded": false,
+    "releaseVersionRecorded": false
+  },
+  "requiredQueryDimensions": [
+    "gbd_release",
+    "measure",
+    "metric",
+    "cause",
+    "location",
+    "age",
+    "sex",
+    "year"
+  ],
+  "analysisRequirements": [
+    "uncertainty interval interpretation specified",
+    "age-standardization decision specified",
+    "rate/count/percent metric distinction specified",
+    "source and citation requirements recorded"
+  ]
+}

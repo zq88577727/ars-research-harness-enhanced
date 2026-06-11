@@ -1,0 +1,23 @@
+{
+  "projectType": "charls-longitudinal-project",
+  "dataSource": "charls",
+  "title": "CHARLS aging public-database manuscript template",
+  "researchQuestion": "To be refined after CHARLS wave access and variable mapping.",
+  "targetWaves": [],
+  "rawDataDirectory": "data/charls/raw",
+  "derivedDataDirectory": "examples/charls-aging-template/derived",
+  "variableMap": "examples/charls-aging-template/variable_map.csv",
+  "accessStatus": {
+    "accountRegistered": true,
+    "dataApplicationSubmitted": false,
+    "dataApproved": false,
+    "rawFilesDownloaded": false
+  },
+  "analysisRequirements": [
+    "wave linkage key confirmed",
+    "sample eligibility criteria specified",
+    "attrition and missingness plan specified",
+    "weights and survey design decision specified",
+    "data-use and citation requirements recorded"
+  ]
+}

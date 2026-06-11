@@ -1,0 +1,31 @@
+{
+  "projectType": "gbd-burden-project",
+  "dataSource": "gbd",
+  "title": "GBD burden public-database manuscript template",
+  "researchQuestion": "To be refined after GBD query export and metric selection.",
+  "rawDataDirectory": "data/gbd/raw",
+  "derivedDataDirectory": "examples/gbd-burden-template/derived",
+  "queryManifest": "examples/gbd-burden-template/gbd_query_manifest.csv",
+  "accessStatus": {
+    "accountRegistered": true,
+    "queryDefined": false,
+    "csvExportDownloaded": false,
+    "releaseVersionRecorded": false
+  },
+  "requiredQueryDimensions": [
+    "gbd_release",
+    "measure",
+    "metric",
+    "cause",
+    "location",
+    "age",
+    "sex",
+    "year"
+  ],
+  "analysisRequirements": [
+    "uncertainty interval interpretation specified",
+    "age-standardization decision specified",
+    "rate/count/percent metric distinction specified",
+    "source and citation requirements recorded"
+  ]
+}

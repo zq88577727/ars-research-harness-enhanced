@@ -24,6 +24,8 @@ COMMANDS = [
     ["python3", "harness/validators/validate_revision_trace.py"],
     ["python3", "harness/validators/validate_revision_diff_report.py"],
     ["python3", "harness/validators/validate_data_source_manifests.py"],
+    ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
+    ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"],
 ]
 
 

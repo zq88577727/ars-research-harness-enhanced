@@ -1,0 +1,2 @@
+gbd_release,measure,metric,cause,location,age,sex,year,export_file,notes
+GBD 2023,DALYs,Rate,,,,,,data/gbd/raw/<export>.csv,Fill every query dimension exactly as exported.

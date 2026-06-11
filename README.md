@@ -44,6 +44,18 @@ python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagno
 python3 harness/scripts/run_all_validations.py
 ```
 
+Start a CHARLS or GBD run after data access/export is ready:
+
+```bash
+python3 harness/scripts/init_public_database_project.py charls charls-example \
+  --title "CHARLS public-database manuscript" \
+  --research-question "To be refined in S1"
+
+python3 harness/scripts/init_public_database_project.py gbd gbd-example \
+  --title "GBD burden manuscript" \
+  --research-question "To be refined in S1"
+```
+
 Key outputs:
 
 - `examples/nhanes-undiagnosed-diabetes/workflow-run.json`
@@ -55,6 +67,8 @@ Enhanced validation details are documented in
 [docs/08-enhanced-validation-roadmap.md](docs/08-enhanced-validation-roadmap.md).
 Production feasibility and public-database access boundaries are documented in
 [docs/09-production-feasibility-matrix.md](docs/09-production-feasibility-matrix.md).
+CHARLS and GBD onboarding steps are documented in
+[docs/10-charls-gbd-onboarding.zh-CN.md](docs/10-charls-gbd-onboarding.zh-CN.md).
 
 ## Workflow
 

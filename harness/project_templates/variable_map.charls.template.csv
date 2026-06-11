@@ -1,0 +1,10 @@
+canonical_name,source_wave,source_file,source_variable,role,required,notes
+participant_id,,,,id,true,Confirm CHARLS respondent/person identifier.
+household_id,,,,id,false,Needed only for household-level linkage.
+wave,,,,time,true,Use survey wave or year.
+age,,,,covariate,true,
+sex,,,,covariate,true,
+education,,,,covariate,false,
+residence,,,,covariate,false,Urban/rural or hukou/residence variable depending on analysis.
+sample_weight,,,,weight,false,Record wave-specific weight decision.
+primary_outcome,,,,outcome,true,Define before analysis.
