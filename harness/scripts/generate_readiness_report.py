@@ -74,6 +74,7 @@ def build_report() -> dict:
     validations = [
         run_json(["python3", "harness/scripts/validate_checkpoint_workflow.py", "examples/nhanes-undiagnosed-diabetes/workflow-run.json"]),
         run_json(["python3", "harness/validators/validate_claims.py"]),
+        run_json(["python3", "harness/validators/validate_candidate_claims.py"]),
         run_json(["python3", "harness/validators/validate_reporting_checklist.py"]),
         run_json(["python3", "harness/validators/validate_data_source_manifests.py"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"]),
@@ -90,7 +91,11 @@ def build_report() -> dict:
     validation_ok = all(item["returncode"] == 0 and item["result"].get("ok") for item in validations)
     check_ok = all(item.get("ok") for item in checks.values())
     warnings = []
-    reporting = validations[2]["result"]
+    reporting = next(
+        item["result"]
+        for item in validations
+        if item["command"] == ["python3", "harness/validators/validate_reporting_checklist.py"]
+    )
     for item in reporting.get("authorDependentItems", []):
         warnings.append(f"Reporting checklist item {item} is author-dependent and must be completed before journal submission.")
     warnings.append("External literature validation is offline by default in CI; run the online mode before real submission when network access is available.")

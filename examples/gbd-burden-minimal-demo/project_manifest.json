@@ -2,7 +2,7 @@
   "projectType": "gbd-burden-project",
   "dataSource": "gbd",
   "dataSourceManifest": "data_sources/gbd.json",
-  "capabilityStatus": "minimal-demo",
+  "capabilityStatus": "minimal-demo-plus-real-default-export",
   "title": "GBD burden minimal teaching demo",
   "researchQuestion": "Can a minimal GBD Results-style export be traced from query dimensions to derived burden claims?",
   "rawDataDirectory": "examples/gbd-burden-minimal-demo/source_exports",
@@ -32,5 +32,7 @@
     "source and citation requirements recorded"
   ],
   "teachingFixture": true,
+  "realDefaultDataEndpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
+  "realDefaultDataDownloadedOn": "2026-06-11",
   "manuscriptBoundary": "This fixture proves workflow traceability only; replace with an approved GBD export before manuscript submission."
 }

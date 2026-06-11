@@ -20,6 +20,9 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
 - `harness/claims/nhanes_claim_registry.json` and
   `harness/validators/validate_claims.py` make core manuscript claims explicit,
   source-backed, and bounded by interpretation rules.
+- `harness/scripts/extract_candidate_claims.py` and
+  `harness/validators/validate_candidate_claims.py` create and validate a
+  human-review queue of numeric candidate claims before registry expansion.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 

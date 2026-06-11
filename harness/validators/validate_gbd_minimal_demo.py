@@ -28,6 +28,9 @@ def validate(root: Path, demo: Path) -> dict:
     source_path = path / "source_exports/gbd_results_minimal_fixture.csv"
     summary_csv_path = path / "results/gbd_minimal_summary.csv"
     summary_md_path = path / "results/gbd_minimal_summary.md"
+    real_source_path = path / "source_exports/gbd_results_real_default_data.csv"
+    real_summary_csv_path = path / "results/gbd_real_default_summary.csv"
+    real_summary_md_path = path / "results/gbd_real_default_summary.md"
     registry_path = path / "claim_registry.json"
 
     required_files = [manifest_path, query_path, source_path, summary_csv_path, summary_md_path, registry_path]
@@ -38,8 +41,8 @@ def validate(root: Path, demo: Path) -> dict:
         return {"ok": False, "demo": str(demo), "failures": failures}
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("capabilityStatus") != "minimal-demo":
-        failures.append({"check": "capability_status", "expected": "minimal-demo", "actual": manifest.get("capabilityStatus")})
+    if manifest.get("capabilityStatus") not in {"minimal-demo", "minimal-demo-plus-real-default-export"}:
+        failures.append({"check": "capability_status", "actual": manifest.get("capabilityStatus")})
     if not manifest.get("teachingFixture"):
         failures.append({"check": "teaching_fixture_declared"})
 
@@ -82,7 +85,33 @@ def validate(root: Path, demo: Path) -> dict:
             if "not a publishable burden estimate" not in summary.get("interpretation_boundary", ""):
                 failures.append({"check": "summary_boundary"})
 
+    if manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export":
+        for required in [real_source_path, real_summary_csv_path, real_summary_md_path]:
+            if not required.exists():
+                failures.append({"check": "real_default_file_exists", "path": str(required.relative_to(root))})
+        if real_source_path.exists() and real_summary_csv_path.exists():
+            real_rows = read_csv(real_source_path)
+            real_summary = read_csv(real_summary_csv_path)[0]
+            for field in ["source_endpoint", "downloaded_on", "source_note"]:
+                if not all(row.get(field) for row in real_rows):
+                    failures.append({"check": "real_source_metadata", "field": field})
+            deaths_2023 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Number" and row["year"] == "2023"), None)
+            dalys_2023 = next((row for row in real_rows if row["measure"] == "DALYs" and row["metric"] == "Number" and row["year"] == "2023"), None)
+            rate_1990 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Rate" and row["year"] == "1990"), None)
+            rate_2023 = next((row for row in real_rows if row["measure"] == "Deaths" and row["metric"] == "Rate" and row["year"] == "2023"), None)
+            if not all([deaths_2023, dalys_2023, rate_1990, rate_2023]):
+                failures.append({"check": "real_required_rows_present"})
+            else:
+                if Decimal(real_summary["deaths_number"]) != Decimal(deaths_2023["val"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP):
+                    failures.append({"check": "real_deaths_match_source"})
+                if Decimal(real_summary["dalys_number"]) != Decimal(dalys_2023["val"]).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP):
+                    failures.append({"check": "real_dalys_match_source"})
+                if "Real GBD Results Tool default endpoint output" not in real_summary.get("interpretation_boundary", ""):
+                    failures.append({"check": "real_summary_boundary"})
+
     manuscript = summary_md_path.read_text(encoding="utf-8")
+    if real_summary_md_path.exists():
+        manuscript += "\n" + real_summary_md_path.read_text(encoding="utf-8")
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     claim_checks = []
     for claim in registry.get("claims", []):

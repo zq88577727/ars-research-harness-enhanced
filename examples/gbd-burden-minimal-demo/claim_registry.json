@@ -37,6 +37,33 @@
       "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
       "sourceFields": ["Boundary paragraph"],
       "interpretationBoundary": "Mandatory scaffold-to-production boundary"
+    },
+    {
+      "id": "gbd-real-default-deaths",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "expectedText": "60,043,088.86 deaths",
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
+      "sourceFields": ["Deaths", "Number", "Global", "All causes", "2023", "version_id 8352"],
+      "interpretationBoundary": "Real GBD Results Tool default endpoint output; verify query dimensions and citation before manuscript use"
+    },
+    {
+      "id": "gbd-real-default-rate-change",
+      "tier": "supporting",
+      "type": "derived-check",
+      "expectedText": "a -17.14% relative change",
+      "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.csv",
+      "sourceFields": ["death_rate_percent_change_1990_2023"],
+      "interpretationBoundary": "Derived endpoint-scale check; not a standalone epidemiologic conclusion"
+    },
+    {
+      "id": "gbd-real-default-boundary",
+      "tier": "core",
+      "type": "interpretation-boundary",
+      "expectedText": "real GBD Results Tool endpoint output used for workflow demonstration",
+      "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
+      "sourceFields": ["Boundary paragraph"],
+      "interpretationBoundary": "Real data source requires citation, query documentation, and reuse-term confirmation before submission"
     }
   ]
 }

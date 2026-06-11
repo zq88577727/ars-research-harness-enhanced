@@ -1,0 +1,2 @@
+gbd_release,version_id,cause,location,age,sex,year,deaths_number,dalys_number,dalys_per_death,death_rate_1990,death_rate_2023,death_rate_percent_change_1990_2023,source_endpoint,interpretation_boundary
+GBD 2023,8352,All causes,Global,All ages,Both,2023,60043088.86,2799135266.30,46.62,0.00898401,0.00744413,-17.14,https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352,"Real GBD Results Tool default endpoint output for workflow demonstration; verify query dimensions, citation, and redistribution terms before manuscript use."

@@ -2,9 +2,11 @@
 
 Data source: `gbd`
 
-Status: minimal teaching demo. This folder demonstrates how a GBD-style query
-manifest, tiny export fixture, derived result table, narrative summary, and
-claim registry can move through the harness to S7 integrity checking.
+Status: minimal teaching demo plus a real GBD Results Tool default endpoint
+export. This folder demonstrates how a GBD-style query manifest, tiny export
+fixture, real default endpoint output, derived result tables, narrative
+summaries, and claim registry can move through the harness to S7 integrity
+checking.
 
 This is not a publishable burden study. Replace the fixture with an approved
 GBD Results Tool export or approved API route before writing real manuscript
@@ -20,8 +22,12 @@ derived burden summary and source-backed claims?
 - `gbd_query_manifest.csv`: exact query dimensions for the teaching fixture.
 - `source_exports/gbd_results_minimal_fixture.csv`: small committed fixture in a
   GBD Results-style table shape.
+- `source_exports/gbd_results_real_default_data.csv`: real GBD Results Tool
+  public default endpoint output downloaded on 2026-06-11.
 - `results/gbd_minimal_summary.csv`: derived summary produced by
   `scripts/generate_gbd_minimal_results.py`.
+- `results/gbd_real_default_summary.csv`: derived summary from the real default
+  endpoint output.
 - `results/gbd_minimal_summary.md`: manuscript-style result paragraph with
   explicit interpretation boundaries.
 - `claim_registry.json`: source-backed claim registry for S7 checking.

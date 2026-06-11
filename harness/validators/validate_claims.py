@@ -22,8 +22,29 @@ ALLOWED_TIERS = {"core", "supporting", "background"}
 
 
 def split_sentences(text: str) -> list[str]:
-    compact = re.sub(r"\s+", " ", text)
-    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", compact) if part.strip()]
+    sentences = []
+    metadata_prefixes = (
+        "Article type:",
+        "Running title:",
+        "Authors:",
+        "Affiliations:",
+        "Corresponding author:",
+        "Funding:",
+        "Conflicts of interest:",
+        "Author contributions:",
+        "Acknowledgements:",
+        "Word count:",
+        "**Keywords:**",
+    )
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or line.startswith("|"):
+            continue
+        if any(line.startswith(prefix) for prefix in metadata_prefixes):
+            continue
+        compact = re.sub(r"\s+", " ", line)
+        sentences.extend(part.strip() for part in re.split(r"(?<=[.!?])\s+", compact) if part.strip())
+    return sentences
 
 
 def validate(root: Path, registry_path: Path) -> dict:

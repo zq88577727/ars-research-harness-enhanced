@@ -46,6 +46,11 @@ python3 scripts/build_submission_docx.py
 python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagnosed-diabetes/workflow-run.json
 python3 harness/scripts/run_all_validations.py
 python3 harness/scripts/generate_readiness_report.py --format markdown
+python3 harness/scripts/extract_candidate_claims.py \
+  examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md \
+  --registry harness/claims/nhanes_claim_registry.json \
+  --prefix nhanes --limit 40 \
+  --output harness/claims/nhanes_candidate_claims.json
 ```
 
 Start a CHARLS or GBD run after data access/export is ready:

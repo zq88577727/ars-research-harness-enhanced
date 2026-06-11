@@ -1,0 +1,335 @@
+{
+  "ok": true,
+  "manuscript": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+  "registry": "harness/claims/nhanes_claim_registry.json",
+  "candidateCount": 40,
+  "counts": {
+    "needs-human-review:core": 24,
+    "already-registered:core": 9,
+    "already-registered:supporting": 2,
+    "needs-human-review:supporting": 4,
+    "already-registered:background": 1
+  },
+  "candidates": [
+    {
+      "id": "nhanes-candidate-001",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "This study estimated the weighted prevalence of HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-002",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "adults and examined demographic, anthropometric, cardiometabolic, and lifestyle correlates using National Health and Nutrition Examination Survey (NHANES) 2017-2018 data.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-003",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "This cross-sectional study used public-use NHANES 2017-2018 interview, examination, and laboratory files.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-004",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Adults aged 20 years or older who self-reported no prior diabetes diagnosis and had available HbA1c data were included.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-005",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "prevalence-or-percentage",
+      "sentence": "The primary outcome was HbA1c-defined undiagnosed diabetes, defined as HbA1c >=6.5% among participants who self-reported no diabetes diagnosis.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-006",
+      "status": "already-registered",
+      "suggestedTier": "supporting",
+      "type": "prevalence-or-percentage",
+      "sentence": "Prediabetes was defined as HbA1c 5.7%-6.4%.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-007",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "A fasting-subsample sensitivity definition used HbA1c >=6.5% or fasting plasma glucose >=126 mg/dL.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-008",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "sample-size",
+      "sentence": "The final analytic sample included 4,004 self-reported non-diabetic adults with available HbA1c data after excluding pregnant participants.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-009",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "The weighted prevalence of HbA1c-defined undiagnosed diabetes was 2.17% (95% CI, 1.74%-2.70%), and the weighted prevalence of HbA1c-defined prediabetes was 24.76% (95% CI, 22.63%-27.02%).",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-010",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "In the fasting subsample, the fasting-weighted prevalence increased from 1.84% (95% CI, 1.29%-2.62%) using HbA1c alone to 4.06% (95% CI, 3.12%-5.28%) using HbA1c or fasting plasma glucose.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-011",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "prevalence-or-percentage",
+      "sentence": "Weighted prevalence was higher among participants with obesity than among those without obesity (4.08% vs 0.85%).",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-012",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "In a parsimonious survey-weighted logistic model, waist circumference (OR per cm, 1.051; 95% CI, 1.030-1.073) and non-HDL cholesterol (OR per mg/dL, 1.016; 95% CI, 1.008-1.023) were associated with higher odds of HbA1c-defined undiagnosed diabetes.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-013",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Compared with non-Hispanic White participants, non-Hispanic Asian participants (OR, 5.986; 95% CI, 1.859-19.276) and non-Hispanic Black participants (OR, 4.099; 95% CI, 1.334-12.600) had higher odds.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-014",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Reporting any physical activity was associated with lower odds in direction, but the confidence interval included the null (OR, 0.478; 95% CI, 0.211-1.078).",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-015",
+      "status": "needs-human-review",
+      "suggestedTier": "supporting",
+      "type": "prevalence-or-percentage",
+      "sentence": "adults in NHANES 2017-2018, HbA1c-defined undiagnosed diabetes was present in approximately 2% of the weighted population and was patterned by obesity, waist circumference, non-HDL cholesterol, and race/ethnicity.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-016",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Because the analysis was cross-sectional and based on a single survey cycle, results should be interpreted as associations rather than causal effects or diagnostic recommendations.",
+      "interpretationBoundaryNeeded": false
+    },
+    {
+      "id": "nhanes-candidate-017",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "The National Center for Health Statistics reported that during August 2021-August 2023, the prevalence of total, diagnosed, and undiagnosed diabetes among U.S.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-018",
+      "status": "already-registered",
+      "suggestedTier": "supporting",
+      "type": "prevalence-or-percentage",
+      "sentence": "adults was 15.8%, 11.3%, and 4.5%, respectively, with prevalence increasing by age and weight status [7].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-019",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Self-reported diabetes status is useful in population surveys, but it cannot fully capture glycemic abnormalities in people who have not been tested, have not received results, or do not recall a prior diagnosis.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-020",
+      "status": "already-registered",
+      "suggestedTier": "background",
+      "type": "prevalence-or-percentage",
+      "sentence": "The American Diabetes Association lists HbA1c >=6.5% as a diabetes-range threshold and HbA1c 5.7%-6.4% as a prediabetes range; fasting plasma glucose >=126 mg/dL is another diabetes-range criterion [5].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-021",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "The National Institute of Diabetes and Digestive and Kidney Diseases similarly emphasizes that abnormal A1C results used for diagnosis usually require confirmation with a second measurement [6].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-022",
+      "status": "already-registered",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "In population research, this distinction is essential: a single HbA1c value can define an epidemiologic category, but it should not be described as a clinical diagnosis.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-023",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "NHANES provides demographic data, anthropometry, blood pressure, health questionnaires, and laboratory measures, including glycohemoglobin and fasting glucose in the 2017-2018 cycle.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-024",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "NHANES analytic guidelines and weighting tutorials emphasize that weights account for unequal selection probabilities, oversampling, non-response, and post-stratification adjustment [1,2].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-025",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "Prior NHANES-based studies have examined diabetes prevalence trends, undiagnosed diabetes definitions, population screening patterns, and discrepancies between HbA1c-based and glucose-based glycemic classification [9-13].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-026",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "These studies provide important background but leave room for narrower analyses focused on the profile of people who self-report no diabetes diagnosis while meeting laboratory criteria for diabetes-range HbA1c.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-027",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "This framing is especially relevant for public health and primary care because variables such as waist circumference, blood pressure, and lipid measures are widely available or relatively inexpensive compared with advanced metabolic testing.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-028",
+      "status": "needs-human-review",
+      "suggestedTier": "supporting",
+      "type": "numeric-claim",
+      "sentence": "Central adiposity is closely related to insulin resistance and adverse cardiometabolic risk profiles, and NHANES-based studies have examined waist circumference and other body shape indices in relation to glycemic outcomes [14].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-029",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Recent NHANES and cohort studies have reported associations between non-HDL cholesterol, non-HDL-to-HDL cholesterol ratio, and diabetes or incident diabetes risk [15-17].",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-030",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "Participants with undiagnosed diabetes may have altered lifestyle behaviors, unmeasured comorbidities, or differential health awareness.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-031",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "The objective of this study was to estimate the weighted prevalence of HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-032",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "adults and to examine its demographic, anthropometric, cardiometabolic, and lifestyle correlates using NHANES 2017-2018 data.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-033",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "sample-size",
+      "sentence": "The study further evaluated HbA1c-defined prediabetes and a fasting-subsample sensitivity definition that incorporated fasting plasma glucose.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-034",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "First, the denominator is not the general adult population or adults with diagnosed diabetes, but adults who report no diabetes diagnosis.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-035",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "This restriction better matches the practical screening problem: clinicians and public health programs often need to decide which apparently non-diabetic adults may warrant laboratory testing or closer follow-up.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-036",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "model-estimate",
+      "sentence": "The analysis can identify associations that may guide future screening research, but it cannot determine whether modifying waist circumference, lipid levels, or physical activity would reduce undiagnosed diabetes in the observed population.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-037",
+      "status": "needs-human-review",
+      "suggestedTier": "supporting",
+      "type": "numeric-claim",
+      "sentence": "This cross-sectional study used publicly available NHANES 2017-2018 data.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-038",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "numeric-claim",
+      "sentence": "The 2017-2018 cycle included demographic, examination, questionnaire, and laboratory components.",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-039",
+      "status": "needs-human-review",
+      "suggestedTier": "supporting",
+      "type": "numeric-claim",
+      "sentence": "The present analysis used 12 NHANES files: demographic data (`DEMO_J`), body measures (`BMX_J`), blood pressure examination data (`BPX_J`), diabetes questionnaire data (`DIQ_J`), glycohemoglobin (`GHB_J`), fasting plasma glucose (`GLU_J`), blood pressure and cholesterol questionnaire data (`BPQ_J`), total cholesterol (`TCHOL_J`), HDL cholesterol (`HDL_J`), physical activity questionnaire data (`PAQ_J`), smoking questionnaire data (`SMQ_J`), and sleep questionnaire data (`SLQ_J`).",
+      "interpretationBoundaryNeeded": true
+    },
+    {
+      "id": "nhanes-candidate-040",
+      "status": "needs-human-review",
+      "suggestedTier": "core",
+      "type": "prevalence-or-percentage",
+      "sentence": "Glycohemoglobin was identified using the NHANES variable `LBXGH`, documented as glycohemoglobin (%) in the 2017-2018 laboratory documentation [3,4].",
+      "interpretationBoundaryNeeded": true
+    }
+  ]
+}
