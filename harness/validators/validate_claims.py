@@ -2,9 +2,10 @@
 """Validate structured manuscript claims against a claim registry.
 
 This is the first production-facing step beyond fixed number checks: claims are
-explicit objects with source files, expected rendered text, and interpretation
-boundaries. The validator also extracts candidate numeric sentences so reviewers
-can see which claims are still outside the registry.
+explicit objects with source files, expected rendered text, interpretation
+boundaries, and review priority tiers. The validator also extracts candidate
+numeric sentences so reviewers can see which claims are still outside the
+registry.
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ from pathlib import Path
 
 
 NUMERIC_PATTERN = re.compile(r"(\d[\d,]*(?:\.\d+)?%?|\bOR\b|95% CI)", re.IGNORECASE)
+ALLOWED_TIERS = {"core", "supporting", "background"}
 
 
 def split_sentences(text: str) -> list[str]:
@@ -31,18 +33,25 @@ def validate(root: Path, registry_path: Path) -> dict:
     manuscript_compact = re.sub(r"\s+", " ", manuscript)
     failures = []
     checks = []
+    tier_counts = {tier: 0 for tier in sorted(ALLOWED_TIERS)}
 
     for claim in registry.get("claims", []):
         source = root / claim["sourceFile"]
         source_ok = source.exists()
         text_ok = claim["expectedText"] in manuscript_compact
         boundary_ok = bool(claim.get("interpretationBoundary"))
+        tier = claim.get("tier")
+        tier_ok = tier in ALLOWED_TIERS
+        if tier_ok:
+            tier_counts[tier] += 1
         checks.append(
             {
                 "claim": claim["id"],
+                "tier": tier,
                 "sourceExists": source_ok,
                 "expectedTextPresent": text_ok,
                 "interpretationBoundaryPresent": boundary_ok,
+                "tierValid": tier_ok,
             }
         )
         if not source_ok:
@@ -51,6 +60,8 @@ def validate(root: Path, registry_path: Path) -> dict:
             failures.append({"check": "expected_text_present", "claim": claim["id"], "expected": claim["expectedText"]})
         if not boundary_ok:
             failures.append({"check": "interpretation_boundary", "claim": claim["id"]})
+        if not tier_ok:
+            failures.append({"check": "allowed_tier", "claim": claim["id"], "tier": tier})
 
     registered_texts = [claim["expectedText"] for claim in registry.get("claims", [])]
     candidate_sentences = [
@@ -66,6 +77,7 @@ def validate(root: Path, registry_path: Path) -> dict:
         "registry": str(registry_path),
         "manuscript": str(manuscript_path),
         "registeredClaimCount": len(registry.get("claims", [])),
+        "registeredClaimTiers": tier_counts,
         "unregisteredNumericSentenceSample": candidate_sentences[:20],
         "checks": checks,
         "failures": failures,

@@ -1,6 +1,6 @@
 # ars-research-harness
 
-一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。
+一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。当前能力边界需要明确区分：NHANES 是完整闭环示例；CHARLS 和 GBD 目前是带访问规则的 scaffold/适配框架，不包含受限原始数据、GBD 导出结果或已完成的 CHARLS/GBD 分析。
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 
@@ -43,6 +43,20 @@ python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagno
 - `examples/nhanes-undiagnosed-diabetes/results/`
 - `examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_with_tables_figures.docx`
 
+如果初始化 CHARLS 或 GBD 项目，请先取得相应数据访问或导出文件，再运行：
+
+```bash
+python3 harness/scripts/init_public_database_project.py charls charls-example \
+  --title "CHARLS public-database manuscript" \
+  --research-question "To be refined in S1"
+
+python3 harness/scripts/init_public_database_project.py gbd gbd-example \
+  --title "GBD burden manuscript" \
+  --research-question "To be refined in S1"
+```
+
+这些命令只生成项目脚手架，不会自动下载 CHARLS 或 GBD 数据，也不会自动生成可以投稿的结论。只有完成 S3 分析产物和 S7 完整性核查后，才可以写入正式 claim。
+
 ## S0-S9 工作流
 
 ![Checkpoint Loop](assets/diagrams/02-checkpoint-loop-japanese-handdrawn.png)
@@ -83,6 +97,10 @@ python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagno
 - `harness/scripts/validate_checkpoint_workflow.py`：检查阶段状态。
 - `examples/nhanes-undiagnosed-diabetes/`：完整 NHANES 案例。
 - `scripts/`：可复用执行入口。
+- `data_sources/`：NHANES、CHARLS、GBD 的数据源治理声明。
+- `docs/11-study-design-support-matrix.md`：研究类型支持边界。
+- `docs/12-artifact-governance.md`：结果、DOCX、图片和原始数据的入库规则。
+- `DATA_POLICY.md`：公共数据、受限数据和不得入库数据的政策。
 
 ## NHANES 案例
 
@@ -129,7 +147,10 @@ python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagno
 
 - 本项目是科研工作流和教学模板，不保证论文被 SCI 接收。
 - NHANES 是复杂抽样调查；正式推断必须使用权重、分层和 PSU。
+- 横断面结果不能写成因果结论。
+- 单次 HbA1c 或空腹血糖不能写成临床确诊。
+- 公共数据库描述性或关联分析不能写成机制研究。
 - AI 生成的研究文本需要人工统计、伦理、引用和期刊格式复核。
-- NHANES 数据来自 CDC/NCHS public-use files，使用者应遵守原始数据来源说明和引用规范。
+- NHANES 数据来自 CDC/NCHS public-use files；CHARLS 与 GBD 使用者必须遵守原始平台的数据访问、引用和再分发规则。
 
 English documentation: [README.md](README.md)

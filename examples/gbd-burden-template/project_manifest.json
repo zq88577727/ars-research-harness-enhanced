@@ -1,6 +1,8 @@
 {
   "projectType": "gbd-burden-project",
   "dataSource": "gbd",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "capabilityStatus": "scaffold-only",
   "title": "GBD burden public-database manuscript template",
   "researchQuestion": "To be refined after GBD query export and metric selection.",
   "rawDataDirectory": "data/gbd/raw",

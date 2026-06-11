@@ -1,6 +1,8 @@
 {
   "projectType": "charls-longitudinal-project",
   "dataSource": "charls",
+  "dataSourceManifest": "data_sources/charls.json",
+  "capabilityStatus": "scaffold-only",
   "title": "CHARLS aging public-database manuscript template",
   "researchQuestion": "To be refined after CHARLS wave access and variable mapping.",
   "targetWaves": [],

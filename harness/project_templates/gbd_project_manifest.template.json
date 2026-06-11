@@ -1,6 +1,8 @@
 {
   "projectType": "gbd-burden-project",
   "dataSource": "gbd",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "capabilityStatus": "scaffold-only",
   "title": "",
   "researchQuestion": "",
   "rawDataDirectory": "data/gbd/raw",

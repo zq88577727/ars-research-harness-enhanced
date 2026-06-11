@@ -15,3 +15,6 @@ The key rule is honesty about access:
 Adapters are metadata contracts. They tell the workflow what questions, weights,
 source files, and reporting risks must be resolved before analysis and drafting.
 
+`data_sources/*.json` is the source-of-truth layer for dataset-level policy.
+Example project manifests and scaffold templates should reference these files
+through `dataSourceManifest` instead of copying access rules into every run.

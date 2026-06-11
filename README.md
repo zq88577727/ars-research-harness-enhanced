@@ -2,7 +2,7 @@
 
 A checkpoint-first academic research workflow harness. This repository turns an AI-assisted paper workflow into a traceable, reproducible, human-confirmed process.
 
-The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults.
+The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults. NHANES is the repository's complete closed-loop example. CHARLS and GBD support is currently access-aware scaffolding: the harness can initialize project manifests and governance files, but it does not include restricted CHARLS raw data, GBD exports, or completed CHARLS/GBD analyses.
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 
@@ -19,6 +19,9 @@ Core properties:
 - validator-backed workflow status
 - artifact trail for every stage
 - complete NHANES example that can be reused as a template
+- explicit capability boundaries: NHANES is a complete teaching case; CHARLS
+  and GBD are scaffolded adapters until the user supplies approved data exports,
+  variable/query maps, analysis outputs, and source-specific citations
 - enhanced manuscript-number, reference, reporting-checklist, journal-profile,
   environment-lock, and reviewer-response trace validators
 - CI validation, optional Crossref/PubMed literature checks, structured claim
@@ -56,6 +59,10 @@ python3 harness/scripts/init_public_database_project.py gbd gbd-example \
   --research-question "To be refined in S1"
 ```
 
+These commands create scaffolded run folders only. They do not download CHARLS
+or GBD data and do not create defensible manuscript claims until S3 analysis
+outputs and S7 integrity checks are complete.
+
 Key outputs:
 
 - `examples/nhanes-undiagnosed-diabetes/workflow-run.json`
@@ -69,6 +76,11 @@ Production feasibility and public-database access boundaries are documented in
 [docs/09-production-feasibility-matrix.md](docs/09-production-feasibility-matrix.md).
 CHARLS and GBD onboarding steps are documented in
 [docs/10-charls-gbd-onboarding.zh-CN.md](docs/10-charls-gbd-onboarding.zh-CN.md).
+Study-design support boundaries are documented in
+[docs/11-study-design-support-matrix.md](docs/11-study-design-support-matrix.md).
+Artifact retention rules are documented in
+[docs/12-artifact-governance.md](docs/12-artifact-governance.md).
+Repository data-use rules are documented in [DATA_POLICY.md](DATA_POLICY.md).
 
 ## Workflow
 
@@ -108,6 +120,6 @@ The NHANES example demonstrates how a public health dataset becomes survey-weigh
 
 ## Disclaimer
 
-This project is a research workflow and teaching template. It does not guarantee journal acceptance and does not replace statistical, ethical, clinical, or editorial review. NHANES data are from CDC/NCHS public-use files; users are responsible for following source citation and reuse guidance.
+This project is a research workflow and teaching template. It does not guarantee journal acceptance and does not replace statistical, ethical, clinical, or editorial review. Cross-sectional findings must not be written as causal effects, single laboratory measurements must not be written as clinical diagnoses, and descriptive public-database analyses must not be written as mechanism studies. NHANES data are from CDC/NCHS public-use files; CHARLS and GBD users are responsible for following source access, citation, and redistribution rules.
 
 中文文档: [README.zh-CN.md](README.zh-CN.md)

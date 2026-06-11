@@ -1,6 +1,8 @@
 {
   "projectType": "charls-longitudinal-project",
   "dataSource": "charls",
+  "dataSourceManifest": "data_sources/charls.json",
+  "capabilityStatus": "scaffold-only",
   "title": "",
   "researchQuestion": "",
   "targetWaves": [],

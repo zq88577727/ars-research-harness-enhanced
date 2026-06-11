@@ -49,6 +49,24 @@ def validate_project(path: Path) -> dict:
         failures.append({"check": "workflow_stages", "missing": missing_stages})
 
     data_source = manifest.get("dataSource")
+    data_source_manifest = manifest.get("dataSourceManifest")
+    if not data_source_manifest:
+        failures.append({"check": "data_source_manifest_declared"})
+    else:
+        source_manifest_path = Path(data_source_manifest)
+        if not source_manifest_path.exists():
+            failures.append({"check": "data_source_manifest_exists", "path": data_source_manifest})
+        else:
+            source_manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
+            if source_manifest.get("id") != data_source:
+                failures.append(
+                    {
+                        "check": "data_source_manifest_matches",
+                        "dataSource": data_source,
+                        "manifestId": source_manifest.get("id"),
+                    }
+                )
+
     if data_source == "charls":
         variable_map = path / "variable_map.csv"
         if not variable_map.exists():

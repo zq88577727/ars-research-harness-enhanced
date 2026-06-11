@@ -4,6 +4,7 @@
   "claims": [
     {
       "id": "sample-final-n",
+      "tier": "core",
       "type": "sample-size",
       "expectedText": "4,004 remained",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/flow_counts.csv",
@@ -12,6 +13,7 @@
     },
     {
       "id": "primary-prevalence",
+      "tier": "core",
       "type": "weighted-prevalence",
       "expectedText": "2.17% (95% CI, 1.74%-2.70%)",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/weighted_prevalence_overall.csv",
@@ -20,6 +22,7 @@
     },
     {
       "id": "prediabetes-prevalence",
+      "tier": "core",
       "type": "weighted-prevalence",
       "expectedText": "24.76% (95% CI, 22.63%-27.02%)",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/weighted_prevalence_overall.csv",
@@ -28,6 +31,7 @@
     },
     {
       "id": "fasting-sensitivity",
+      "tier": "core",
       "type": "sensitivity-analysis",
       "expectedText": "1.84% (95% CI, 1.29%-2.62%) using HbA1c alone to 4.06% (95% CI, 3.12%-5.28%)",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/fasting_weighted_sensitivity_prevalence.csv",
@@ -36,6 +40,7 @@
     },
     {
       "id": "waist-or",
+      "tier": "core",
       "type": "model-estimate",
       "expectedText": "1.051; 95% CI, 1.030-1.073",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
@@ -44,11 +49,102 @@
     },
     {
       "id": "non-hdl-or",
+      "tier": "core",
       "type": "model-estimate",
       "expectedText": "1.016; 95% CI, 1.008-1.023",
       "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
       "sourceFields": ["Non-HDL cholesterol, per mg/dL"],
       "interpretationBoundary": "association, not clinical rule"
+    },
+    {
+      "id": "outcome-definition",
+      "tier": "core",
+      "type": "outcome-definition",
+      "expectedText": "HbA1c-defined undiagnosed diabetes, defined as HbA1c >=6.5%",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+      "sourceFields": ["Methods: outcome definition"],
+      "interpretationBoundary": "epidemiologic definition among self-reported non-diabetic participants, not confirmed clinical diagnosis"
+    },
+    {
+      "id": "prediabetes-definition",
+      "tier": "supporting",
+      "type": "outcome-definition",
+      "expectedText": "Prediabetes was defined as HbA1c 5.7%-6.4%",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+      "sourceFields": ["Methods: outcome definition"],
+      "interpretationBoundary": "single HbA1c epidemiologic range"
+    },
+    {
+      "id": "obesity-subgroup-prevalence",
+      "tier": "supporting",
+      "type": "subgroup-prevalence",
+      "expectedText": "4.08% vs 0.85%",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/weighted_prevalence_subgroups.csv",
+      "sourceFields": ["obesity=1", "obesity=0"],
+      "interpretationBoundary": "subgroup prevalence pattern, not causal effect of obesity"
+    },
+    {
+      "id": "asian-or",
+      "tier": "core",
+      "type": "model-estimate",
+      "expectedText": "5.986; 95% CI, 1.859-19.276",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
+      "sourceFields": ["Non-Hispanic Asian vs Non-Hispanic White"],
+      "interpretationBoundary": "association using broad NHANES race/ethnicity categories, not biological causation"
+    },
+    {
+      "id": "black-or",
+      "tier": "core",
+      "type": "model-estimate",
+      "expectedText": "4.099; 95% CI, 1.334-12.600",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
+      "sourceFields": ["Non-Hispanic Black vs Non-Hispanic White"],
+      "interpretationBoundary": "association using broad NHANES race/ethnicity categories, not biological causation"
+    },
+    {
+      "id": "physical-activity-or",
+      "tier": "supporting",
+      "type": "model-estimate",
+      "expectedText": "0.478; 95% CI, 0.211-1.078",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/table2_formatted.csv",
+      "sourceFields": ["Any reported physical activity vs none"],
+      "interpretationBoundary": "directional association with confidence interval including the null"
+    },
+    {
+      "id": "cross-sectional-boundary",
+      "tier": "core",
+      "type": "interpretation-boundary",
+      "expectedText": "results should be interpreted as associations rather than causal effects or diagnostic recommendations",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+      "sourceFields": ["Abstract conclusion"],
+      "interpretationBoundary": "mandatory limitation statement for cross-sectional public-use data"
+    },
+    {
+      "id": "single-hba1c-boundary",
+      "tier": "core",
+      "type": "interpretation-boundary",
+      "expectedText": "a single HbA1c value can define an epidemiologic category, but it should not be described as a clinical diagnosis",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.md",
+      "sourceFields": ["Introduction"],
+      "interpretationBoundary": "mandatory limitation statement for single-measure laboratory classification"
+    },
+    {
+      "id": "nchs-background-prevalence",
+      "tier": "background",
+      "type": "background-statistic",
+      "expectedText": "15.8%, 11.3%, and 4.5%",
+      "sourceFile": "harness/reference_registry/nhanes_undiagnosed_diabetes.references.json",
+      "sourceFields": ["NCHS Data Brief reference"],
+      "interpretationBoundary": "background national surveillance statistic, not directly comparable to the study denominator"
+    },
+    {
+      "id": "ada-threshold-background",
+      "tier": "background",
+      "type": "background-threshold",
+      "expectedText": "HbA1c >=6.5% as a diabetes-range threshold and HbA1c 5.7%-6.4% as a prediabetes range",
+      "sourceFile": "harness/reference_registry/nhanes_undiagnosed_diabetes.references.json",
+      "sourceFields": ["ADA Standards of Care reference"],
+      "interpretationBoundary": "diagnostic threshold background; this manuscript uses epidemiologic classification without confirmatory testing"
     }
   ]
 }

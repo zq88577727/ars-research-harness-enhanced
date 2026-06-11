@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 
-ALLOWED_STATUSES = {"addressed", "partial", "not-addressed", "not-applicable", "needs-author-completion"}
+ALLOWED_STATUSES = {"addressed", "partial", "not-addressed", "not-applicable", "author-dependent"}
 
 
 def validate(path: Path) -> dict:
@@ -24,12 +24,14 @@ def validate(path: Path) -> dict:
                 failures.append({"check": "required_field", "item": item.get("item"), "field": field})
         if item.get("status") not in ALLOWED_STATUSES:
             failures.append({"check": "allowed_status", "item": item.get("item"), "status": item.get("status")})
-    unresolved = [item["item"] for item in items if item.get("status") in {"partial", "not-addressed", "needs-author-completion"}]
+    unresolved = [item["item"] for item in items if item.get("status") in {"partial", "not-addressed"}]
+    author_dependent = [item["item"] for item in items if item.get("status") == "author-dependent"]
     return {
         "ok": not failures,
         "checklist": str(path),
         "itemCount": len(items),
         "unresolvedItems": unresolved,
+        "authorDependentItems": author_dependent,
         "failures": failures,
     }
 
