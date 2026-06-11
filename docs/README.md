@@ -20,6 +20,7 @@ support for completed analysis capability.
 - `10-charls-gbd-onboarding.zh-CN.md`: CHARLS and GBD onboarding steps.
 - `11-study-design-support-matrix.md`: supported, scaffolded, and future study designs.
 - `12-artifact-governance.md`: repository, release, and local artifact rules.
+- `../harness/scripts/generate_readiness_report.py`: production-readiness gate.
 
 ## Repository-Level Policies
 

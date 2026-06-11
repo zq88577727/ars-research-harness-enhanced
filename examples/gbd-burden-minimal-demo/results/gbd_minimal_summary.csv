@@ -1,0 +1,2 @@
+gbd_release,cause,location,age,sex,year,deaths_number,dalys_number,dalys_per_death,interpretation_boundary
+GBD 2023,All causes,Global,All ages,Both,2023,60043088.86,2799135266.30,46.62,Teaching fixture for workflow traceability; not a publishable burden estimate until replaced with an approved GBD export and full citation.

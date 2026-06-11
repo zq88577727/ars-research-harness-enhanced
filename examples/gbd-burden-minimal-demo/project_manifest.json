@@ -1,0 +1,36 @@
+{
+  "projectType": "gbd-burden-project",
+  "dataSource": "gbd",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "capabilityStatus": "minimal-demo",
+  "title": "GBD burden minimal teaching demo",
+  "researchQuestion": "Can a minimal GBD Results-style export be traced from query dimensions to derived burden claims?",
+  "rawDataDirectory": "examples/gbd-burden-minimal-demo/source_exports",
+  "derivedDataDirectory": "examples/gbd-burden-minimal-demo/results",
+  "queryManifest": "examples/gbd-burden-minimal-demo/gbd_query_manifest.csv",
+  "claimRegistry": "examples/gbd-burden-minimal-demo/claim_registry.json",
+  "accessStatus": {
+    "accountRegistered": true,
+    "queryDefined": true,
+    "csvExportDownloaded": true,
+    "releaseVersionRecorded": true
+  },
+  "requiredQueryDimensions": [
+    "gbd_release",
+    "measure",
+    "metric",
+    "cause",
+    "location",
+    "age",
+    "sex",
+    "year"
+  ],
+  "analysisRequirements": [
+    "uncertainty interval interpretation specified",
+    "age-standardization decision specified",
+    "rate/count/percent metric distinction specified",
+    "source and citation requirements recorded"
+  ],
+  "teachingFixture": true,
+  "manuscriptBoundary": "This fixture proves workflow traceability only; replace with an approved GBD export before manuscript submission."
+}

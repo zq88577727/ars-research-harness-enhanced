@@ -1,0 +1,42 @@
+{
+  "id": "gbd-burden-minimal-demo-claim-registry",
+  "manuscript": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
+  "claims": [
+    {
+      "id": "gbd-demo-deaths",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "expectedText": "60,043,088.86 deaths",
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
+      "sourceFields": ["Deaths", "Number", "Global", "All causes", "2023"],
+      "interpretationBoundary": "GBD Results-style teaching fixture; replace with approved export before manuscript use"
+    },
+    {
+      "id": "gbd-demo-dalys",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "expectedText": "2,799,135,266.30 DALYs",
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
+      "sourceFields": ["DALYs", "Number", "Global", "All causes", "2023"],
+      "interpretationBoundary": "GBD Results-style teaching fixture; replace with approved export before manuscript use"
+    },
+    {
+      "id": "gbd-demo-derived-ratio",
+      "tier": "supporting",
+      "type": "derived-check",
+      "expectedText": "46.62 DALYs per death",
+      "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.csv",
+      "sourceFields": ["dalys_per_death"],
+      "interpretationBoundary": "Derived traceability check, not an epidemiologic interpretation"
+    },
+    {
+      "id": "gbd-demo-boundary",
+      "tier": "core",
+      "type": "interpretation-boundary",
+      "expectedText": "workflow fixture, not a publishable disease-burden estimate",
+      "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
+      "sourceFields": ["Boundary paragraph"],
+      "interpretationBoundary": "Mandatory scaffold-to-production boundary"
+    }
+  ]
+}

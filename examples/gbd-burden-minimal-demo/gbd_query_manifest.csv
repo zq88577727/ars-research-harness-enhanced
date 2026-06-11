@@ -1,0 +1,3 @@
+gbd_release,measure,metric,cause,location,age,sex,year,export_file,notes
+GBD 2023,Deaths,Number,All causes,Global,All ages,Both,2023,examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv,Teaching fixture row used for traceability demo.
+GBD 2023,DALYs,Number,All causes,Global,All ages,Both,2023,examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv,Teaching fixture row used for traceability demo.

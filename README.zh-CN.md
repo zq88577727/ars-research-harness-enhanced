@@ -34,6 +34,8 @@ python3 scripts/generate_tables.py
 Rscript scripts/generate_figures.R
 python3 scripts/build_submission_docx.py
 python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagnosed-diabetes/workflow-run.json
+python3 harness/scripts/run_all_validations.py
+python3 harness/scripts/generate_readiness_report.py --format markdown
 ```
 
 运行后重点查看：
@@ -42,6 +44,7 @@ python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagno
 - `examples/nhanes-undiagnosed-diabetes/checkpoints/`
 - `examples/nhanes-undiagnosed-diabetes/results/`
 - `examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_with_tables_figures.docx`
+- `examples/gbd-burden-minimal-demo/`
 
 如果初始化 CHARLS 或 GBD 项目，请先取得相应数据访问或导出文件，再运行：
 
@@ -117,6 +120,14 @@ python3 harness/scripts/init_public_database_project.py gbd gbd-example \
 - Table 1、Table 2、Figure 1、Figure 2。
 - 引用核查和修回记录。
 - 最终通用 SCI Word 稿。
+
+## GBD 最小闭环 demo
+
+`examples/gbd-burden-minimal-demo/` 使用一个很小的 GBD Results 风格教学
+fixture，演示 query manifest、导出表结构、派生结果、claim registry 和 S7
+完整性核查如何连起来。它证明的是 GBD 工作流治理与 claim 可追踪性，不是可投稿
+的真实疾病负担研究。正式 GBD 论文必须替换为获准导出的真实数据，并补齐 IHME/GHDx
+引用、release version、query dimensions 和 uncertainty interval 解释。
 
 ## 与普通 prompt/skill 的区别
 

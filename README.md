@@ -45,6 +45,7 @@ Rscript scripts/generate_figures.R
 python3 scripts/build_submission_docx.py
 python3 harness/scripts/validate_checkpoint_workflow.py examples/nhanes-undiagnosed-diabetes/workflow-run.json
 python3 harness/scripts/run_all_validations.py
+python3 harness/scripts/generate_readiness_report.py --format markdown
 ```
 
 Start a CHARLS or GBD run after data access/export is ready:
@@ -69,6 +70,7 @@ Key outputs:
 - `examples/nhanes-undiagnosed-diabetes/checkpoints/`
 - `examples/nhanes-undiagnosed-diabetes/results/`
 - `examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_with_tables_figures.docx`
+- `examples/gbd-burden-minimal-demo/`
 
 Enhanced validation details are documented in
 [docs/08-enhanced-validation-roadmap.md](docs/08-enhanced-validation-roadmap.md).
@@ -117,6 +119,10 @@ This repository can be used as a teaching module for a 90-120 minute AI medical 
 Chinese teaching notes are available in [docs/07-teaching-courseware.zh-CN.md](docs/07-teaching-courseware.zh-CN.md).
 
 The NHANES example demonstrates how a public health dataset becomes survey-weighted results, tables, figures, a manuscript draft, a simulated review trail, and a Word submission package.
+
+The GBD minimal demo demonstrates the same governance pattern on a small
+GBD Results-style teaching fixture through S7 integrity checking. It proves
+query-to-claim traceability, not a publishable burden analysis.
 
 ## Disclaimer
 

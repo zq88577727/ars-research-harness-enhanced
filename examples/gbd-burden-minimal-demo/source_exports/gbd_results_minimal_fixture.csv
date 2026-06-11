@@ -1,0 +1,3 @@
+gbd_release,measure,metric,cause,location,age,sex,year,val,upper,lower,fixture_note
+GBD 2023,Deaths,Number,All causes,Global,All ages,Both,2023,60043088.86,61239779.90,59045447.00,Minimal teaching fixture from a GBD Results-style global all-cause table; replace with approved export before manuscript use.
+GBD 2023,DALYs,Number,All causes,Global,All ages,Both,2023,2799135266.30,3084150400.00,2566897200.00,Minimal teaching fixture from a GBD Results-style global all-cause table; replace with approved export before manuscript use.

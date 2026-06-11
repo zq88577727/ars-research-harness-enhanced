@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run all local validation gates for the NHANES example."""
+"""Run all local validation gates for the research harness."""
 
 from __future__ import annotations
 
@@ -26,6 +26,9 @@ COMMANDS = [
     ["python3", "harness/validators/validate_data_source_manifests.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"],
+    ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"],
+    ["python3", "harness/validators/validate_gbd_minimal_demo.py"],
+    ["python3", "harness/scripts/generate_readiness_report.py"],
 ]
 
 
