@@ -44,6 +44,29 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 validator 只检查清单结构、必需波次和路径边界；当设为 `true` 后，必需行
 必须指向 `data/charls/raw/` 下真实存在的本地文件。
 
+CHARLS 本地受限数据 dry-run：
+
+```bash
+python3 harness/validators/validate_charls_local_dry_run.py
+```
+
+默认模式不会读取 `.dta`、`.sav`、`.sas7bdat`、CSV 或压缩包内容，只验证：
+
+- `project_manifest.json` 是否声明 CHARLS、本地原始数据目录和禁止入库策略；
+- `charls_file_manifest.csv` 是否包含必需列、至少两个纵向必需波次、路径边界和合法访问状态；
+- `variable_map.csv` 是否包含 respondent/person ID、wave、baseline/follow-up wave、age、sex、exposure、outcome、attrition status；
+- 已标记为 `downloaded_local` 的文件是否存在，若填写 `checksum_sha256` 是否匹配；
+- `data/charls/raw/` 下是否误提交受限原始数据。
+
+准备进入真实分析前运行严格模式：
+
+```bash
+python3 harness/validators/validate_charls_local_dry_run.py --require-local-data
+```
+
+严格模式会要求最小纵向分析所需的本地文件已经就绪；当前模板在未下载数据时应返回
+`awaiting-local-data`，而不是被解释为完整 CHARLS 分析实例。
+
 `variable_map.csv` 必须至少明确 respondent/person ID、wave、baseline wave、
 follow-up wave、age、sex、primary exposure、primary outcome、attrition status。
 纵向研究不能因为有先后波次就自动写成因果结论，必须在 S2 说明时序、样本流失、
@@ -107,5 +130,6 @@ python3 harness/scripts/run_all_validations.py
 
 ```bash
 python3 harness/validators/validate_project_scaffold.py examples/charls-aging-template
+python3 harness/validators/validate_charls_local_dry_run.py
 python3 harness/validators/validate_project_scaffold.py examples/gbd-burden-template
 ```

@@ -27,6 +27,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_revision_diff_report.py"],
     ["python3", "harness/validators/validate_data_source_manifests.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
+    ["python3", "harness/validators/validate_charls_local_dry_run.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"],
     ["python3", "scripts/fetch_gbd_export.py", "--dry-run"],

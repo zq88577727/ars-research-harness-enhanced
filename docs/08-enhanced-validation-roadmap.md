@@ -36,6 +36,10 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
 - `scripts/fetch_gbd_export.py` reads the GBD analysis manifest's `download`
   block, performs a non-overwriting dry run in CI, and can fetch approved public
   GBD endpoint data into metadata-rich CSV exports when run intentionally.
+- `harness/validators/validate_charls_local_dry_run.py` checks local CHARLS
+  restricted-data readiness without opening raw data files. Default mode supports
+  metadata-only scaffolds; `--require-local-data` blocks analysis until required
+  local files are present and optional checksums match.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 

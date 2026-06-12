@@ -53,6 +53,7 @@ python3 harness/scripts/extract_candidate_claims.py \
   --output harness/claims/nhanes_candidate_claims.json
 python3 harness/scripts/prepare_claim_registry_review.py
 python3 harness/scripts/apply_claim_review_decisions.py
+python3 harness/validators/validate_charls_local_dry_run.py
 ```
 
 Start a CHARLS or GBD run after data access/export is ready:
@@ -70,6 +71,15 @@ python3 harness/scripts/init_public_database_project.py gbd gbd-example \
 These commands create scaffolded run folders only. They do not download CHARLS
 or GBD data and do not create defensible manuscript claims until S3 analysis
 outputs and S7 integrity checks are complete.
+
+For CHARLS, the local restricted-data dry run checks manifest structure, local
+path boundaries, variable mapping, checksums when supplied, and raw-data git
+tracking without opening the restricted data files:
+
+```bash
+python3 harness/validators/validate_charls_local_dry_run.py
+python3 harness/validators/validate_charls_local_dry_run.py --require-local-data
+```
 
 For the included GBD demo, the public default endpoint can be checked without
 modifying files:
