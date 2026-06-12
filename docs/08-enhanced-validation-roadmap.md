@@ -42,6 +42,12 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
   local files are present, required variables are mapped to source variables or
   documented derivations, semantic variable fields are complete, wave roles are
   auditable, and optional checksums match.
+- `harness/validators/validate_charls_design_gate.py` checks the CHARLS S1/S2
+  research-design gate. It links `charls_design_gate.json` to the variable map
+  and wave map, then validates the research question, estimand, exposure/outcome
+  temporal ordering, attrition plan, weight decision, and no-causal-language
+  boundary. Default mode allows scaffold projects to remain pending;
+  `--require-ready` blocks real analysis until placeholders are resolved.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 
@@ -71,6 +77,13 @@ Run live DOI checks only in a network-enabled environment:
 
 ```bash
 python3 harness/validators/validate_external_literature.py --online
+```
+
+Run the CHARLS S1/S2 design gate:
+
+```bash
+python3 harness/validators/validate_charls_design_gate.py
+python3 harness/validators/validate_charls_design_gate.py --require-ready
 ```
 
 Generate the manuscript revision diff report with:

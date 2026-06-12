@@ -49,6 +49,11 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
         shutil.copyfile(TEMPLATE_DIR / "variable_map.charls.template.csv", run_root / "variable_map.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_file_manifest.template.csv", run_root / "charls_file_manifest.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_wave_map.template.csv", run_root / "charls_wave_map.csv")
+        design_gate = (TEMPLATE_DIR / "charls_design_gate.template.json").read_text(encoding="utf-8")
+        (run_root / "charls_design_gate.json").write_text(
+            design_gate.replace("<project-slug>", slug),
+            encoding="utf-8",
+        )
     elif kind == "gbd":
         shutil.copyfile(TEMPLATE_DIR / "gbd_query_manifest.template.csv", run_root / "gbd_query_manifest.csv")
         shutil.copyfile(TEMPLATE_DIR / "gbd_analysis_manifest.template.json", run_root / "gbd_analysis_manifest.json")
@@ -82,6 +87,17 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
     }
     (run_root / "workflow-run.json").write_text(json.dumps(workflow, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    next_steps = [
+        "1. Complete S0 intake and confirm data access status.",
+        "2. Fill the variable map or query manifest.",
+        "3. Place raw data in the ignored local raw-data directory declared by `project_manifest.json`.",
+    ]
+    if kind == "charls":
+        next_steps.append("4. Complete the CHARLS S1/S2 design gate before any real longitudinal analysis.")
+        next_steps.append("5. Do not draft final claims until S3 results and S7 validation artifacts exist.")
+    else:
+        next_steps.append("4. Do not draft final claims until S3 results and S7 validation artifacts exist.")
+
     readme = [
         f"# {title}",
         "",
@@ -97,10 +113,7 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
         "",
         "## Required Next Steps",
         "",
-        "1. Complete S0 intake and confirm data access status.",
-        "2. Fill the variable map or query manifest.",
-        "3. Place raw data in the ignored local raw-data directory declared by `project_manifest.json`.",
-        "4. Do not draft final claims until S3 results and S7 validation artifacts exist.",
+        *next_steps,
         "",
     ]
     (run_root / "README.md").write_text("\n".join(readme), encoding="utf-8")

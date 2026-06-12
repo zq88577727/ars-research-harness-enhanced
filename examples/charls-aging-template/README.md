@@ -22,10 +22,44 @@ To be refined after CHARLS wave access and variable mapping.
    follow-up wave, exposure, outcome, attrition status, and weight decision.
    Required variables must carry construct, domain, measurement type, wave role,
    time anchor, coding decision, missingness decision, and interpretation boundary.
-5. Place raw data in the ignored local raw-data directory declared by
+5. Fill `charls_design_gate.json` with the S1/S2 research question, estimand,
+   temporal-ordering, attrition, weight, and claim-language decisions.
+6. Place raw data in the ignored local raw-data directory declared by
    `project_manifest.json`; do not commit raw `.dta`, `.sav`, `.sas7bdat`, CSV,
    or archive files.
-6. Do not draft final claims until S3 results and S7 validation artifacts exist.
+7. Do not draft final claims until S3 results and S7 validation artifacts exist.
+
+## S1/S2 Design Gate
+
+`charls_design_gate.json` connects the variable and wave maps to the research
+question and method-analysis plan. It is intentionally scaffold-only until the
+research question, exposure, outcome, attrition plan, and weight decision are
+confirmed.
+
+Run the design gate during S1/S2:
+
+```bash
+python3 harness/validators/validate_charls_design_gate.py
+```
+
+The default gate checks that:
+
+- the research question points to variables in `variable_map.csv`;
+- baseline and follow-up waves are declared in `charls_wave_map.csv`;
+- exposure is baseline-positioned and outcome is follow-up-positioned;
+- attrition and weight variables are connected to explicit S2 decisions;
+- manuscript language includes a no-causal-overclaim boundary.
+
+Run the strict gate before real CHARLS analysis:
+
+```bash
+python3 harness/validators/validate_charls_design_gate.py --require-ready
+```
+
+Strict mode blocks analysis until the design gate is marked
+`ready-for-analysis`, the research question and estimand are no longer
+placeholders, exposure/outcome/attrition variables are mapped or derived from
+real CHARLS variables, and the weight decision is no longer pending.
 
 ## Local Data Boundary
 

@@ -36,6 +36,7 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 - `examples/charls-aging-template/charls_file_manifest.csv`
 - `examples/charls-aging-template/charls_wave_map.csv`
 - `examples/charls-aging-template/variable_map.csv`
+- `examples/charls-aging-template/charls_design_gate.json`
 - `examples/charls-aging-template/checkpoints/stage-S0-intake.md`
 - `examples/charls-aging-template/checkpoints/stage-S1-research-question.md`
 - `examples/charls-aging-template/checkpoints/stage-S2-method-plan.md`
@@ -82,6 +83,35 @@ follow-up wave、age、sex、primary exposure、primary outcome、attrition stat
 attrition 角色；后者说明本地文件路径、下载状态和 checksum。两者必须一致。
 纵向研究不能因为有先后波次就自动写成因果结论，必须在 S2 说明时序、样本流失、
 缺失、权重和波次链接策略。
+
+CHARLS S1/S2 研究设计门禁：
+
+```bash
+python3 harness/validators/validate_charls_design_gate.py
+```
+
+`charls_design_gate.json` 把 `variable_map.csv` 和 `charls_wave_map.csv` 继续接到
+研究问题、估计目标、暴露/结局时间顺序、attrition plan、weight decision 和
+claim-language boundary。默认模式允许 scaffold 通过，但会返回
+`s1-s2-design-pending`，提示哪些 S1/S2 决策尚未关闭。它检查：
+
+- 研究问题中的 exposure/outcome 是否存在于变量语义表；
+- baseline/follow-up 波次是否存在于波次语义表，且角色正确；
+- exposure 是否定位在 baseline，outcome 是否定位在 follow-up；
+- attrition status 和 sample weight 是否连接到 S2 处理计划；
+- 是否存在 `no-causal-language` 边界，防止把观察性关联写成因果结论。
+
+准备进入真实 CHARLS 分析前运行严格模式：
+
+```bash
+python3 harness/validators/validate_charls_design_gate.py --require-ready
+```
+
+严格模式要求 `charls_design_gate.json` 的 `status` 为 `ready-for-analysis`，
+研究问题和 estimand 不再是占位文本，exposure/outcome/attrition 已经映射到真实
+CHARLS source variables 或明确 derived variables，且 weight decision 不再是
+`pending_weight_decision`。未满足这些条件时，即使本地文件存在，也不应进入真实分析或
+撰写结果性结论。
 
 CHARLS 重点风险：
 
@@ -141,6 +171,7 @@ python3 harness/scripts/run_all_validations.py
 
 ```bash
 python3 harness/validators/validate_project_scaffold.py examples/charls-aging-template
+python3 harness/validators/validate_charls_design_gate.py
 python3 harness/validators/validate_charls_local_dry_run.py
 python3 harness/validators/validate_project_scaffold.py examples/gbd-burden-template
 ```

@@ -48,6 +48,15 @@ CHARLS_FILE_MANIFEST_COLUMNS = {
     "notes",
 }
 
+CHARLS_DESIGN_GATE_REQUIRED_FIELDS = {
+    "researchQuestion",
+    "estimand",
+    "temporalOrdering",
+    "attritionPlan",
+    "weightDecision",
+    "claimBoundaries",
+}
+
 RAW_FILE_EXTENSIONS = {".dta", ".sav", ".sas7bdat", ".xpt", ".csv", ".zip", ".rar", ".7z"}
 
 
@@ -81,6 +90,19 @@ def validate_charls_project(path: Path, manifest: dict, failures: list[dict]) ->
         missing = sorted(CHARLS_REQUIRED_VARIABLES - required_names)
         if missing:
             failures.append({"check": "charls_required_variables_present", "missing": missing})
+
+    design_gate_value = manifest.get("designGate")
+    if not design_gate_value:
+        failures.append({"check": "charls_design_gate_declared"})
+    else:
+        design_gate = path / "charls_design_gate.json"
+        if not design_gate.exists():
+            failures.append({"check": "charls_design_gate_exists"})
+        else:
+            gate = json.loads(design_gate.read_text(encoding="utf-8"))
+            missing_gate_fields = sorted(CHARLS_DESIGN_GATE_REQUIRED_FIELDS - set(gate))
+            if missing_gate_fields:
+                failures.append({"check": "charls_design_gate_fields", "missing": missing_gate_fields})
 
     file_manifest_value = manifest.get("fileManifest")
     if not file_manifest_value:
