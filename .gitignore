@@ -14,6 +14,7 @@ tmp/
 *.tmp
 .workflow/
 data/charls/raw/
+data/charls/codebooks/
 data/gbd/raw/
 data/**/restricted/
 data/**/sensitive/

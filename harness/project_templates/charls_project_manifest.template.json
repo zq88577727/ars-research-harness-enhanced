@@ -14,6 +14,7 @@
   "variableMap": "examples/<project-slug>/variable_map.csv",
   "designGate": "examples/<project-slug>/charls_design_gate.json",
   "codebookExtract": "examples/<project-slug>/charls_codebook_extract.csv",
+  "codebookImportSample": "examples/<project-slug>/charls_codebook_import_sample.csv",
   "variableMappingDecisions": "examples/<project-slug>/charls_variable_mapping_decisions.json",
   "localRawDataPolicy": "Raw CHARLS files must remain in ignored local directories and must not be committed.",
   "interpretationBoundary": "CHARLS longitudinal associations require explicit wave linkage, attrition, missingness, weight, and temporality decisions before manuscript claims.",

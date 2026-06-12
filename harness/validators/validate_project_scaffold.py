@@ -158,6 +158,12 @@ def validate_charls_project(path: Path, manifest: dict, failures: list[dict]) ->
             if invalid_decisions:
                 failures.append({"check": "charls_variable_mapping_decision_values", "variables": invalid_decisions})
 
+    codebook_import_sample_value = manifest.get("codebookImportSample")
+    if not codebook_import_sample_value:
+        failures.append({"check": "charls_codebook_import_sample_declared"})
+    elif not (path / "charls_codebook_import_sample.csv").exists():
+        failures.append({"check": "charls_codebook_import_sample_exists"})
+
     file_manifest_value = manifest.get("fileManifest")
     if not file_manifest_value:
         failures.append({"check": "charls_file_manifest_declared"})

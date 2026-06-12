@@ -73,6 +73,37 @@ candidate source variables for human review. It should contain official CHARLS
 metadata such as source variable names, labels, modules, waves, measurement
 domains, and eligible analysis roles. It must not contain respondent-level data.
 
+## Local Codebook Importer
+
+The local codebook importer helps turn a narrow CHARLS codebook table into the
+`charls_codebook_extract.csv` schema. Place official local codebook or
+questionnaire exports under an ignored directory such as
+`data/charls/codebooks/`; do not commit those source files unless their license
+explicitly allows redistribution.
+
+Preview a local codebook import without writing output:
+
+```bash
+python3 harness/scripts/import_charls_codebook_extract.py \
+  --input data/charls/codebooks/<local-codebook>.csv \
+  --dry-run
+```
+
+Write or append only after the preview confirms that the input is
+variable-level metadata:
+
+```bash
+python3 harness/scripts/import_charls_codebook_extract.py \
+  --input data/charls/codebooks/<local-codebook>.csv \
+  --append
+```
+
+The importer supports CSV/TSV by default and XLS/XLSX when the local Python
+environment has a compatible Excel engine. It rejects likely respondent-level
+wide data and requires a source-variable column before importing. The included
+`charls_codebook_import_sample.csv` is a metadata-only sample for CI and
+training; replace it with official local CHARLS metadata for a real project.
+
 Generate the worksheet:
 
 ```bash

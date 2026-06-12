@@ -53,6 +53,11 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
   when available, suggests candidate source variables for human review, and
   records unresolved mapping, attrition, weight, and research-question decisions
   without mutating the variable map or design gate.
+- `harness/scripts/import_charls_codebook_extract.py` imports local
+  variable-level CHARLS codebook metadata into the codebook extract schema. It
+  supports CSV/TSV by default, optional XLS/XLSX through local Excel
+  dependencies, dry-run previews, append/dedupe writes, and rejection of likely
+  respondent-level wide data.
 - `harness/scripts/apply_charls_variable_mapping_decisions.py` closes the
   human-review loop from CHARLS codebook extract to variable-map draft. It
   validates `charls_variable_mapping_decisions.json`, permits pending scaffold

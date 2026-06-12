@@ -50,6 +50,7 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
         shutil.copyfile(TEMPLATE_DIR / "charls_file_manifest.template.csv", run_root / "charls_file_manifest.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_wave_map.template.csv", run_root / "charls_wave_map.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_codebook_extract.template.csv", run_root / "charls_codebook_extract.csv")
+        shutil.copyfile(TEMPLATE_DIR / "charls_codebook_import_sample.template.csv", run_root / "charls_codebook_import_sample.csv")
         decisions = (TEMPLATE_DIR / "charls_variable_mapping_decisions.template.json").read_text(encoding="utf-8")
         (run_root / "charls_variable_mapping_decisions.json").write_text(
             decisions.replace("<project-slug>", slug),
@@ -100,7 +101,7 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
     ]
     if kind == "charls":
         next_steps.append("4. Complete the CHARLS S1/S2 design gate before any real longitudinal analysis.")
-        next_steps.append("5. Fill the CHARLS codebook extract and generate the S1/S2 instantiation worksheet.")
+        next_steps.append("5. Import or fill the CHARLS codebook extract and generate the S1/S2 instantiation worksheet.")
         next_steps.append("6. Record reviewed variable-mapping decisions and generate a review draft variable map.")
         next_steps.append("7. Do not draft final claims until S3 results and S7 validation artifacts exist.")
     else:

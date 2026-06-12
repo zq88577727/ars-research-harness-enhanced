@@ -41,7 +41,13 @@ def file_check() -> dict:
 
 def raw_data_policy_check() -> dict:
     gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-    required = ["data/charls/raw/", "data/gbd/raw/", "data/**/restricted/", "data/**/sensitive/"]
+    required = [
+        "data/charls/raw/",
+        "data/charls/codebooks/",
+        "data/gbd/raw/",
+        "data/**/restricted/",
+        "data/**/sensitive/",
+    ]
     missing = [item for item in required if item not in gitignore]
     return {"ok": not missing, "missing": missing}
 
@@ -79,6 +85,7 @@ def build_report() -> dict:
         run_json(["python3", "harness/validators/validate_data_source_manifests.py"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"]),
         run_json(["python3", "harness/validators/validate_charls_design_gate.py"]),
+        run_json(["python3", "harness/scripts/import_charls_codebook_extract.py", "--input", "examples/charls-aging-template/charls_codebook_import_sample.csv", "--dry-run"]),
         run_json(["python3", "harness/scripts/prepare_charls_design_gate_instance.py", "--dry-run"]),
         run_json(["python3", "harness/scripts/apply_charls_variable_mapping_decisions.py", "--dry-run"]),
         run_json(["python3", "harness/validators/validate_charls_local_dry_run.py"]),

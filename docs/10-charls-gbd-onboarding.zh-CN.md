@@ -127,6 +127,35 @@ python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
 变量级元数据表，只能包含变量名、标签、模块、波次、构念关键词、测量域、测量类型、
 可承担的分析角色等 codebook 级信息，不得包含任何 respondent-level 原始数据。
 
+CHARLS 本地 codebook 辅助导入器：
+
+```bash
+python3 harness/scripts/import_charls_codebook_extract.py \
+  --input data/charls/codebooks/<local-codebook>.csv \
+  --dry-run
+
+python3 harness/scripts/import_charls_codebook_extract.py \
+  --input data/charls/codebooks/<local-codebook>.csv \
+  --append
+```
+
+官方 CHARLS codebook、questionnaire 或 portal export 应放在被忽略的本地目录，
+例如 `data/charls/codebooks/`。导入器只接受变量级窄表，要求能识别
+source-variable 列；如果输入看起来像 respondent-level 宽表，脚本会拒绝导入。
+CSV/TSV 可直接读取，XLS/XLSX 取决于本地是否安装 pandas 与 Excel engine。CI 中使用
+`examples/charls-aging-template/charls_codebook_import_sample.csv` 作为元数据样例：
+
+```bash
+python3 harness/scripts/import_charls_codebook_extract.py \
+  --input examples/charls-aging-template/charls_codebook_import_sample.csv \
+  --dry-run
+```
+
+真实项目中，先看 `--dry-run` 的 `detectedColumns` 和 `preview`，确认没有原始受访者数据、
+没有直接标识符、没有自由文本回答后，再使用 `--append` 写入
+`charls_codebook_extract.csv`。写入后仍需进入人工变量映射决策闭环，不能自动视为
+`variable_map.csv` 已审核完成。
+
 默认命令会生成 `charls_s1_s2_design_review.md`，把 S1/S2 design gate 的目标变量
 逐个连接到 codebook extract 中的候选 source variables，并标注仍需人工确认的动作。
 该 worksheet 不会自动修改 `variable_map.csv`，也不会把 `charls_design_gate.json`
