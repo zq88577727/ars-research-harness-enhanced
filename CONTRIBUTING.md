@@ -19,6 +19,10 @@ artifacts that cannot be reproduced.
    `harness/claims/`.
 5. If you add generated artifacts, explain whether they are committed teaching
    artifacts, release artifacts, or locally regenerated files.
+6. When closing a phase or proposing a next phase, include a stage review that
+   checks prior recommendations against actual completion evidence, then
+   propose the next actions with rationale, order, validation plan, and
+   remaining boundaries.
 
 ## Scientific Standards
 
