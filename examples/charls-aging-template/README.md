@@ -24,10 +24,13 @@ To be refined after CHARLS wave access and variable mapping.
    time anchor, coding decision, missingness decision, and interpretation boundary.
 5. Fill `charls_design_gate.json` with the S1/S2 research question, estimand,
    temporal-ordering, attrition, weight, and claim-language decisions.
-6. Place raw data in the ignored local raw-data directory declared by
+6. Fill `charls_codebook_extract.csv` with codebook-level metadata for candidate
+   source variables. Do not copy raw participant data into this file.
+7. Generate and review `charls_s1_s2_design_review.md`.
+8. Place raw data in the ignored local raw-data directory declared by
    `project_manifest.json`; do not commit raw `.dta`, `.sav`, `.sas7bdat`, CSV,
    or archive files.
-7. Do not draft final claims until S3 results and S7 validation artifacts exist.
+9. Do not draft final claims until S3 results and S7 validation artifacts exist.
 
 ## S1/S2 Design Gate
 
@@ -60,6 +63,30 @@ Strict mode blocks analysis until the design gate is marked
 `ready-for-analysis`, the research question and estimand are no longer
 placeholders, exposure/outcome/attrition variables are mapped or derived from
 real CHARLS variables, and the weight decision is no longer pending.
+
+## S1/S2 Instantiation Assistant
+
+`charls_codebook_extract.csv` is a codebook-level extract used to propose
+candidate source variables for human review. It should contain official CHARLS
+metadata such as source variable names, labels, modules, waves, measurement
+domains, and eligible analysis roles. It must not contain respondent-level data.
+
+Generate the worksheet:
+
+```bash
+python3 harness/scripts/prepare_charls_design_gate_instance.py
+```
+
+The command writes `charls_s1_s2_design_review.md`. The worksheet lists each
+target variable from the design gate and variable map, any candidate source
+variables found in the codebook extract, and the human action required before
+`variable_map.csv` or `charls_design_gate.json` can be marked analysis-ready.
+
+CI uses dry-run mode so validation remains read-only:
+
+```bash
+python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
+```
 
 ## Local Data Boundary
 

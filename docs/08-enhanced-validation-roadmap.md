@@ -48,6 +48,11 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
   temporal ordering, attrition plan, weight decision, and no-causal-language
   boundary. Default mode allows scaffold projects to remain pending;
   `--require-ready` blocks real analysis until placeholders are resolved.
+- `harness/scripts/prepare_charls_design_gate_instance.py` turns the CHARLS S1/S2
+  gate into an instantiation worksheet. It reads `charls_codebook_extract.csv`
+  when available, suggests candidate source variables for human review, and
+  records unresolved mapping, attrition, weight, and research-question decisions
+  without mutating the variable map or design gate.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 
@@ -84,6 +89,7 @@ Run the CHARLS S1/S2 design gate:
 ```bash
 python3 harness/validators/validate_charls_design_gate.py
 python3 harness/validators/validate_charls_design_gate.py --require-ready
+python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
 ```
 
 Generate the manuscript revision diff report with:

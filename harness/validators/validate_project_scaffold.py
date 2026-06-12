@@ -48,6 +48,20 @@ CHARLS_FILE_MANIFEST_COLUMNS = {
     "notes",
 }
 
+CHARLS_CODEBOOK_EXTRACT_COLUMNS = {
+    "source_wave",
+    "file_label",
+    "module",
+    "source_variable",
+    "variable_label",
+    "construct_keywords",
+    "measurement_domain",
+    "measurement_type",
+    "wave_role",
+    "eligible_roles",
+    "notes",
+}
+
 CHARLS_DESIGN_GATE_REQUIRED_FIELDS = {
     "researchQuestion",
     "estimand",
@@ -103,6 +117,22 @@ def validate_charls_project(path: Path, manifest: dict, failures: list[dict]) ->
             missing_gate_fields = sorted(CHARLS_DESIGN_GATE_REQUIRED_FIELDS - set(gate))
             if missing_gate_fields:
                 failures.append({"check": "charls_design_gate_fields", "missing": missing_gate_fields})
+
+    codebook_extract_value = manifest.get("codebookExtract")
+    if not codebook_extract_value:
+        failures.append({"check": "charls_codebook_extract_declared"})
+    else:
+        codebook_extract = path / "charls_codebook_extract.csv"
+        if not codebook_extract.exists():
+            failures.append({"check": "charls_codebook_extract_exists"})
+        else:
+            rows = read_csv(codebook_extract)
+            if not rows:
+                failures.append({"check": "charls_codebook_extract_rows"})
+            else:
+                missing_cols = sorted(CHARLS_CODEBOOK_EXTRACT_COLUMNS - set(rows[0].keys()))
+                if missing_cols:
+                    failures.append({"check": "charls_codebook_extract_columns", "missing": missing_cols})
 
     file_manifest_value = manifest.get("fileManifest")
     if not file_manifest_value:

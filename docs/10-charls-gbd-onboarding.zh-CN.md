@@ -37,6 +37,8 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 - `examples/charls-aging-template/charls_wave_map.csv`
 - `examples/charls-aging-template/variable_map.csv`
 - `examples/charls-aging-template/charls_design_gate.json`
+- `examples/charls-aging-template/charls_codebook_extract.csv`
+- `examples/charls-aging-template/charls_s1_s2_design_review.md`
 - `examples/charls-aging-template/checkpoints/stage-S0-intake.md`
 - `examples/charls-aging-template/checkpoints/stage-S1-research-question.md`
 - `examples/charls-aging-template/checkpoints/stage-S2-method-plan.md`
@@ -113,6 +115,22 @@ CHARLS source variables 或明确 derived variables，且 weight decision 不再
 `pending_weight_decision`。未满足这些条件时，即使本地文件存在，也不应进入真实分析或
 撰写结果性结论。
 
+CHARLS S1/S2 项目实例化助手：
+
+```bash
+python3 harness/scripts/prepare_charls_design_gate_instance.py
+python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
+```
+
+`charls_codebook_extract.csv` 是从官方 CHARLS questionnaire/codebook 中摘录的
+变量级元数据表，只能包含变量名、标签、模块、波次、构念关键词、测量域、测量类型、
+可承担的分析角色等 codebook 级信息，不得包含任何 respondent-level 原始数据。
+
+默认命令会生成 `charls_s1_s2_design_review.md`，把 S1/S2 design gate 的目标变量
+逐个连接到 codebook extract 中的候选 source variables，并标注仍需人工确认的动作。
+该 worksheet 不会自动修改 `variable_map.csv`，也不会把 `charls_design_gate.json`
+改为 `ready-for-analysis`。CI 使用 `--dry-run`，只检查实例化助手可运行且输入结构可读。
+
 CHARLS 重点风险：
 
 - 波次链接和样本流失。
@@ -172,6 +190,7 @@ python3 harness/scripts/run_all_validations.py
 ```bash
 python3 harness/validators/validate_project_scaffold.py examples/charls-aging-template
 python3 harness/validators/validate_charls_design_gate.py
+python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
 python3 harness/validators/validate_charls_local_dry_run.py
 python3 harness/validators/validate_project_scaffold.py examples/gbd-burden-template
 ```

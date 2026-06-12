@@ -49,6 +49,7 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
         shutil.copyfile(TEMPLATE_DIR / "variable_map.charls.template.csv", run_root / "variable_map.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_file_manifest.template.csv", run_root / "charls_file_manifest.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_wave_map.template.csv", run_root / "charls_wave_map.csv")
+        shutil.copyfile(TEMPLATE_DIR / "charls_codebook_extract.template.csv", run_root / "charls_codebook_extract.csv")
         design_gate = (TEMPLATE_DIR / "charls_design_gate.template.json").read_text(encoding="utf-8")
         (run_root / "charls_design_gate.json").write_text(
             design_gate.replace("<project-slug>", slug),
@@ -94,7 +95,8 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
     ]
     if kind == "charls":
         next_steps.append("4. Complete the CHARLS S1/S2 design gate before any real longitudinal analysis.")
-        next_steps.append("5. Do not draft final claims until S3 results and S7 validation artifacts exist.")
+        next_steps.append("5. Fill the CHARLS codebook extract and generate the S1/S2 instantiation worksheet.")
+        next_steps.append("6. Do not draft final claims until S3 results and S7 validation artifacts exist.")
     else:
         next_steps.append("4. Do not draft final claims until S3 results and S7 validation artifacts exist.")
 

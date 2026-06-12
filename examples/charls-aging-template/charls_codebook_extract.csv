@@ -1,0 +1,6 @@
+source_wave,file_label,module,source_variable,variable_label,construct_keywords,measurement_domain,measurement_type,wave_role,eligible_roles,notes
+wave1,baseline_core,TBD,TBD,TBD,respondent id;person id,linkage,identifier,cross_wave,id,Template row only. Replace with CHARLS codebook metadata after data access approval.
+wave1,baseline_core,TBD,TBD,TBD,age;birth year,demographic,continuous,baseline,covariate,Template row only. Replace with CHARLS codebook metadata after data access approval.
+wave1,baseline_core,TBD,TBD,TBD,sex;gender,demographic,categorical,baseline,covariate,Template row only. Replace with CHARLS codebook metadata after data access approval.
+wave1,baseline_core,TBD,TBD,TBD,weight;sampling weight;longitudinal weight,design,weight,baseline,weight,Template row only. Replace with CHARLS codebook metadata after data access approval.
+wave2,followup_core,TBD,TBD,TBD,interview status;follow-up status;attrition,missingness,binary,followup,missingness,Template row only. Replace with CHARLS codebook metadata after data access approval.
