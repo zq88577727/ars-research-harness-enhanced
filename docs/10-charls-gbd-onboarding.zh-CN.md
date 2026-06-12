@@ -39,6 +39,7 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 - `examples/charls-aging-template/charls_design_gate.json`
 - `examples/charls-aging-template/charls_codebook_extract.csv`
 - `examples/charls-aging-template/charls_s1_s2_design_review.md`
+- `examples/charls-aging-template/charls_variable_mapping_decisions.json`
 - `examples/charls-aging-template/checkpoints/stage-S0-intake.md`
 - `examples/charls-aging-template/checkpoints/stage-S1-research-question.md`
 - `examples/charls-aging-template/checkpoints/stage-S2-method-plan.md`
@@ -131,6 +132,24 @@ python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
 该 worksheet 不会自动修改 `variable_map.csv`，也不会把 `charls_design_gate.json`
 改为 `ready-for-analysis`。CI 使用 `--dry-run`，只检查实例化助手可运行且输入结构可读。
 
+CHARLS codebook extract 到 variable map 的人工决策闭环：
+
+```bash
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --dry-run
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --require-reviewed --update-variable-map
+```
+
+`charls_variable_mapping_decisions.json` 记录人工复核后的变量映射决定。允许的状态包括
+`pending`、`map_source`、`derive`、`defer` 和 `reject_candidate`。默认 scaffold 中
+所有核心变量保持 `pending`，因此普通 dry-run 可以通过，但 `--require-reviewed` 会阻断。
+
+普通运行会生成 `variable_map.review_draft.csv`，供人工比较和复核；它不会覆盖
+`variable_map.csv`。只有在所有必需变量完成审核、且明确传入
+`--require-reviewed --update-variable-map` 时，脚本才允许更新正式变量语义表。正式更新前
+必须确认 source variable、wave/file、coding decision、missingness decision 和
+interpretation boundary 均来自官方 CHARLS 文档。
+
 CHARLS 重点风险：
 
 - 波次链接和样本流失。
@@ -191,6 +210,7 @@ python3 harness/scripts/run_all_validations.py
 python3 harness/validators/validate_project_scaffold.py examples/charls-aging-template
 python3 harness/validators/validate_charls_design_gate.py
 python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --dry-run
 python3 harness/validators/validate_charls_local_dry_run.py
 python3 harness/validators/validate_project_scaffold.py examples/gbd-burden-template
 ```

@@ -53,6 +53,11 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
   when available, suggests candidate source variables for human review, and
   records unresolved mapping, attrition, weight, and research-question decisions
   without mutating the variable map or design gate.
+- `harness/scripts/apply_charls_variable_mapping_decisions.py` closes the
+  human-review loop from CHARLS codebook extract to variable-map draft. It
+  validates `charls_variable_mapping_decisions.json`, permits pending scaffold
+  decisions by default, blocks strict reviewed mode until required targets are
+  resolved, and only updates `variable_map.csv` when explicitly requested.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 
@@ -90,6 +95,7 @@ Run the CHARLS S1/S2 design gate:
 python3 harness/validators/validate_charls_design_gate.py
 python3 harness/validators/validate_charls_design_gate.py --require-ready
 python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --dry-run
 ```
 
 Generate the manuscript revision diff report with:

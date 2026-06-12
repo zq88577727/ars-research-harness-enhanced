@@ -71,6 +71,8 @@ CHARLS_DESIGN_GATE_REQUIRED_FIELDS = {
     "claimBoundaries",
 }
 
+CHARLS_VARIABLE_MAPPING_DECISION_VALUES = {"pending", "map_source", "derive", "defer", "reject_candidate"}
+
 RAW_FILE_EXTENSIONS = {".dta", ".sav", ".sas7bdat", ".xpt", ".csv", ".zip", ".rar", ".7z"}
 
 
@@ -133,6 +135,28 @@ def validate_charls_project(path: Path, manifest: dict, failures: list[dict]) ->
                 missing_cols = sorted(CHARLS_CODEBOOK_EXTRACT_COLUMNS - set(rows[0].keys()))
                 if missing_cols:
                     failures.append({"check": "charls_codebook_extract_columns", "missing": missing_cols})
+
+    decisions_value = manifest.get("variableMappingDecisions")
+    if not decisions_value:
+        failures.append({"check": "charls_variable_mapping_decisions_declared"})
+    else:
+        decisions_path = path / "charls_variable_mapping_decisions.json"
+        if not decisions_path.exists():
+            failures.append({"check": "charls_variable_mapping_decisions_exists"})
+        else:
+            decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
+            if decisions.get("schemaVersion") != "charls-variable-mapping-decisions-v1":
+                failures.append({"check": "charls_variable_mapping_decisions_schema"})
+            decision_items = decisions.get("decisions", [])
+            if not decision_items:
+                failures.append({"check": "charls_variable_mapping_decisions_rows"})
+            invalid_decisions = [
+                item.get("canonicalName")
+                for item in decision_items
+                if item.get("decision") not in CHARLS_VARIABLE_MAPPING_DECISION_VALUES
+            ]
+            if invalid_decisions:
+                failures.append({"check": "charls_variable_mapping_decision_values", "variables": invalid_decisions})
 
     file_manifest_value = manifest.get("fileManifest")
     if not file_manifest_value:

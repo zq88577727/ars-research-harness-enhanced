@@ -27,10 +27,12 @@ To be refined after CHARLS wave access and variable mapping.
 6. Fill `charls_codebook_extract.csv` with codebook-level metadata for candidate
    source variables. Do not copy raw participant data into this file.
 7. Generate and review `charls_s1_s2_design_review.md`.
-8. Place raw data in the ignored local raw-data directory declared by
+8. Record reviewed decisions in `charls_variable_mapping_decisions.json` and
+   generate a draft variable map for review.
+9. Place raw data in the ignored local raw-data directory declared by
    `project_manifest.json`; do not commit raw `.dta`, `.sav`, `.sas7bdat`, CSV,
    or archive files.
-9. Do not draft final claims until S3 results and S7 validation artifacts exist.
+10. Do not draft final claims until S3 results and S7 validation artifacts exist.
 
 ## S1/S2 Design Gate
 
@@ -87,6 +89,38 @@ CI uses dry-run mode so validation remains read-only:
 ```bash
 python3 harness/scripts/prepare_charls_design_gate_instance.py --dry-run
 ```
+
+## Variable Mapping Decision Loop
+
+`charls_variable_mapping_decisions.json` records human review decisions that
+convert codebook candidates into a draft `variable_map.csv` update. The default
+state is `pending`; pending decisions are valid for a scaffold but block real
+analysis.
+
+Validate the decision file without writing output:
+
+```bash
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --dry-run
+```
+
+After a human reviewer has approved source-variable mappings or derivations,
+generate a review draft:
+
+```bash
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py
+```
+
+This writes `variable_map.review_draft.csv` and leaves `variable_map.csv`
+unchanged. Updating the authoritative variable map requires an explicit reviewed
+gate:
+
+```bash
+python3 harness/scripts/apply_charls_variable_mapping_decisions.py --require-reviewed --update-variable-map
+```
+
+Do not use `--update-variable-map` until the selected source variables,
+derivation rules, coding decisions, missingness decisions, and interpretation
+boundaries have all been checked against official CHARLS documentation.
 
 ## Local Data Boundary
 

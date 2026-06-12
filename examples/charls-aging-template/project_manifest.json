@@ -14,6 +14,7 @@
   "variableMap": "examples/charls-aging-template/variable_map.csv",
   "designGate": "examples/charls-aging-template/charls_design_gate.json",
   "codebookExtract": "examples/charls-aging-template/charls_codebook_extract.csv",
+  "variableMappingDecisions": "examples/charls-aging-template/charls_variable_mapping_decisions.json",
   "localRawDataPolicy": "Raw CHARLS files must remain in ignored local directories and must not be committed.",
   "interpretationBoundary": "CHARLS longitudinal associations require explicit wave linkage, attrition, missingness, weight, and temporality decisions before manuscript claims.",
   "accessStatus": {

@@ -80,6 +80,7 @@ def build_report() -> dict:
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"]),
         run_json(["python3", "harness/validators/validate_charls_design_gate.py"]),
         run_json(["python3", "harness/scripts/prepare_charls_design_gate_instance.py", "--dry-run"]),
+        run_json(["python3", "harness/scripts/apply_charls_variable_mapping_decisions.py", "--dry-run"]),
         run_json(["python3", "harness/validators/validate_charls_local_dry_run.py"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"]),

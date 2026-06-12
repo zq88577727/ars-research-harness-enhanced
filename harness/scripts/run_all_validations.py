@@ -29,6 +29,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
     ["python3", "harness/validators/validate_charls_design_gate.py"],
     ["python3", "harness/scripts/prepare_charls_design_gate_instance.py", "--dry-run"],
+    ["python3", "harness/scripts/apply_charls_variable_mapping_decisions.py", "--dry-run"],
     ["python3", "harness/validators/validate_charls_local_dry_run.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"],
