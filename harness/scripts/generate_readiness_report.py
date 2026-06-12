@@ -80,6 +80,7 @@ def build_report() -> dict:
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"]),
+        run_json(["python3", "scripts/fetch_gbd_export.py", "--dry-run"]),
         run_json(["python3", "harness/validators/validate_gbd_minimal_demo.py"]),
     ]
     checks = {

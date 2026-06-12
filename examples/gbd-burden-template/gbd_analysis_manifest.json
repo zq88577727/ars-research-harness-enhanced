@@ -6,6 +6,31 @@
       "sourceFile": "examples/gbd-burden-template/source_exports/<approved-gbd-export>.csv",
       "outputCsv": "examples/gbd-burden-template/results/gbd_primary_summary.csv",
       "outputMarkdown": "examples/gbd-burden-template/results/gbd_primary_summary.md",
+      "download": {
+        "sourceType": "gbd-default-data-json",
+        "endpoint": "<approved endpoint or documented manual export route>",
+        "downloadedOn": "<YYYY-MM-DD>",
+        "overwritePolicy": "no-overwrite-without-force",
+        "sourceNote": "Document GBD source, citation, query dimensions, and reuse terms before manuscript use.",
+        "expectedRowCountMinimum": 1,
+        "requiredColumns": [
+          "gbd_release",
+          "version_id",
+          "measure",
+          "metric",
+          "cause",
+          "location",
+          "age",
+          "sex",
+          "year",
+          "val",
+          "upper",
+          "lower",
+          "source_endpoint",
+          "downloaded_on",
+          "source_note"
+        ]
+      },
       "dimensionFilter": {
         "gbd_release": "GBD 2023",
         "version_id": "<version id if available>",

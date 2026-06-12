@@ -30,8 +30,31 @@
       "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
       "outputCsv": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.csv",
       "outputMarkdown": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
-      "endpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
-      "downloadedOn": "2026-06-11",
+      "download": {
+        "sourceType": "gbd-default-data-json",
+        "endpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
+        "downloadedOn": "2026-06-11",
+        "overwritePolicy": "no-overwrite-without-force",
+        "sourceNote": "Real GBD Results Tool default data endpoint output; use for workflow demonstration with IHME/GHDx citation and query metadata.",
+        "expectedRowCountMinimum": 1,
+        "requiredColumns": [
+          "gbd_release",
+          "version_id",
+          "measure",
+          "metric",
+          "cause",
+          "location",
+          "age",
+          "sex",
+          "year",
+          "val",
+          "upper",
+          "lower",
+          "source_endpoint",
+          "downloaded_on",
+          "source_note"
+        ]
+      },
       "dimensionFilter": {
         "gbd_release": "GBD 2023",
         "version_id": "8352",

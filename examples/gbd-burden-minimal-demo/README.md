@@ -40,9 +40,17 @@ derived burden summary and source-backed claims?
 ## Regenerate Results
 
 ```bash
+python3 scripts/fetch_gbd_export.py --dry-run
+# To intentionally refresh the committed demo export:
+# python3 scripts/fetch_gbd_export.py --force
 python3 scripts/generate_gbd_minimal_results.py
 python3 harness/validators/validate_gbd_minimal_demo.py
 ```
+
+`scripts/fetch_gbd_export.py` reads the `download` block in
+`gbd_analysis_manifest.json`. It refuses to overwrite an existing export unless
+`--force` is supplied, writes endpoint/date/source-note metadata into the CSV,
+and is intended only for public or otherwise approved GBD export routes.
 
 ## Boundary
 

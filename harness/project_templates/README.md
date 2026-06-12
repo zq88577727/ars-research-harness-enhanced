@@ -22,3 +22,8 @@ GBD runs should pair `gbd_query_manifest.template.csv` with
 dimensions row by row, while the analysis manifest controls source files,
 outputs, comparison years, and interpretation boundaries for generation and
 validation.
+
+When a GBD endpoint is public or otherwise approved for scripted access,
+`scripts/fetch_gbd_export.py` can read the analysis manifest's `download` block
+and create a metadata-rich CSV. Existing exports are not overwritten unless the
+caller passes `--force`.

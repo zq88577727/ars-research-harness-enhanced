@@ -49,6 +49,33 @@ def validate_analysis_config(root: Path, config: dict, failures: list[dict], lab
     for column in ["cause", "location", "age", "sex"]:
         if not dimensions.get(column):
             failures.append({"check": "analysis_dimension_present", "analysis": label, "column": column})
+    download = config.get("download")
+    if download:
+        if download.get("overwritePolicy") != "no-overwrite-without-force":
+            failures.append({"check": "download_overwrite_policy", "analysis": label, "actual": download.get("overwritePolicy")})
+        required_columns = set(download.get("requiredColumns", []))
+        if source_rows:
+            missing_columns = sorted(required_columns - set(source_rows[0].keys()))
+            if missing_columns:
+                failures.append({"check": "download_required_columns", "analysis": label, "missing": missing_columns})
+            minimum_rows = int(download.get("expectedRowCountMinimum", 1))
+            if len(source_rows) < minimum_rows:
+                failures.append({"check": "download_row_count_minimum", "analysis": label, "actual": len(source_rows), "minimum": minimum_rows})
+            endpoint = download.get("endpoint")
+            downloaded_on = download.get("downloadedOn")
+            source_note = download.get("sourceNote")
+            for row in source_rows:
+                if endpoint and row.get("source_endpoint") != endpoint:
+                    failures.append({"check": "download_endpoint_matches", "analysis": label})
+                    break
+            for row in source_rows:
+                if downloaded_on and row.get("downloaded_on") != downloaded_on:
+                    failures.append({"check": "download_date_matches", "analysis": label})
+                    break
+            for row in source_rows:
+                if source_note and row.get("source_note") != source_note:
+                    failures.append({"check": "download_source_note_matches", "analysis": label})
+                    break
     return source_rows, summary_rows
 
 

@@ -1,6 +1,6 @@
 # ars-research-harness
 
-一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。当前能力边界需要明确区分：NHANES 是完整闭环示例；CHARLS 和 GBD 目前是带访问规则的 scaffold/适配框架，不包含受限原始数据、GBD 导出结果或已完成的 CHARLS/GBD 分析。
+一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。当前能力边界需要明确区分：NHANES 是完整闭环示例；CHARLS 仍是带访问规则的 scaffold；GBD 已包含一个小型公开默认 endpoint 导出演示和 manifest-driven scaffold，但不是已完成、可投稿的 GBD 疾病负担分析，也不包含受限数据。
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 
@@ -65,6 +65,12 @@ python3 harness/scripts/init_public_database_project.py gbd gbd-example \
 ```
 
 这些命令只生成项目脚手架，不会自动下载 CHARLS 或 GBD 数据，也不会自动生成可以投稿的结论。只有完成 S3 分析产物和 S7 完整性核查后，才可以写入正式 claim。
+
+GBD demo 的公开默认 endpoint 可以先做不改文件的检查：
+
+```bash
+python3 scripts/fetch_gbd_export.py --dry-run
+```
 
 ## S0-S9 工作流
 
