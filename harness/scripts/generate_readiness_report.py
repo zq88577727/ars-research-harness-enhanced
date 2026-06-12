@@ -54,7 +54,11 @@ def raw_data_policy_check() -> dict:
 
 def scaffold_boundary_check() -> dict:
     failures = []
-    for rel in ["examples/charls-aging-template/project_manifest.json", "examples/gbd-burden-template/project_manifest.json"]:
+    for rel in [
+        "examples/charls-aging-template/project_manifest.json",
+        "examples/charls-depression-cognition-instance/project_manifest.json",
+        "examples/gbd-burden-template/project_manifest.json",
+    ]:
         manifest = json.loads((ROOT / rel).read_text(encoding="utf-8"))
         if manifest.get("capabilityStatus") != "scaffold-only":
             failures.append({"manifest": rel, "capabilityStatus": manifest.get("capabilityStatus")})
@@ -90,6 +94,11 @@ def build_report() -> dict:
         run_json(["python3", "harness/scripts/prepare_charls_design_gate_instance.py", "--dry-run"]),
         run_json(["python3", "harness/scripts/apply_charls_variable_mapping_decisions.py", "--dry-run"]),
         run_json(["python3", "harness/validators/validate_charls_local_dry_run.py"]),
+        run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-depression-cognition-instance"]),
+        run_json(["python3", "harness/validators/validate_charls_design_gate.py", "--project", "examples/charls-depression-cognition-instance"]),
+        run_json(["python3", "harness/scripts/rehearse_charls_codebook_import.py", "--project", "examples/charls-depression-cognition-instance"]),
+        run_json(["python3", "harness/scripts/prepare_charls_design_gate_instance.py", "--project", "examples/charls-depression-cognition-instance", "--dry-run"]),
+        run_json(["python3", "harness/scripts/apply_charls_variable_mapping_decisions.py", "--project", "examples/charls-depression-cognition-instance", "--dry-run"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-template"]),
         run_json(["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"]),
         run_json(["python3", "scripts/fetch_gbd_export.py", "--dry-run"]),

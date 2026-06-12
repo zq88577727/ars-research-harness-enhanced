@@ -1,0 +1,4 @@
+wave,file_label,module,variable_name,label,domain,type,role,notes
+wave1,baseline_core,demographic,ra001,Age at baseline,demographic,continuous,covariate,Sample codebook metadata row only; replace with official CHARLS metadata.
+wave1,baseline_core,demographic,rgender,Sex or gender marker,demographic,categorical,covariate,Sample codebook metadata row only; replace with official CHARLS metadata.
+wave2,followup_core,tracking,rstatus,Follow-up interview status,missingness,binary,missingness,Sample codebook metadata row only; replace with official CHARLS metadata.

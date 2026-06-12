@@ -1,0 +1,34 @@
+{
+  "projectType": "charls-longitudinal-project",
+  "dataSource": "charls",
+  "dataSourceManifest": "data_sources/charls.json",
+  "capabilityStatus": "scaffold-only",
+  "title": "CHARLS depressive symptoms and cognitive function longitudinal manuscript",
+  "researchQuestion": "Among middle-aged and older CHARLS participants with baseline and follow-up linkage, are baseline depressive symptoms associated with follow-up cognitive function or cognitive decline?",
+  "studyDesign": "longitudinal cohort scaffold",
+  "targetWaves": [],
+  "rawDataDirectory": "data/charls/raw",
+  "derivedDataDirectory": "examples/charls-depression-cognition-instance/derived",
+  "fileManifest": "examples/charls-depression-cognition-instance/charls_file_manifest.csv",
+  "waveMap": "examples/charls-depression-cognition-instance/charls_wave_map.csv",
+  "variableMap": "examples/charls-depression-cognition-instance/variable_map.csv",
+  "designGate": "examples/charls-depression-cognition-instance/charls_design_gate.json",
+  "codebookExtract": "examples/charls-depression-cognition-instance/charls_codebook_extract.csv",
+  "codebookImportSample": "examples/charls-depression-cognition-instance/charls_codebook_import_sample.csv",
+  "variableMappingDecisions": "examples/charls-depression-cognition-instance/charls_variable_mapping_decisions.json",
+  "localRawDataPolicy": "Raw CHARLS files must remain in ignored local directories and must not be committed.",
+  "interpretationBoundary": "CHARLS longitudinal associations require explicit wave linkage, attrition, missingness, weight, and temporality decisions before manuscript claims.",
+  "accessStatus": {
+    "accountRegistered": true,
+    "dataApplicationSubmitted": false,
+    "dataApproved": false,
+    "rawFilesDownloaded": false
+  },
+  "analysisRequirements": [
+    "wave linkage key confirmed",
+    "sample eligibility criteria specified",
+    "attrition and missingness plan specified",
+    "weights and survey design decision specified",
+    "data-use and citation requirements recorded"
+  ]
+}
