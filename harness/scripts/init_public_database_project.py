@@ -48,6 +48,7 @@ def init_project(kind: str, slug: str, title: str, research_question: str) -> di
     if kind == "charls":
         shutil.copyfile(TEMPLATE_DIR / "variable_map.charls.template.csv", run_root / "variable_map.csv")
         shutil.copyfile(TEMPLATE_DIR / "charls_file_manifest.template.csv", run_root / "charls_file_manifest.csv")
+        shutil.copyfile(TEMPLATE_DIR / "charls_wave_map.template.csv", run_root / "charls_wave_map.csv")
     elif kind == "gbd":
         shutil.copyfile(TEMPLATE_DIR / "gbd_query_manifest.template.csv", run_root / "gbd_query_manifest.csv")
         shutil.copyfile(TEMPLATE_DIR / "gbd_analysis_manifest.template.json", run_root / "gbd_analysis_manifest.json")

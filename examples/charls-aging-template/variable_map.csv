@@ -1,14 +1,14 @@
-canonical_name,source_wave,source_file,source_variable,role,required,notes
-participant_id,,,,id,true,Confirm CHARLS respondent/person identifier.
-household_id,,,,id,false,Needed only for household-level linkage.
-wave,,,,time,true,Use survey wave or year.
-baseline_wave,,,,time,true,Define the baseline wave used for exposure/covariate measurement.
-followup_wave,,,,time,true,Define the follow-up wave used for outcome ascertainment.
-age,,,,covariate,true,
-sex,,,,covariate,true,
-education,,,,covariate,false,
-residence,,,,covariate,false,Urban/rural or hukou/residence variable depending on analysis.
-primary_exposure,,,,exposure,true,Define before modeling; do not infer causal language from exposure timing alone.
-sample_weight,,,,weight,false,Record wave-specific weight decision.
-attrition_status,,,,missingness,true,Required for longitudinal attrition and selection assessment.
-primary_outcome,,,,outcome,true,Define before analysis.
+canonical_name,source_wave,source_file,source_variable,role,required,semantic_status,construct,measurement_domain,measurement_type,wave_role,time_anchor,coding_decision,missingness_decision,interpretation_boundary,notes
+participant_id,all,baseline_core,TBD_after_codebook_review,id,true,planned,respondent identifier,linkage,identifier,cross_wave,all waves,confirm stable respondent identifier across waves,exclude records without confirmed person identifier,linkage key only not an analysis exposure,Confirm CHARLS respondent/person identifier.
+household_id,all,baseline_core,TBD_after_codebook_review,id,false,planned,household identifier,linkage,identifier,cross_wave,all waves,confirm household identifier only if household-level linkage is needed,document unmatched household records,household linkage is optional and not required for individual-level analysis,Needed only for household-level linkage.
+wave,all,baseline_core,TBD_after_codebook_review,time,true,planned,survey wave,time,index,cross_wave,all waves,derive from wave or interview year,records without wave cannot enter longitudinal linkage,time index only not exposure timing by itself,Use survey wave or year.
+baseline_wave,wave1,baseline_core,TBD_after_codebook_review,time,true,planned,baseline assessment,time,index,baseline,pre-exposure baseline,define baseline wave before exposure and covariates,exclude participants missing baseline eligibility variables,baseline timing must be explicit before longitudinal claims,Define the baseline wave used for exposure/covariate measurement.
+followup_wave,wave2,followup_core,TBD_after_codebook_review,time,true,planned,follow-up assessment,time,index,followup,outcome follow-up,define follow-up wave before outcome ascertainment,document loss to follow-up before outcome modeling,follow-up timing supports temporality only after attrition assessment,Define the follow-up wave used for outcome ascertainment.
+age,wave1,baseline_core,TBD_after_codebook_review,covariate,true,planned,age at baseline,demographic,continuous,baseline,baseline covariate,derive age in years and assess plausible range,flag missing or implausible age before modeling,baseline covariate not modifiable exposure,
+sex,wave1,baseline_core,TBD_after_codebook_review,covariate,true,planned,sex or gender marker,demographic,categorical,baseline,baseline covariate,record coding labels from CHARLS codebook,flag missing or ambiguous coding before modeling,demographic adjustment variable not biological mechanism claim,
+education,wave1,baseline_core,TBD_after_codebook_review,covariate,false,planned,educational attainment,socioeconomic,categorical,baseline,baseline covariate,harmonize categories before modeling,document missing education and category collapsing,socioeconomic covariate interpretation depends on coding,
+residence,wave1,baseline_core,TBD_after_codebook_review,covariate,false,planned,residence or hukou context,socioeconomic,categorical,baseline,baseline covariate,confirm urban/rural or hukou variable selected,document migration or inconsistent residence coding,residence categories are context markers not causal mechanisms,Urban/rural or hukou/residence variable depending on analysis.
+primary_exposure,wave1,baseline_core,TBD_after_codebook_review,exposure,true,planned,primary exposure to be defined,analysis exposure,mixed,baseline,pre-outcome exposure window,define exposure coding before modeling,document missing exposure and exclusion/imputation rule,do not infer causal effect from exposure timing alone,Define before modeling; do not infer causal language from exposure timing alone.
+sample_weight,wave1,baseline_core,TBD_after_codebook_review,weight,false,planned,survey or longitudinal weight,design,weight,baseline,analysis weight decision,record whether cross-sectional or longitudinal weight is used,document missing or inapplicable weight handling,weight decision defines target population and must match estimand,Record wave-specific weight decision.
+attrition_status,wave2,followup_core,TBD_after_codebook_review,missingness,true,planned,follow-up attrition,missingness,binary,followup,between baseline and follow-up,derive completion or loss-to-follow-up status,report attrition and compare baseline characteristics before outcome claims,attrition can bias longitudinal associations and must be discussed,Required for longitudinal attrition and selection assessment.
+primary_outcome,wave2,followup_core,TBD_after_codebook_review,outcome,true,planned,primary outcome to be defined,analysis outcome,mixed,followup,outcome follow-up window,define outcome coding before analysis,document missing outcome and censoring/exclusion rule,outcome timing must follow baseline exposure for longitudinal interpretation,Define before analysis.

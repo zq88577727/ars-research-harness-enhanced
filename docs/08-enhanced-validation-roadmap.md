@@ -39,7 +39,9 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
 - `harness/validators/validate_charls_local_dry_run.py` checks local CHARLS
   restricted-data readiness without opening raw data files. Default mode supports
   metadata-only scaffolds; `--require-local-data` blocks analysis until required
-  local files are present and optional checksums match.
+  local files are present, required variables are mapped to source variables or
+  documented derivations, semantic variable fields are complete, wave roles are
+  auditable, and optional checksums match.
 - `requirements.txt`, `renv.lock`, and `Dockerfile` declare reproducible Python
   and R environments.
 

@@ -34,6 +34,7 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 
 - `examples/charls-aging-template/project_manifest.json`
 - `examples/charls-aging-template/charls_file_manifest.csv`
+- `examples/charls-aging-template/charls_wave_map.csv`
 - `examples/charls-aging-template/variable_map.csv`
 - `examples/charls-aging-template/checkpoints/stage-S0-intake.md`
 - `examples/charls-aging-template/checkpoints/stage-S1-research-question.md`
@@ -54,7 +55,9 @@ python3 harness/validators/validate_charls_local_dry_run.py
 
 - `project_manifest.json` 是否声明 CHARLS、本地原始数据目录和禁止入库策略；
 - `charls_file_manifest.csv` 是否包含必需列、至少两个纵向必需波次、路径边界和合法访问状态；
+- `charls_wave_map.csv` 是否把波次标记为 baseline/follow-up、说明时间锚点、文件标签、linkage key 状态、权重决策和 attrition 角色；
 - `variable_map.csv` 是否包含 respondent/person ID、wave、baseline/follow-up wave、age、sex、exposure、outcome、attrition status；
+- required 变量是否填写语义字段：`semantic_status`、`construct`、`measurement_domain`、`measurement_type`、`wave_role`、`time_anchor`、`coding_decision`、`missingness_decision`、`interpretation_boundary`；
 - 已标记为 `downloaded_local` 的文件是否存在，若填写 `checksum_sha256` 是否匹配；
 - `data/charls/raw/` 下是否误提交受限原始数据。
 
@@ -69,6 +72,14 @@ python3 harness/validators/validate_charls_local_dry_run.py --require-local-data
 
 `variable_map.csv` 必须至少明确 respondent/person ID、wave、baseline wave、
 follow-up wave、age、sex、primary exposure、primary outcome、attrition status。
+在仅有脚手架时，`source_variable` 可以暂时保留为 `TBD_after_codebook_review`，
+但 `semantic_status` 应为 `planned`，并且必须先写清构念、时间定位、编码决策、
+缺失处理和解释边界。准备进入真实分析前，required 变量必须从 `planned` 升级为
+`mapped` 或 `derived`，并替换为真实 CHARLS codebook 变量名。
+
+`charls_wave_map.csv` 是波次语义层，不替代 `charls_file_manifest.csv`。前者说明
+2011、2013 等波次在研究设计中的 baseline/follow-up 角色、时间锚点、权重决策和
+attrition 角色；后者说明本地文件路径、下载状态和 checksum。两者必须一致。
 纵向研究不能因为有先后波次就自动写成因果结论，必须在 S2 说明时序、样本流失、
 缺失、权重和波次链接策略。
 

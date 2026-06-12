@@ -16,12 +16,16 @@ To be refined after CHARLS wave access and variable mapping.
 1. Complete S0 intake and confirm data access status.
 2. Fill `charls_file_manifest.csv` with the exact local filenames, waves, modules,
    and access status after CHARLS portal download.
-3. Fill the variable mapping file, including respondent ID, wave, baseline wave,
+3. Fill `charls_wave_map.csv` with baseline/follow-up roles, time anchors,
+   linkage-key status, weight decisions, and attrition roles.
+4. Fill the variable mapping file, including respondent ID, wave, baseline wave,
    follow-up wave, exposure, outcome, attrition status, and weight decision.
-4. Place raw data in the ignored local raw-data directory declared by
+   Required variables must carry construct, domain, measurement type, wave role,
+   time anchor, coding decision, missingness decision, and interpretation boundary.
+5. Place raw data in the ignored local raw-data directory declared by
    `project_manifest.json`; do not commit raw `.dta`, `.sav`, `.sas7bdat`, CSV,
    or archive files.
-5. Do not draft final claims until S3 results and S7 validation artifacts exist.
+6. Do not draft final claims until S3 results and S7 validation artifacts exist.
 
 ## Local Data Boundary
 
@@ -36,11 +40,18 @@ Run the metadata-only dry run while files are not yet downloaded:
 python3 harness/validators/validate_charls_local_dry_run.py
 ```
 
+In metadata-only mode, source variables may remain `TBD_after_codebook_review`,
+but required variables must already describe their semantic construct, wave role,
+time anchor, coding decision, missingness decision, and interpretation boundary.
+
 Run the strict local-data gate before any real CHARLS analysis:
 
 ```bash
 python3 harness/validators/validate_charls_local_dry_run.py --require-local-data
 ```
+
+Strict mode requires local files and requires required variables to be resolved
+to real CHARLS source variables or documented derived variables.
 
 Longitudinal CHARLS claims must not be written as causal conclusions unless the
 analysis plan explicitly addresses temporality, attrition, missingness, weights,

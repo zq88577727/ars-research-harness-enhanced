@@ -37,6 +37,27 @@ REQUIRED_VARIABLE_COLUMNS = {
     "source_variable",
     "role",
     "required",
+    "semantic_status",
+    "construct",
+    "measurement_domain",
+    "measurement_type",
+    "wave_role",
+    "time_anchor",
+    "coding_decision",
+    "missingness_decision",
+    "interpretation_boundary",
+    "notes",
+}
+REQUIRED_WAVE_COLUMNS = {
+    "wave",
+    "year",
+    "wave_role",
+    "time_anchor",
+    "file_labels",
+    "required_for_minimal_longitudinal",
+    "linkage_key_status",
+    "weight_decision",
+    "attrition_role",
     "notes",
 }
 REQUIRED_VARIABLES = {
@@ -50,6 +71,20 @@ REQUIRED_VARIABLES = {
     "attrition_status",
     "primary_outcome",
 }
+ALLOWED_SEMANTIC_STATUSES = {"planned", "mapped", "derived", "deferred"}
+ALLOWED_WAVE_ROLES = {"baseline", "followup", "cross_wave", "id", "time_index", "attrition", "not_applicable"}
+REQUIRED_SEMANTIC_FIELDS = {
+    "semantic_status",
+    "construct",
+    "measurement_domain",
+    "measurement_type",
+    "wave_role",
+    "time_anchor",
+    "coding_decision",
+    "missingness_decision",
+    "interpretation_boundary",
+}
+PLACEHOLDER_VALUES = {"", "TBD", "TBD_after_codebook_review", "pending", "pending_codebook_confirmation"}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -89,6 +124,14 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def split_semicolon(value: str) -> list[str]:
+    return [item.strip() for item in value.split(";") if item.strip()]
+
+
+def is_placeholder(value: str | None) -> bool:
+    return (value or "").strip() in PLACEHOLDER_VALUES
+
+
 def validate(project: Path, require_local_data: bool) -> dict:
     project_dir = project.resolve()
     failures: list[dict] = []
@@ -120,8 +163,10 @@ def validate(project: Path, require_local_data: bool) -> dict:
         failures.append({"check": "local_raw_data_policy"})
 
     file_manifest_value = manifest.get("fileManifest")
+    wave_map_value = manifest.get("waveMap")
     variable_map_value = manifest.get("variableMap")
     file_manifest = project_path(file_manifest_value, project_dir) if file_manifest_value else None
+    wave_map = project_path(wave_map_value, project_dir) if wave_map_value else None
     variable_map = project_path(variable_map_value, project_dir) if variable_map_value else None
     if not file_manifest or not file_manifest.exists():
         failures.append({"check": "file_manifest_exists", "path": file_manifest_value})
@@ -134,6 +179,18 @@ def validate(project: Path, require_local_data: bool) -> dict:
             missing = sorted(REQUIRED_FILE_COLUMNS - set(file_rows[0]))
             if missing:
                 failures.append({"check": "file_manifest_columns", "missing": missing})
+
+    if not wave_map or not wave_map.exists():
+        failures.append({"check": "wave_map_exists", "path": wave_map_value})
+        wave_rows: list[dict[str, str]] = []
+    else:
+        wave_rows = read_csv(wave_map)
+        if not wave_rows:
+            failures.append({"check": "wave_map_has_rows"})
+        else:
+            missing = sorted(REQUIRED_WAVE_COLUMNS - set(wave_rows[0]))
+            if missing:
+                failures.append({"check": "wave_map_columns", "missing": missing})
 
     if not variable_map or not variable_map.exists():
         failures.append({"check": "variable_map_exists", "path": variable_map_value})
@@ -150,6 +207,57 @@ def validate(project: Path, require_local_data: bool) -> dict:
             missing_required = sorted(REQUIRED_VARIABLES - required_names)
             if missing_required:
                 failures.append({"check": "required_variable_contract", "missing": missing_required})
+
+    file_labels = {row.get("file_label") for row in file_rows if row.get("file_label")}
+    file_waves = {row.get("wave") for row in file_rows if row.get("wave")}
+    wave_ids = {row.get("wave") for row in wave_rows if row.get("wave")}
+    baseline_waves = [row for row in wave_rows if row.get("required_for_minimal_longitudinal", "").lower() == "true" and row.get("wave_role") == "baseline"]
+    followup_waves = [row for row in wave_rows if row.get("required_for_minimal_longitudinal", "").lower() == "true" and row.get("wave_role") == "followup"]
+    if wave_rows and not baseline_waves:
+        failures.append({"check": "wave_map_required_baseline"})
+    if wave_rows and not followup_waves:
+        failures.append({"check": "wave_map_required_followup"})
+    for row in wave_rows:
+        wave = row.get("wave", "")
+        if wave and wave not in file_waves:
+            failures.append({"check": "wave_map_wave_in_file_manifest", "wave": wave})
+        if row.get("wave_role") not in {"baseline", "followup"}:
+            failures.append({"check": "wave_map_role_allowed", "wave": wave, "waveRole": row.get("wave_role")})
+        if not row.get("time_anchor"):
+            failures.append({"check": "wave_map_time_anchor", "wave": wave})
+        for label in split_semicolon(row.get("file_labels", "")):
+            if label not in file_labels:
+                failures.append({"check": "wave_map_file_label_known", "wave": wave, "fileLabel": label})
+
+    semantic_ready_count = 0
+    mapped_variable_count = 0
+    for row in variable_rows:
+        canonical = row.get("canonical_name", "")
+        required = row.get("required", "").lower() == "true"
+        semantic_status = row.get("semantic_status", "")
+        if semantic_status not in ALLOWED_SEMANTIC_STATUSES:
+            failures.append({"check": "semantic_status_allowed", "variable": canonical, "semanticStatus": semantic_status})
+        if row.get("wave_role") not in ALLOWED_WAVE_ROLES:
+            failures.append({"check": "variable_wave_role_allowed", "variable": canonical, "waveRole": row.get("wave_role")})
+        if required:
+            missing_semantic = sorted(field for field in REQUIRED_SEMANTIC_FIELDS if not row.get(field))
+            if missing_semantic:
+                failures.append({"check": "required_variable_semantic_fields", "variable": canonical, "missing": missing_semantic})
+            else:
+                semantic_ready_count += 1
+        source_wave = row.get("source_wave", "")
+        if source_wave and source_wave not in {"all", "derived", "not_applicable"} and source_wave not in wave_ids:
+            failures.append({"check": "variable_source_wave_known", "variable": canonical, "sourceWave": source_wave})
+        source_file = row.get("source_file", "")
+        if source_file and source_file not in {"derived", "not_applicable"} and source_file not in file_labels:
+            failures.append({"check": "variable_source_file_known", "variable": canonical, "sourceFile": source_file})
+        if not is_placeholder(row.get("source_variable")) and source_file not in {"derived", "not_applicable", ""}:
+            mapped_variable_count += 1
+        if require_local_data and required:
+            if semantic_status not in {"mapped", "derived"}:
+                failures.append({"check": "required_variable_mapped_for_analysis", "variable": canonical, "semanticStatus": semantic_status})
+            if is_placeholder(row.get("source_variable")):
+                failures.append({"check": "required_source_variable_resolved", "variable": canonical})
 
     required_rows = [
         row
@@ -214,7 +322,10 @@ def validate(project: Path, require_local_data: bool) -> dict:
     checks.extend(
         [
             {"check": "fileManifestRows", "count": len(file_rows), "ok": bool(file_rows)},
+            {"check": "waveMapRows", "count": len(wave_rows), "ok": bool(wave_rows)},
             {"check": "requiredRows", "count": len(required_rows), "ok": len(required_rows) >= 2},
+            {"check": "semanticReadyRequiredVariables", "count": semantic_ready_count, "ok": semantic_ready_count >= len(REQUIRED_VARIABLES)},
+            {"check": "mappedVariables", "count": mapped_variable_count, "ok": mapped_variable_count > 0},
             {"check": "localReadyRows", "count": local_ready_count, "ok": local_ready_count > 0},
             {"check": "placeholderRows", "count": placeholder_count, "ok": placeholder_count == 0},
             {"check": "missingRequiredRows", "count": missing_required_count, "ok": missing_required_count == 0},
