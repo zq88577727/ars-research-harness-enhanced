@@ -13,8 +13,21 @@ def json_block(payload: dict) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
-def build_decisions(candidates: list[dict], candidates_path: Path, registry_path: Path | None) -> dict:
+def build_decisions(
+    candidates: list[dict],
+    candidates_path: Path,
+    registry_path: Path | None,
+    existing_decisions_path: Path | None,
+) -> dict:
     needs_review = [candidate for candidate in candidates if candidate.get("status") == "needs-human-review"]
+    existing_by_id = {}
+    if existing_decisions_path and existing_decisions_path.exists():
+        existing = json.loads(existing_decisions_path.read_text(encoding="utf-8"))
+        existing_by_id = {
+            decision.get("candidateId"): decision
+            for decision in existing.get("decisions", [])
+            if decision.get("candidateId")
+        }
     return {
         "candidateFile": str(candidates_path),
         "registry": str(registry_path) if registry_path else None,
@@ -27,17 +40,18 @@ def build_decisions(candidates: list[dict], candidates_path: Path, registry_path
             "Use defer when the source artifact or interpretation boundary is not yet available.",
             "Use merge when the sentence is already covered by an existing or broader claim; set mergeWith to that claim id.",
         ],
-        "decisions": [
-            {
-                "candidateId": candidate["id"],
-                "decision": "pending",
-                "reviewer": "human-required",
-                "rationale": "Pending human review; do not register automatically.",
-                "mergeWith": None,
-                "registryDraft": None,
-            }
-            for candidate in needs_review
-        ],
+        "decisions": [existing_by_id.get(candidate["id"], pending_decision(candidate["id"])) for candidate in needs_review],
+    }
+
+
+def pending_decision(candidate_id: str) -> dict:
+    return {
+        "candidateId": candidate_id,
+        "decision": "pending",
+        "reviewer": "human-required",
+        "rationale": "Pending human review; do not register automatically.",
+        "mergeWith": None,
+        "registryDraft": None,
     }
 
 
@@ -45,7 +59,11 @@ def build_review(candidates_path: Path, output_path: Path, decisions_output: Pat
     data = json.loads(candidates_path.read_text(encoding="utf-8"))
     candidates = data.get("candidates", [])
     needs_review = [candidate for candidate in candidates if candidate.get("status") == "needs-human-review"]
-    decisions = build_decisions(candidates, candidates_path, registry_path)
+    decisions = build_decisions(candidates, candidates_path, registry_path, decisions_output)
+    decision_counts: dict[str, int] = {}
+    for decision in decisions["decisions"]:
+        key = decision.get("decision", "missing")
+        decision_counts[key] = decision_counts.get(key, 0) + 1
     lines = [
         "# Candidate Claim Registry Review",
         "",
@@ -71,6 +89,10 @@ def build_review(candidates_path: Path, output_path: Path, decisions_output: Pat
         "2. Change the decision to `register`, `reject`, `defer`, or `merge` in the machine-readable decisions file.",
         "3. Run `python3 harness/scripts/apply_claim_review_decisions.py` to produce registry additions for approved `register` decisions.",
         "4. Copy approved additions into the claim registry only after a second review of source traceability.",
+        "",
+        "## Current Decision Summary",
+        "",
+        *[f"- `{key}`: `{decision_counts[key]}`" for key in sorted(decision_counts)],
         "",
         "## Registry Drafts",
         "",

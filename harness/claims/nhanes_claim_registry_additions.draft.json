@@ -1,5 +1,47 @@
 {
   "sourceCandidateFile": "harness/claims/nhanes_candidate_claims.json",
   "sourceDecisionsFile": "harness/claims/nhanes_candidate_claim_decisions.json",
-  "claims": []
+  "claims": [
+    {
+      "id": "eligibility-adults-no-diabetes-hba1c",
+      "tier": "core",
+      "type": "eligibility-criteria",
+      "expectedText": "Adults aged 20 years or older who self-reported no prior diabetes diagnosis and had available HbA1c data were included.",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/flow_counts.csv",
+      "sourceFields": [
+        "Adults aged >=20 years",
+        "Self-reported no diabetes and HbA1c available"
+      ],
+      "interpretationBoundary": "analytic eligibility criteria for this NHANES cross-sectional sample, not a target-population denominator"
+    },
+    {
+      "id": "fasting-sensitivity-definition",
+      "tier": "supporting",
+      "type": "sensitivity-definition",
+      "expectedText": "A fasting-subsample sensitivity definition used HbA1c >=6.5% or fasting plasma glucose >=126 mg/dL.",
+      "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/fasting_weighted_sensitivity_prevalence.csv",
+      "sourceFields": [
+        "HbA1c or fasting glucose-defined undiagnosed diabetes in fasting subsample",
+        "weight=WTSAF2YR"
+      ],
+      "interpretationBoundary": "fasting-subsample sensitivity definition, not the primary outcome definition or a clinical diagnostic rule"
+    },
+    {
+      "id": "nhanes-component-coverage",
+      "tier": "supporting",
+      "type": "data-source-scope",
+      "expectedText": "NHANES provides demographic data, anthropometry, blood pressure, health questionnaires, and laboratory measures, including glycohemoglobin and fasting glucose in the 2017-2018 cycle.",
+      "sourceFile": "data/nhanes_2017_2018/README.md",
+      "sourceFields": [
+        "文件清单",
+        "raw/DEMO_J.xpt",
+        "raw/BMX_J.xpt",
+        "raw/BPX_J.xpt",
+        "raw/DIQ_J.xpt",
+        "raw/GHB_J.xpt",
+        "raw/GLU_J.xpt"
+      ],
+      "interpretationBoundary": "source-data scope statement for the NHANES 2017-2018 example; component availability does not imply complete data for every participant"
+    }
+  ]
 }

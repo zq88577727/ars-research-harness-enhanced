@@ -35,41 +35,63 @@
     },
     {
       "candidateId": "nhanes-candidate-003",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
+      "decision": "register",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "The eligibility sentence states analytic inclusion criteria that are directly traceable to the flow-count artifact and manuscript methods.",
       "mergeWith": null,
-      "registryDraft": null
+      "registryDraft": {
+        "id": "eligibility-adults-no-diabetes-hba1c",
+        "tier": "core",
+        "type": "eligibility-criteria",
+        "expectedText": "Adults aged 20 years or older who self-reported no prior diabetes diagnosis and had available HbA1c data were included.",
+        "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S3/flow_counts.csv",
+        "sourceFields": [
+          "Adults aged >=20 years",
+          "Self-reported no diabetes and HbA1c available"
+        ],
+        "interpretationBoundary": "analytic eligibility criteria for this NHANES cross-sectional sample, not a target-population denominator"
+      }
     },
     {
       "candidateId": "nhanes-candidate-006",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
+      "decision": "register",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "The fasting-subsample sensitivity definition is a methods claim supported by the fasting sensitivity output and bounded as a secondary analysis.",
       "mergeWith": null,
-      "registryDraft": null
+      "registryDraft": {
+        "id": "fasting-sensitivity-definition",
+        "tier": "supporting",
+        "type": "sensitivity-definition",
+        "expectedText": "A fasting-subsample sensitivity definition used HbA1c >=6.5% or fasting plasma glucose >=126 mg/dL.",
+        "sourceFile": "examples/nhanes-undiagnosed-diabetes/results/S8b/fasting_weighted_sensitivity_prevalence.csv",
+        "sourceFields": [
+          "HbA1c or fasting glucose-defined undiagnosed diabetes in fasting subsample",
+          "weight=WTSAF2YR"
+        ],
+        "interpretationBoundary": "fasting-subsample sensitivity definition, not the primary outcome definition or a clinical diagnostic rule"
+      }
     },
     {
       "candidateId": "nhanes-candidate-007",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
-      "mergeWith": null,
+      "decision": "merge",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "The sentence is a fuller wording of the already registered final analytic sample claim; adding a duplicate claim would not improve traceability.",
+      "mergeWith": "sample-final-n",
       "registryDraft": null
     },
     {
       "candidateId": "nhanes-candidate-014",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
-      "mergeWith": null,
+      "decision": "merge",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "This is a composite summary of already registered prevalence, subgroup, and model-estimate claims; preserving the more granular claims avoids a broad duplicate summary claim.",
+      "mergeWith": "primary-prevalence; obesity-subgroup-prevalence; waist-or; non-hdl-or; asian-or; black-or",
       "registryDraft": null
     },
     {
       "candidateId": "nhanes-candidate-017",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
+      "decision": "reject",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "This sentence is an interpretive background statement without a direct local numeric artifact; it should remain prose supported by citations rather than become a source-backed numeric claim.",
       "mergeWith": null,
       "registryDraft": null
     },
@@ -83,11 +105,27 @@
     },
     {
       "candidateId": "nhanes-candidate-021",
-      "decision": "pending",
-      "reviewer": "human-required",
-      "rationale": "Pending human review; do not register automatically.",
+      "decision": "register",
+      "reviewer": "codex-assisted-technical-review; human sign-off required before journal submission",
+      "rationale": "The NHANES component-coverage sentence is supported by the local public-use small-pack README and documents the source-data scope used by the example.",
       "mergeWith": null,
-      "registryDraft": null
+      "registryDraft": {
+        "id": "nhanes-component-coverage",
+        "tier": "supporting",
+        "type": "data-source-scope",
+        "expectedText": "NHANES provides demographic data, anthropometry, blood pressure, health questionnaires, and laboratory measures, including glycohemoglobin and fasting glucose in the 2017-2018 cycle.",
+        "sourceFile": "data/nhanes_2017_2018/README.md",
+        "sourceFields": [
+          "文件清单",
+          "raw/DEMO_J.xpt",
+          "raw/BMX_J.xpt",
+          "raw/BPX_J.xpt",
+          "raw/DIQ_J.xpt",
+          "raw/GHB_J.xpt",
+          "raw/GLU_J.xpt"
+        ],
+        "interpretationBoundary": "source-data scope statement for the NHANES 2017-2018 example; component availability does not imply complete data for every participant"
+      }
     },
     {
       "candidateId": "nhanes-candidate-022",

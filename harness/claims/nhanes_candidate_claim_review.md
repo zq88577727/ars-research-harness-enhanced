@@ -23,6 +23,13 @@ Needs human review: `28`
 3. Run `python3 harness/scripts/apply_claim_review_decisions.py` to produce registry additions for approved `register` decisions.
 4. Copy approved additions into the claim registry only after a second review of source traceability.
 
+## Current Decision Summary
+
+- `merge`: `2`
+- `pending`: `22`
+- `register`: `3`
+- `reject`: `1`
+
 ## Registry Drafts
 
 ### nhanes-candidate-001
