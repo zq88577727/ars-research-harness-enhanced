@@ -25,10 +25,14 @@ become a storage bucket for every generated file.
 - Exploratory plots.
 - Local CHARLS or GBD derived files that depend on restricted or user-specific
   exports.
+- CHARLS local codebook rehearsal reports generated from official local
+  codebooks unless redistribution is explicitly permitted.
 
 ## Never Commit
 
 - Restricted raw CHARLS files.
+- Official CHARLS codebooks, questionnaires, or portal exports with registered
+  access or redistribution limits.
 - Private GBD exports when redistribution is not clearly allowed.
 - Credentials, cookies, API tokens, or private portal screenshots.
 - Participant-level identifiers or re-identifiable records.

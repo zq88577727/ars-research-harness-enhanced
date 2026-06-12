@@ -104,6 +104,33 @@ wide data and requires a source-variable column before importing. The included
 `charls_codebook_import_sample.csv` is a metadata-only sample for CI and
 training; replace it with official local CHARLS metadata for a real project.
 
+Run a full local rehearsal that discovers files under `data/charls/codebooks/`,
+imports codebook metadata into a temporary extract, and generates candidate
+source-variable suggestions without mutating the project:
+
+```bash
+python3 harness/scripts/rehearse_charls_codebook_import.py
+```
+
+Run the same rehearsal against a specific local codebook:
+
+```bash
+python3 harness/scripts/rehearse_charls_codebook_import.py \
+  --input data/charls/codebooks/<local-codebook>.csv
+```
+
+Use strict mode when a real local codebook is expected:
+
+```bash
+python3 harness/scripts/rehearse_charls_codebook_import.py --require-input
+```
+
+The rehearsal returns `awaiting-local-codebook` when no local codebook is found.
+It returns candidate suggestions only above a conservative score threshold
+(`--min-candidate-score`, default `12`). Reports generated with
+`--write-report` should remain local unless the underlying official codebook
+metadata is redistributable.
+
 Generate the worksheet:
 
 ```bash

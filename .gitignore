@@ -15,6 +15,7 @@ tmp/
 .workflow/
 data/charls/raw/
 data/charls/codebooks/
+examples/*/charls_codebook_import_rehearsal.md
 data/gbd/raw/
 data/**/restricted/
 data/**/sensitive/

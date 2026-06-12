@@ -39,6 +39,12 @@ dependencies are installed, into the `charls_codebook_extract.csv` schema. Use
 `--dry-run` first; source official codebook files should remain in ignored local
 directories such as `data/charls/codebooks/`.
 
+`harness/scripts/rehearse_charls_codebook_import.py` sits between local
+codebook import and human mapping decisions. It discovers or accepts local
+codebook files, builds a temporary extract, generates conservative
+source-variable candidates for S1/S2 review, and reports
+`awaiting-local-codebook` when no local files are present.
+
 GBD runs should pair `gbd_query_manifest.template.csv` with
 `gbd_analysis_manifest.template.json`: the query manifest records exported
 dimensions row by row, while the analysis manifest controls source files,

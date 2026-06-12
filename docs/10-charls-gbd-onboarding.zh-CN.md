@@ -156,6 +156,26 @@ python3 harness/scripts/import_charls_codebook_extract.py \
 `charls_codebook_extract.csv`。写入后仍需进入人工变量映射决策闭环，不能自动视为
 `variable_map.csv` 已审核完成。
 
+CHARLS 本地 codebook 导入演练与候选变量生成：
+
+```bash
+python3 harness/scripts/rehearse_charls_codebook_import.py
+
+python3 harness/scripts/rehearse_charls_codebook_import.py \
+  --input data/charls/codebooks/<local-codebook>.csv
+
+python3 harness/scripts/rehearse_charls_codebook_import.py --require-input
+```
+
+演练器会搜索 `data/charls/codebooks/`，或读取显式传入的本地 codebook 文件；随后在临时
+extract 中运行候选变量生成，不会修改 `charls_codebook_extract.csv`、`variable_map.csv`
+或 `charls_design_gate.json`。如果本机没有本地 codebook，默认状态为
+`awaiting-local-codebook`；如果进入真实项目，建议加 `--require-input`，让缺少本地文件时
+直接失败。候选变量默认只展示分数不低于 12 的较强匹配；可以用
+`--min-candidate-score` 调整，但正式采用前必须人工核对官方 CHARLS 文档。使用
+`--write-report` 生成的 rehearsal report 可能包含官方 codebook 变量名或标签，除非确认
+可再分发，否则不要提交入库。
+
 默认命令会生成 `charls_s1_s2_design_review.md`，把 S1/S2 design gate 的目标变量
 逐个连接到 codebook extract 中的候选 source variables，并标注仍需人工确认的动作。
 该 worksheet 不会自动修改 `variable_map.csv`，也不会把 `charls_design_gate.json`

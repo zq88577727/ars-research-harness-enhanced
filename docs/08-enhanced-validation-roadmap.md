@@ -58,6 +58,11 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
   supports CSV/TSV by default, optional XLS/XLSX through local Excel
   dependencies, dry-run previews, append/dedupe writes, and rejection of likely
   respondent-level wide data.
+- `harness/scripts/rehearse_charls_codebook_import.py` runs the project-level
+  local codebook rehearsal. It discovers or accepts ignored local codebook
+  files, transforms them into a temporary extract, generates conservative
+  candidate source-variable suggestions, and reports `awaiting-local-codebook`
+  rather than fabricating results when no local files are present.
 - `harness/scripts/apply_charls_variable_mapping_decisions.py` closes the
   human-review loop from CHARLS codebook extract to variable-map draft. It
   validates `charls_variable_mapping_decisions.json`, permits pending scaffold
