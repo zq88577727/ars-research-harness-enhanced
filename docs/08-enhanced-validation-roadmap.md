@@ -26,6 +26,13 @@ This enhanced fork adds two layers above the original checkpoint-first workflow:
 - `harness/scripts/prepare_claim_registry_review.py` turns that queue into a
   Markdown review worksheet with draft registry objects. The worksheet still
   requires human source-file, source-field, and interpretation-boundary review.
+- `harness/claims/nhanes_candidate_claim_decisions.json` records machine-readable
+  review decisions for every candidate that needs human review. Pending decisions
+  are allowed, but approved `register` decisions must include complete,
+  source-backed registry drafts.
+- `harness/scripts/apply_claim_review_decisions.py` converts only approved
+  `register` decisions into a draft registry-additions file; it does not mutate
+  the authoritative claim registry.
 - `scripts/fetch_gbd_export.py` reads the GBD analysis manifest's `download`
   block, performs a non-overwriting dry run in CI, and can fetch approved public
   GBD endpoint data into metadata-rich CSV exports when run intentionally.

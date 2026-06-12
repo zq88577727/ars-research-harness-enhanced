@@ -52,6 +52,7 @@ python3 harness/scripts/extract_candidate_claims.py \
   --prefix nhanes --limit 40 \
   --output harness/claims/nhanes_candidate_claims.json
 python3 harness/scripts/prepare_claim_registry_review.py
+python3 harness/scripts/apply_claim_review_decisions.py
 ```
 
 Start a CHARLS or GBD run after data access/export is ready:

@@ -1,0 +1,5 @@
+{
+  "sourceCandidateFile": "harness/claims/nhanes_candidate_claims.json",
+  "sourceDecisionsFile": "harness/claims/nhanes_candidate_claim_decisions.json",
+  "claims": []
+}

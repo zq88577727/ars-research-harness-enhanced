@@ -1,0 +1,245 @@
+{
+  "candidateFile": "harness/claims/nhanes_candidate_claims.json",
+  "registry": "harness/claims/nhanes_claim_registry.json",
+  "reviewState": "pending-human-review",
+  "allowedDecisions": [
+    "pending",
+    "register",
+    "reject",
+    "defer",
+    "merge"
+  ],
+  "decisionRules": [
+    "Use pending until a human reviewer confirms source artifact, source fields, tier, and interpretation boundary.",
+    "Use register only when registryDraft is complete and contains no TODO placeholders.",
+    "Use reject for non-claims, duplicated claims, unsupported statements, or sentences that should be rewritten instead of registered.",
+    "Use defer when the source artifact or interpretation boundary is not yet available.",
+    "Use merge when the sentence is already covered by an existing or broader claim; set mergeWith to that claim id."
+  ],
+  "decisions": [
+    {
+      "candidateId": "nhanes-candidate-001",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-002",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-003",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-006",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-007",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-014",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-017",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-019",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-021",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-022",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-023",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-024",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-025",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-026",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-027",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-028",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-029",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-030",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-031",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-032",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-033",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-034",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-035",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-036",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-037",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-038",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-039",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    },
+    {
+      "candidateId": "nhanes-candidate-040",
+      "decision": "pending",
+      "reviewer": "human-required",
+      "rationale": "Pending human review; do not register automatically.",
+      "mergeWith": null,
+      "registryDraft": null
+    }
+  ]
+}

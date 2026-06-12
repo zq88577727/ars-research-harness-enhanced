@@ -12,8 +12,16 @@ tier, interpretation boundary, and whether the sentence should be registered at 
 - Do not register a claim until the exact source artifact and interpretation boundary are known.
 
 Candidate file: `harness/claims/nhanes_candidate_claims.json`
+Machine-readable decisions: `harness/claims/nhanes_candidate_claim_decisions.json`
 Total candidates: `40`
 Needs human review: `28`
+
+## Decision Workflow
+
+1. Keep a candidate as `pending` until a human reviewer confirms source artifact, source fields, tier, and interpretation boundary.
+2. Change the decision to `register`, `reject`, `defer`, or `merge` in the machine-readable decisions file.
+3. Run `python3 harness/scripts/apply_claim_review_decisions.py` to produce registry additions for approved `register` decisions.
+4. Copy approved additions into the claim registry only after a second review of source traceability.
 
 ## Registry Drafts
 

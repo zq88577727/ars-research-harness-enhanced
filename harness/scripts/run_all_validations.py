@@ -19,6 +19,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_external_literature.py"],
     ["python3", "harness/validators/validate_claims.py"],
     ["python3", "harness/validators/validate_candidate_claims.py"],
+    ["python3", "harness/scripts/apply_claim_review_decisions.py"],
     ["python3", "harness/validators/validate_environment_lock.py"],
     ["python3", "harness/validators/validate_reporting_checklist.py"],
     ["python3", "harness/validators/validate_journal_profile.py"],
