@@ -2,7 +2,7 @@
 
 A checkpoint-first academic research workflow harness. This repository turns an AI-assisted paper workflow into a traceable, reproducible, human-confirmed process.
 
-The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults. NHANES is the repository's complete closed-loop example. CHARLS remains access-aware scaffolding only. GBD includes a small public default-endpoint export for workflow demonstration plus manifest-driven scaffolding, but it is not a completed publishable GBD burden analysis and does not include restricted data.
+The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults. NHANES is the repository's complete closed-loop example. CHARLS now has local-only restricted-data manifests and validators, but remains scaffold-only until user-downloaded files are placed outside git. GBD includes a small public default-endpoint export for workflow demonstration plus manifest-driven scaffolding, but it is not a completed publishable GBD burden analysis and does not include restricted data.
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 

@@ -17,6 +17,13 @@ harness stages live in `data_sources/*.json`; project manifests should keep only
 run-specific state such as access progress, local paths, variable maps, and query
 manifests.
 
+CHARLS runs should pair `variable_map.charls.template.csv` with
+`charls_file_manifest.template.csv`: the variable map records analysis variables
+and longitudinal roles, while the file manifest records local-only raw files,
+waves, modules, access status, and optional checksums. The validator checks
+metadata without reading restricted data unless the project manifest declares
+that raw files have been downloaded.
+
 GBD runs should pair `gbd_query_manifest.template.csv` with
 `gbd_analysis_manifest.template.json`: the query manifest records exported
 dimensions row by row, while the analysis manifest controls source files,

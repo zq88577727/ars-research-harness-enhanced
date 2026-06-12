@@ -29,6 +29,12 @@ derived non-identifiable summaries, but it must not contain raw CHARLS data.
 Users are responsible for confirming the permitted use, citation, and
 redistribution terms for every downloaded wave or harmonized file.
 
+Each CHARLS project should maintain a committed `charls_file_manifest.csv` that
+describes local-only raw files by wave/module/path/access status without
+committing the files themselves. Validators may check local existence after a
+project declares that raw files have been downloaded, but they must not require
+or expose raw CHARLS contents.
+
 ## GBD
 
 GBD work should be represented by query manifests that record release version,

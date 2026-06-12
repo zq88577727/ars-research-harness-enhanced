@@ -33,10 +33,21 @@ python3 harness/scripts/init_public_database_project.py charls charls-aging-temp
 下一步必须人工填写：
 
 - `examples/charls-aging-template/project_manifest.json`
+- `examples/charls-aging-template/charls_file_manifest.csv`
 - `examples/charls-aging-template/variable_map.csv`
 - `examples/charls-aging-template/checkpoints/stage-S0-intake.md`
 - `examples/charls-aging-template/checkpoints/stage-S1-research-question.md`
 - `examples/charls-aging-template/checkpoints/stage-S2-method-plan.md`
+
+`charls_file_manifest.csv` 只记录本地文件清单和访问状态，不提交原始数据。
+当 `project_manifest.json` 中的 `rawFilesDownloaded` 仍为 `false` 时，
+validator 只检查清单结构、必需波次和路径边界；当设为 `true` 后，必需行
+必须指向 `data/charls/raw/` 下真实存在的本地文件。
+
+`variable_map.csv` 必须至少明确 respondent/person ID、wave、baseline wave、
+follow-up wave、age、sex、primary exposure、primary outcome、attrition status。
+纵向研究不能因为有先后波次就自动写成因果结论，必须在 S2 说明时序、样本流失、
+缺失、权重和波次链接策略。
 
 CHARLS 重点风险：
 
@@ -98,4 +109,3 @@ python3 harness/scripts/run_all_validations.py
 python3 harness/validators/validate_project_scaffold.py examples/charls-aging-template
 python3 harness/validators/validate_project_scaffold.py examples/gbd-burden-template
 ```
-

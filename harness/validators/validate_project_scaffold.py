@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -23,10 +24,103 @@ REQUIRED_STAGE_KEYS = [
     "S9_finalize_closeout",
 ]
 
+CHARLS_REQUIRED_VARIABLES = {
+    "participant_id",
+    "wave",
+    "baseline_wave",
+    "followup_wave",
+    "age",
+    "sex",
+    "primary_exposure",
+    "attrition_status",
+    "primary_outcome",
+}
+
+CHARLS_FILE_MANIFEST_COLUMNS = {
+    "wave",
+    "year",
+    "file_label",
+    "expected_local_path",
+    "module",
+    "required_for_minimal_longitudinal",
+    "access_status",
+    "checksum_sha256",
+    "notes",
+}
+
+RAW_FILE_EXTENSIONS = {".dta", ".sav", ".sas7bdat", ".xpt", ".csv", ".zip", ".rar", ".7z"}
+
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
+
+
+def git_tracked_files_under(path: str) -> list[str]:
+    try:
+        completed = subprocess.run(["git", "ls-files", path], check=True, capture_output=True, text=True)
+    except Exception:
+        return []
+    return [line for line in completed.stdout.splitlines() if line]
+
+
+def validate_charls_project(path: Path, manifest: dict, failures: list[dict]) -> None:
+    if manifest.get("studyDesign") != "longitudinal cohort scaffold":
+        failures.append({"check": "charls_study_design", "actual": manifest.get("studyDesign")})
+    if "must not be committed" not in manifest.get("localRawDataPolicy", ""):
+        failures.append({"check": "charls_local_raw_policy"})
+    if not manifest.get("interpretationBoundary"):
+        failures.append({"check": "charls_interpretation_boundary"})
+
+    variable_map = path / "variable_map.csv"
+    if not variable_map.exists():
+        failures.append({"check": "charls_variable_map_exists"})
+    else:
+        rows = read_csv(variable_map)
+        required_names = {row.get("canonical_name") for row in rows if row.get("required", "").lower() == "true"}
+        missing = sorted(CHARLS_REQUIRED_VARIABLES - required_names)
+        if missing:
+            failures.append({"check": "charls_required_variables_present", "missing": missing})
+
+    file_manifest_value = manifest.get("fileManifest")
+    if not file_manifest_value:
+        failures.append({"check": "charls_file_manifest_declared"})
+        return
+    file_manifest = path / "charls_file_manifest.csv"
+    if not file_manifest.exists():
+        failures.append({"check": "charls_file_manifest_exists"})
+        return
+
+    rows = read_csv(file_manifest)
+    if not rows:
+        failures.append({"check": "charls_file_manifest_rows"})
+        return
+    missing_cols = sorted(CHARLS_FILE_MANIFEST_COLUMNS - set(rows[0].keys()))
+    if missing_cols:
+        failures.append({"check": "charls_file_manifest_columns", "missing": missing_cols})
+
+    raw_dir = manifest.get("rawDataDirectory", "")
+    required_rows = [row for row in rows if row.get("required_for_minimal_longitudinal", "").lower() == "true"]
+    if len(required_rows) < 2:
+        failures.append({"check": "charls_minimum_longitudinal_files"})
+    for row in rows:
+        expected = row.get("expected_local_path", "")
+        if raw_dir and expected and not expected.startswith(raw_dir.rstrip("/") + "/"):
+            failures.append({"check": "charls_expected_path_under_raw_dir", "path": expected})
+        if row.get("access_status") not in {"not_downloaded", "downloaded_local", "not_required", "pending"}:
+            failures.append({"check": "charls_access_status", "status": row.get("access_status")})
+        if manifest.get("accessStatus", {}).get("rawFilesDownloaded") and row.get("required_for_minimal_longitudinal", "").lower() == "true":
+            local_path = Path(expected)
+            if "<" in expected or ">" in expected or not local_path.exists():
+                failures.append({"check": "charls_required_local_file_exists", "path": expected})
+
+    tracked = [
+        file
+        for file in git_tracked_files_under(raw_dir)
+        if Path(file).suffix.lower() in RAW_FILE_EXTENSIONS
+    ]
+    if tracked:
+        failures.append({"check": "charls_raw_files_not_tracked", "tracked": tracked})
 
 
 def validate_project(path: Path) -> dict:
@@ -68,14 +162,7 @@ def validate_project(path: Path) -> dict:
                 )
 
     if data_source == "charls":
-        variable_map = path / "variable_map.csv"
-        if not variable_map.exists():
-            failures.append({"check": "charls_variable_map_exists"})
-        else:
-            rows = read_csv(variable_map)
-            required = [row for row in rows if row.get("required", "").lower() == "true"]
-            if not required:
-                failures.append({"check": "charls_required_variables_present"})
+        validate_charls_project(path, manifest, failures)
     elif data_source == "gbd":
         query_manifest = path / "gbd_query_manifest.csv"
         analysis_manifest = path / "gbd_analysis_manifest.json"

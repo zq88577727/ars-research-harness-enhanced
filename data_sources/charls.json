@@ -15,5 +15,16 @@
   "supportedStudyDesigns": ["longitudinal cohort", "cross-sectional wave analysis", "aging and chronic disease analysis"],
   "expectedRawLayout": "data/charls/raw/<wave>/",
   "requiredHarnessStages": ["S1 longitudinal estimand", "S2 attrition and wave-linkage plan", "S3 reproducible cleaning scripts", "S7 ethics/data-use audit"],
-  "minimumVariablesToMap": ["respondent_id", "wave", "age", "sex", "education", "residence", "health_outcome", "sample_weight"]
+  "minimumVariablesToMap": [
+    "participant_id",
+    "wave",
+    "baseline_wave",
+    "followup_wave",
+    "age",
+    "sex",
+    "primary_exposure",
+    "attrition_status",
+    "primary_outcome",
+    "sample_weight"
+  ]
 }

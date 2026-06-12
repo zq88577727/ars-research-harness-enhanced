@@ -1,6 +1,6 @@
 # ars-research-harness
 
-一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。当前能力边界需要明确区分：NHANES 是完整闭环示例；CHARLS 仍是带访问规则的 scaffold；GBD 已包含一个小型公开默认 endpoint 导出演示和 manifest-driven scaffold，但不是已完成、可投稿的 GBD 疾病负担分析，也不包含受限数据。
+一个把 AI 学术写作从“提示词输出”升级为“受控工程流程”的研究工作流项目。它以 NHANES 2017-2018 未诊断糖尿病论文为完整案例，展示如何从公共医学数据走到分析结果、表图、论文初稿、审稿模拟、修回和投稿前 Word 包。当前能力边界需要明确区分：NHANES 是完整闭环示例；CHARLS 现在具备本地受限数据 manifest 和 validator，但在用户下载文件并放入 git 外部本地目录前仍是 scaffold；GBD 已包含一个小型公开默认 endpoint 导出演示和 manifest-driven scaffold，但不是已完成、可投稿的 GBD 疾病负担分析，也不包含受限数据。
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 
