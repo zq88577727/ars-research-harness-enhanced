@@ -1,0 +1,97 @@
+{
+  "id": "topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls-s1-s2-design-gate",
+  "stage": "S1_S2",
+  "status": "s1-s2-pending",
+  "purpose": "Connect CHARLS variable semantics to the research question and method-analysis plan before any longitudinal analysis or manuscript claim is drafted.",
+  "linkedInputs": {
+    "projectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json",
+    "fileManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_file_manifest.csv",
+    "waveMap": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_wave_map.csv",
+    "variableMap": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/variable_map.csv"
+  },
+  "researchQuestion": {
+    "text": "To be refined after CHARLS wave access, codebook review, and S1 confirmation.",
+    "population": "CHARLS participants with confirmed baseline and follow-up linkage.",
+    "exposure": "primary_exposure",
+    "outcome": "primary_outcome",
+    "timeframe": "baseline wave to follow-up wave",
+    "minimumBeforeAnalysis": [
+      "Define the target population and eligibility criteria.",
+      "Replace the placeholder exposure and outcome with codebook-confirmed CHARLS variables.",
+      "Confirm that exposure measurement precedes outcome ascertainment."
+    ]
+  },
+  "estimand": {
+    "type": "associational-longitudinal",
+    "targetPopulation": "Pending weight and eligibility decisions.",
+    "contrast": "TBD_after_S1_confirmation",
+    "timeOrigin": "baseline_wave",
+    "followUp": "followup_wave",
+    "allowedLanguage": [
+      "association",
+      "longitudinal association",
+      "risk marker",
+      "prospective association"
+    ],
+    "prohibitedLanguage": [
+      "causal effect",
+      "impact",
+      "leads to",
+      "prevents",
+      "causes",
+      "protects against"
+    ]
+  },
+  "temporalOrdering": {
+    "baselineWave": "wave1",
+    "followupWave": "wave2",
+    "exposureVariable": "primary_exposure",
+    "outcomeVariable": "primary_outcome",
+    "requiredCheck": "The exposure must be measured at baseline or before the outcome follow-up window; outcome claims require confirmed follow-up timing."
+  },
+  "attritionPlan": {
+    "variable": "attrition_status",
+    "required": true,
+    "minimumBeforeAnalysis": [
+      "Report baseline denominator and follow-up denominator.",
+      "Compare retained and lost-to-follow-up participants on key baseline variables.",
+      "State whether attrition is handled by complete-case analysis, weighting, inverse probability weighting, imputation, or sensitivity analysis."
+    ]
+  },
+  "weightDecision": {
+    "variable": "sample_weight",
+    "requiredBeforeAnalysis": true,
+    "status": "pending_weight_decision",
+    "decisionOptions": [
+      "unweighted descriptive scaffold only",
+      "cross-sectional weight with limited target-population wording",
+      "longitudinal or panel weight if confirmed in CHARLS documentation"
+    ],
+    "boundary": "Target-population claims require a documented weight and survey-design decision."
+  },
+  "claimBoundaries": [
+    {
+      "id": "no-causal-language",
+      "severity": "blocker",
+      "rule": "Do not describe CHARLS observational associations as causal effects unless a separate causal identification design is explicitly specified and justified."
+    },
+    {
+      "id": "no-single-measure-diagnosis",
+      "severity": "blocker",
+      "rule": "Do not describe a single questionnaire item, biomarker, or screen as a definitive clinical diagnosis unless the source variable and diagnostic algorithm support that wording."
+    },
+    {
+      "id": "no-mechanism-overclaim",
+      "severity": "warning",
+      "rule": "Do not describe database associations as biological or behavioral mechanisms without external mechanistic evidence."
+    }
+  ],
+  "manuscriptLanguage": {
+    "boundaryStatement": "This scaffold supports design planning for observational CHARLS analyses; it does not authorize causal, diagnostic, or clinical recommendation wording.",
+    "requiredBeforeDrafting": [
+      "Use association language unless a justified causal design is added.",
+      "Name the waves used for exposure and outcome.",
+      "State attrition, missingness, and weight decisions in Methods and Limitations."
+    ]
+  }
+}

@@ -69,6 +69,19 @@ The topic planner recommends whether NHANES, CHARLS, and/or GBD fit the topic,
 states the study-design boundary, and flags when external omics databases such
 as GEO/TCGA/GTEx are required for bioinformatics or mechanism claims.
 
+Instantiate dataset-specific project scaffolds from the topic plan:
+
+```bash
+python3 harness/scripts/instantiate_from_topic_plan.py \
+  examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json
+python3 harness/validators/validate_topic_scaffolds.py
+```
+
+This creates S0-S2 project scaffolds for the recommended supported data
+sources and an explicit external-omics boundary file when bioinformatics
+evidence is requested. These scaffolds are planning artifacts only: they do not
+download data, run analyses, or create manuscript-ready claims.
+
 Start a CHARLS or GBD run after data access/export is ready:
 
 ```bash

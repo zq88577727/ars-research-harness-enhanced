@@ -1,0 +1,6 @@
+source_wave,file_label,module,source_variable,variable_label,construct_keywords,measurement_domain,measurement_type,wave_role,eligible_roles,notes
+wave1,baseline_core,TBD,TBD,TBD,respondent id;person id,linkage,identifier,cross_wave,id,Fill from CHARLS codebook or questionnaire metadata; do not include raw participant data.
+wave1,baseline_core,TBD,TBD,TBD,age;birth year,demographic,continuous,baseline,covariate,Use only codebook-level metadata.
+wave1,baseline_core,TBD,TBD,TBD,sex;gender,demographic,categorical,baseline,covariate,Confirm CHARLS coding labels before analysis.
+wave1,baseline_core,TBD,TBD,TBD,weight;sampling weight;longitudinal weight,design,weight,baseline,weight,Choose cross-sectional or longitudinal weights according to the estimand.
+wave2,followup_core,TBD,TBD,TBD,interview status;follow-up status;attrition,missingness,binary,followup,missingness,Required for attrition assessment before outcome claims.

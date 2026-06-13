@@ -1,0 +1,19 @@
+{
+  "projectType": "external-omics-placeholder",
+  "dataSource": "external_omics",
+  "capabilityStatus": "placeholder-only-not-supported",
+  "sourceTopicPlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "omicsTerms": [
+    "bioinformatics"
+  ],
+  "supportedByCurrentHarness": false,
+  "requiredExternalDatabases": [
+    "GEO",
+    "TCGA",
+    "GTEx",
+    "HPA",
+    "STRING",
+    "KEGG",
+    "GO"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "topic-plan-instantiation-v1",
+  "sourceTopicPlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "outputDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds",
+  "status": "scaffold-only-not-analysis",
+  "createdProjects": [
+    {
+      "dataSource": "charls",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls",
+      "projectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json"
+    },
+    {
+      "dataSource": "gbd",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd",
+      "projectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/project_manifest.json"
+    },
+    {
+      "dataSource": "external_omics",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-external-omics",
+      "projectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-external-omics/project_manifest.json"
+    }
+  ],
+  "nextStage": "P8-3 manuscript blueprint generator",
+  "boundary": "These scaffolds initialize S0-S2 gates only; they do not contain completed analyses or manuscript-ready claims."
+}

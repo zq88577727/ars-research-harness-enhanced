@@ -1,0 +1,41 @@
+{
+  "projectType": "gbd-burden-project",
+  "dataSource": "gbd",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "capabilityStatus": "scaffold-only",
+  "title": "Depression, cognition, cardiovascular burden, and bioinformatics boundary plan [GBD scaffold]",
+  "researchQuestion": "What are the burden and time trends for diseases or outcomes related to depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults across locations, years, age groups, and sex strata?",
+  "rawDataDirectory": "data/gbd/raw",
+  "derivedDataDirectory": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/derived",
+  "queryManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/gbd_query_manifest.csv",
+  "analysisManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/gbd_analysis_manifest.json",
+  "accessStatus": {
+    "accountRegistered": true,
+    "queryDefined": false,
+    "csvExportDownloaded": false,
+    "releaseVersionRecorded": false
+  },
+  "requiredQueryDimensions": [
+    "gbd_release",
+    "measure",
+    "metric",
+    "cause",
+    "location",
+    "age",
+    "sex",
+    "year"
+  ],
+  "analysisRequirements": [
+    "uncertainty interval interpretation specified",
+    "age-standardization decision specified",
+    "rate/count/percent metric distinction specified",
+    "source and citation requirements recorded"
+  ],
+  "sourceTopicPlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "topicPlanDesign": {
+    "studyDesign": "descriptive disease burden or comparative trend analysis",
+    "reportingGuideline": "GATHER-style source transparency plus journal requirements",
+    "requiredGate": "query profile with release, measure, metric, cause, location, age, sex, year, UI, citation, and reuse review",
+    "claimBoundary": "burden/trend description with uncertainty intervals; no patient-level risk-factor or mechanism claims"
+  }
+}

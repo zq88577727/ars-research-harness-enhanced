@@ -1,0 +1,62 @@
+{
+  "id": "gbd-analysis-template",
+  "description": "Copy this file into a GBD project and fill every dimension exactly as exported before generating results.",
+  "analyses": {
+    "primary": {
+      "sourceFile": "examples/<project>/source_exports/<approved-gbd-export>.csv",
+      "outputCsv": "examples/<project>/results/gbd_primary_summary.csv",
+      "outputMarkdown": "examples/<project>/results/gbd_primary_summary.md",
+      "download": {
+        "sourceType": "gbd-default-data-json",
+        "endpoint": "<approved endpoint or documented manual export route>",
+        "downloadedOn": "<YYYY-MM-DD>",
+        "overwritePolicy": "no-overwrite-without-force",
+        "sourceNote": "Document GBD source, citation, query dimensions, and reuse terms before manuscript use.",
+        "expectedRowCountMinimum": 1,
+        "requiredColumns": [
+          "gbd_release",
+          "version_id",
+          "measure",
+          "metric",
+          "cause",
+          "location",
+          "age",
+          "sex",
+          "year",
+          "val",
+          "upper",
+          "lower",
+          "source_endpoint",
+          "downloaded_on",
+          "source_note"
+        ]
+      },
+      "dimensionFilter": {
+        "gbd_release": "GBD 2023",
+        "version_id": "<version id if available>",
+        "cause": "<cause>",
+        "location": "<location>",
+        "age": "<age group>",
+        "sex": "<sex>"
+      },
+      "numberYear": "<comparison year>",
+      "rateBaselineYear": "<baseline year>",
+      "rateComparisonYear": "<comparison year>",
+      "numberMeasures": {
+        "deaths": {
+          "measure": "Deaths",
+          "metric": "Number"
+        },
+        "dalys": {
+          "measure": "DALYs",
+          "metric": "Number"
+        }
+      },
+      "rateMeasure": {
+        "measure": "Deaths",
+        "metric": "Rate"
+      },
+      "interpretationBoundary": "Document query dimensions, uncertainty intervals, metric scale, citation, and reuse terms before manuscript use."
+    }
+  }
+}

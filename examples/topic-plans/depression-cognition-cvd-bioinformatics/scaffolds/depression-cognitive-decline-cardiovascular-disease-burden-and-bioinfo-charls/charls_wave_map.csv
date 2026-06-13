@@ -1,0 +1,6 @@
+wave,year,wave_role,time_anchor,file_labels,required_for_minimal_longitudinal,linkage_key_status,weight_decision,attrition_role,notes
+wave1,2011,baseline,pre-exposure baseline,baseline_core,true,pending_codebook_confirmation,pending_weight_decision,baseline denominator,Confirm respondent identifier and baseline eligibility before analysis.
+wave2,2013,followup,outcome follow-up,followup_core,true,pending_codebook_confirmation,pending_weight_decision,primary follow-up attrition,Required only after the S1 longitudinal estimand selects Wave 2.
+wave3,2015,followup,optional later follow-up,followup_core,false,pending_codebook_confirmation,pending_weight_decision,optional attrition extension,Optional until declared in targetWaves.
+wave4,2018,followup,optional later follow-up,followup_core,false,pending_codebook_confirmation,pending_weight_decision,optional attrition extension,Optional until declared in targetWaves.
+wave5,2020,followup,optional later follow-up,followup_core,false,pending_codebook_confirmation,pending_weight_decision,optional attrition extension,Optional until declared in targetWaves and access terms are confirmed.

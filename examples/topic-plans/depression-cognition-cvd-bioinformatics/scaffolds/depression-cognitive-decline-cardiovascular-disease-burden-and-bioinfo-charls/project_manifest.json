@@ -1,0 +1,41 @@
+{
+  "projectType": "charls-longitudinal-project",
+  "dataSource": "charls",
+  "dataSourceManifest": "data_sources/charls.json",
+  "capabilityStatus": "scaffold-only",
+  "title": "Depression, cognition, cardiovascular burden, and bioinformatics boundary plan [CHARLS scaffold]",
+  "researchQuestion": "Among middle-aged and older adults, how is depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults related to longitudinal changes in aging-related outcomes after wave linkage and attrition assessment?",
+  "studyDesign": "longitudinal cohort scaffold",
+  "targetWaves": [],
+  "rawDataDirectory": "data/charls/raw",
+  "derivedDataDirectory": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/derived",
+  "fileManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_file_manifest.csv",
+  "waveMap": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_wave_map.csv",
+  "variableMap": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/variable_map.csv",
+  "designGate": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_design_gate.json",
+  "codebookExtract": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_codebook_extract.csv",
+  "codebookImportSample": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_codebook_import_sample.csv",
+  "variableMappingDecisions": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/charls_variable_mapping_decisions.json",
+  "localRawDataPolicy": "Raw CHARLS files must remain in ignored local directories and must not be committed.",
+  "interpretationBoundary": "CHARLS longitudinal associations require explicit wave linkage, attrition, missingness, weight, and temporality decisions before manuscript claims.",
+  "accessStatus": {
+    "accountRegistered": true,
+    "dataApplicationSubmitted": false,
+    "dataApproved": false,
+    "rawFilesDownloaded": false
+  },
+  "analysisRequirements": [
+    "wave linkage key confirmed",
+    "sample eligibility criteria specified",
+    "attrition and missingness plan specified",
+    "weights and survey design decision specified",
+    "data-use and citation requirements recorded"
+  ],
+  "sourceTopicPlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "topicPlanDesign": {
+    "studyDesign": "longitudinal cohort or wave-specific cross-sectional aging analysis",
+    "reportingGuideline": "STROBE/RECORD depending on linkage and reporting frame",
+    "requiredGate": "S1/S2 design gate with wave linkage, temporal ordering, attrition, missingness, and weight decision",
+    "claimBoundary": "temporal association or trajectory language only unless a defensible causal design is added"
+  }
+}
