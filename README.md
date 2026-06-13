@@ -112,6 +112,8 @@ Post-release public-repository audits are documented in
 [docs/13-post-release-audit-p7-15.md](docs/13-post-release-audit-p7-15.md).
 Repository artifact cleanup planning is documented in
 [docs/14-artifact-cleanup-plan-p7-16.md](docs/14-artifact-cleanup-plan-p7-16.md).
+Artifact cleanup implementation and policy enforcement are documented in
+[docs/15-artifact-cleanup-implementation-p7-17.md](docs/15-artifact-cleanup-implementation-p7-17.md).
 Repository data-use rules are documented in [DATA_POLICY.md](DATA_POLICY.md).
 
 ## Workflow

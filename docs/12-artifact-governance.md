@@ -47,3 +47,7 @@ needed by a validator.
 The P7-16 artifact cleanup plan in
 `docs/14-artifact-cleanup-plan-p7-16.md` records the current tracked artifact
 inventory and the recommended sequence for any future cleanup commits.
+
+The P7-17 artifact policy implementation in
+`docs/15-artifact-cleanup-implementation-p7-17.md` records the first
+implementation pass and is enforced by `harness/validators/validate_artifact_policy.py`.

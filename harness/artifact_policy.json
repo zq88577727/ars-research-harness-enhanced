@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "artifact-policy-v1",
+  "description": "Repository artifact policy for public research-workflow examples. This file records reviewed exceptions and blocks unreviewed raw, restricted, or large generated artifacts.",
+  "maxUnreviewedFileBytes": 500000,
+  "forbiddenTrackedPrefixes": [
+    "data/charls/raw/",
+    "data/charls/codebooks/",
+    "data/gbd/raw/",
+    "data/**/restricted/",
+    "data/**/sensitive/"
+  ],
+  "forbiddenTrackedGlobs": [
+    "examples/gbd-cvd-china-global-instance/source_exports/*.csv"
+  ],
+  "reviewedLargeArtifacts": [
+    {
+      "path": "data/nhanes_2017_2018/raw/BPQ_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/SMQ_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/DIQ_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/DEMO_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/PAQ_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/BMX_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/BPX_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "data/nhanes_2017_2018/raw/SLQ_J.xpt",
+      "classification": "public-use-teaching-input",
+      "decision": "keep",
+      "rationale": "NHANES raw XPT files are public-use teaching inputs for the complete closed-loop example."
+    },
+    {
+      "path": "assets/diagrams/01-overview-japanese-handdrawn.png",
+      "classification": "documentation-visual",
+      "decision": "keep",
+      "rationale": "Current README/workshop visual; later visual pass may compress assets without changing research evidence."
+    },
+    {
+      "path": "assets/diagrams/02-checkpoint-loop-japanese-handdrawn.png",
+      "classification": "documentation-visual",
+      "decision": "keep",
+      "rationale": "Current README/workshop visual; later visual pass may compress assets without changing research evidence."
+    },
+    {
+      "path": "assets/diagrams/03-harness-architecture-japanese-handdrawn.png",
+      "classification": "documentation-visual",
+      "decision": "keep",
+      "rationale": "Current README/workshop visual; later visual pass may compress assets without changing research evidence."
+    },
+    {
+      "path": "assets/diagrams/04-nhanes-case-path-japanese-handdrawn.png",
+      "classification": "documentation-visual",
+      "decision": "keep",
+      "rationale": "Current README/workshop visual; later visual pass may compress assets without changing research evidence."
+    },
+    {
+      "path": "examples/nhanes-undiagnosed-diabetes/results/S3/analytic_all.csv",
+      "classification": "nhanes-validator-evidence",
+      "decision": "keep-pending-summary-replacement",
+      "rationale": "Large intermediate table is currently part of the reproducibility evidence; replace only after smaller checksums or summary gates cover the same contract."
+    },
+    {
+      "path": "examples/nhanes-undiagnosed-diabetes/results/S3/analysis_sample.csv",
+      "classification": "nhanes-validator-evidence",
+      "decision": "keep-pending-summary-replacement",
+      "rationale": "Analysis sample is currently useful for teaching and local inspection; replace only after validator coverage is updated."
+    }
+  ],
+  "allowedSourceExportCsvs": [
+    {
+      "path": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
+      "classification": "tiny-teaching-fixture",
+      "decision": "keep",
+      "rationale": "Small fixture is intentionally committed for offline GBD governance demonstration."
+    },
+    {
+      "path": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
+      "classification": "legacy-real-default-demo",
+      "decision": "keep-pending-replacement",
+      "rationale": "Legacy GBD default endpoint CSV remains referenced by query manifest, provenance, and claim registry. Replace in a separate scoped commit only after the demo is converted to a smaller fixture or local-only export route."
+    }
+  ],
+  "reviewedDuplicateGroups": [
+    {
+      "id": "nhanes-figure1-flow-results-and-submission-copy",
+      "paths": [
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure1_flow.png",
+        "examples/nhanes-undiagnosed-diabetes/submission_package/figures/figure1_flow.png"
+      ],
+      "decision": "keep-pending-single-source-refactor",
+      "rationale": "The results copy is referenced by revision trace/checkpoints; the submission copy is referenced by the final package manifest and DOCX builder."
+    },
+    {
+      "id": "nhanes-figure2-subgroup-results-and-submission-copy",
+      "paths": [
+        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure2_subgroup_prevalence.png",
+        "examples/nhanes-undiagnosed-diabetes/submission_package/figures/figure2_subgroup_prevalence.png"
+      ],
+      "decision": "keep-pending-single-source-refactor",
+      "rationale": "The results copy is referenced by revision trace/checkpoints; the submission copy is referenced by the final package manifest and DOCX builder."
+    }
+  ],
+  "reviewedDocxArtifacts": [
+    {
+      "path": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_generic_sci.docx",
+      "decision": "keep",
+      "rationale": "Listed in the submission package manifest as a generic final DOCX."
+    },
+    {
+      "path": "examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_with_tables_figures.docx",
+      "decision": "keep",
+      "rationale": "Documented as the primary teaching deliverable with tables and figures."
+    }
+  ]
+}

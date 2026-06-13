@@ -26,6 +26,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_revision_trace.py"],
     ["python3", "harness/validators/validate_revision_diff_report.py"],
     ["python3", "harness/validators/validate_data_source_manifests.py"],
+    ["python3", "harness/validators/validate_artifact_policy.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
     ["python3", "harness/validators/validate_charls_design_gate.py"],
     ["python3", "harness/scripts/import_charls_codebook_extract.py", "--input", "examples/charls-aging-template/charls_codebook_import_sample.csv", "--dry-run"],
