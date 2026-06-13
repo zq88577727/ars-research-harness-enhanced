@@ -1,6 +1,6 @@
 # P7-15 Post-Release Audit
 
-Status: remote verification and CI hardening audit.
+Status: completed remote verification and CI hardening audit.
 
 Date: 2026-06-13.
 
@@ -29,6 +29,9 @@ Target branch: `main`.
   - `data/charls/codebooks/`
   - `data/gbd/raw/`
 - The raw GitHub URL for the local-only GBD CVD CSV returned `404`.
+- After the P7-16 planning commit, GitHub tree API resolved `main` to
+  `44effb266e364d10e0fd7825b10c760b4e7d3c97` and showed
+  `docs/14-artifact-cleanup-plan-p7-16.md` on the public branch.
 
 ## CI Finding
 
@@ -50,6 +53,10 @@ Fix:
   the GBD CVD manuscript-review gate.
 - Strict local validation can still run without the flag when the local export
   is present.
+- GitHub Actions run `27466360845` passed for the CI fix commit
+  `046f44fb99c3092e551321de506c17ce56fd0aaf`.
+- GitHub Actions run `27469154351` passed for the P7-16 planning commit
+  `44effb266e364d10e0fd7825b10c760b4e7d3c97`.
 
 ## Capability Boundary Audit
 
@@ -65,9 +72,10 @@ The public README, roadmap, and data policy should present these boundaries:
 
 ## P7-15 Decision
 
-The public release is safe to show only after the CI fix commit is pushed and
-the new GitHub Actions run is green. The raw GBD CVD source CSV is not present
-in the remote tree and remains local-only.
+The public release is safe to show as a research-workflow teaching harness and
+manuscript-readiness scaffold. The raw GBD CVD source CSV is not present in the
+remote tree and remains local-only. GitHub Actions is green in the public
+no-raw-export environment.
 
 ## P7-16 Entry Criteria
 
