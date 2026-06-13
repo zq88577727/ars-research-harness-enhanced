@@ -1,0 +1,62 @@
+{
+  "id": "gbd-cvd-china-global-analysis",
+  "description": "Manifest-driven analysis plan for the selected CVD China/global GBD scaffold. It remains blocked until a matching GBD Results Tool export is present.",
+  "queryProfile": "examples/gbd-cvd-china-global-instance/gbd_cvd_query_profile.json",
+  "queryManifest": "examples/gbd-cvd-china-global-instance/gbd_cvd_query_manifest.csv",
+  "claimRegistry": "examples/gbd-cvd-china-global-instance/claim_registry.json",
+  "provenanceFile": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_provenance.json",
+  "analyses": {
+    "cvdChinaGlobal": {
+      "sourceFile": "examples/gbd-cvd-china-global-instance/source_exports/gbd_cvd_china_global_1990_2023.csv",
+      "sourceCitationFile": "examples/gbd-cvd-china-global-instance/source_exports/gbd_cvd_citation.txt",
+      "outputCsv": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "outputMarkdown": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.md",
+      "claimRegistryOutput": "examples/gbd-cvd-china-global-instance/claim_registry.source_backed.json",
+      "dimensionFilter": {
+        "gbd_release": "GBD 2023",
+        "version_id": "8352",
+        "cause": "Cardiovascular diseases",
+        "sex": "Both"
+      },
+      "locations": ["China", "Global"],
+      "years": ["1990", "2023"],
+      "countAge": "All ages",
+      "rateAge": "Age-standardized",
+      "numberMeasures": {
+        "deaths": {
+          "measure": "Deaths",
+          "metric": "Number"
+        },
+        "dalys": {
+          "measure": "DALYs",
+          "metric": "Number"
+        }
+      },
+      "rateMeasures": {
+        "deathRate": {
+          "measure": "Deaths",
+          "metric": "Rate"
+        },
+        "dalyRate": {
+          "measure": "DALYs",
+          "metric": "Rate"
+        }
+      },
+      "requiredColumns": [
+        "gbd_release",
+        "version_id",
+        "measure",
+        "metric",
+        "cause",
+        "location",
+        "age",
+        "sex",
+        "year",
+        "val",
+        "upper",
+        "lower"
+      ],
+      "interpretationBoundary": "Disease-specific descriptive GBD burden analysis only. Counts and age-standardized rates must remain separate, uncertainty intervals must be retained, and no causal, clinical, mechanistic, or policy-effect claim is allowed."
+    }
+  }
+}

@@ -1,6 +1,6 @@
 wave,year,file_label,expected_local_path,module,required_for_minimal_longitudinal,access_status,checksum_sha256,notes
-wave1,2011,baseline_core,data/charls/raw/2011/<charls-wave1-core-file>,core,true,not_downloaded,,Keep raw CHARLS files local and ignored; do not commit.
+wave1,2011,baseline_core,data/charls/raw/2011/<charls-wave1-core-file>,core,true,pending,,CHARLS portal application waiting for review on 2026-06-13; keep raw files local and ignored after approval.
 wave2,2013,followup_core,data/charls/raw/2013/<charls-wave2-core-file>,core,true,not_downloaded,,Required only after the S1 longitudinal estimand selects Wave 2.
 wave3,2015,followup_core,data/charls/raw/2015/<charls-wave3-core-file>,core,false,not_downloaded,,Optional until declared in targetWaves.
 wave4,2018,followup_core,data/charls/raw/2018/<charls-wave4-core-file>,core,false,not_downloaded,,Optional until declared in targetWaves.
-wave5,2020,followup_core,data/charls/raw/2020/<charls-wave5-core-file>,core,false,not_downloaded,,Optional until declared in targetWaves and access terms are confirmed.
+wave5,2020,followup_core,data/charls/raw/2020/<charls-wave5-core-file>,core,false,pending,,CHARLS portal application waiting for review on 2026-06-13; optional until declared in targetWaves and access terms are confirmed.

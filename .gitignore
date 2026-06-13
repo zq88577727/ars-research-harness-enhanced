@@ -17,6 +17,7 @@ data/charls/raw/
 data/charls/codebooks/
 examples/*/charls_codebook_import_rehearsal.md
 data/gbd/raw/
+examples/gbd-cvd-china-global-instance/source_exports/*.csv
 data/**/restricted/
 data/**/sensitive/
 NHANES_SCI投稿包_可见版/

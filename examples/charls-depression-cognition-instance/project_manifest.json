@@ -20,10 +20,15 @@
   "interpretationBoundary": "CHARLS longitudinal associations require explicit wave linkage, attrition, missingness, weight, and temporality decisions before manuscript claims.",
   "accessStatus": {
     "accountRegistered": true,
-    "dataApplicationSubmitted": false,
+    "dataApplicationSubmitted": true,
     "dataApproved": false,
-    "rawFilesDownloaded": false
+    "rawFilesDownloaded": false,
+    "portalStatusDate": "2026-06-13",
+    "portalReviewStatus": "waiting-for-review",
+    "submittedWaves": ["2008-pilot", "2011-wave1", "2020-wave5"],
+    "pendingOrUnconfirmedWaves": ["2013-wave2", "2015-wave3", "2018-wave4", "harmonized-charls"]
   },
+  "externalBlockers": "examples/charls-depression-cognition-instance/external_blockers.md",
   "analysisRequirements": [
     "wave linkage key confirmed",
     "sample eligibility criteria specified",

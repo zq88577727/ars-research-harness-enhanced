@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "gbd-provenance-v1",
+  "project": "examples/gbd-cvd-china-global-instance",
+  "analysisManifest": "examples/gbd-cvd-china-global-instance/gbd_cvd_analysis_manifest.json",
+  "queryManifest": "examples/gbd-cvd-china-global-instance/gbd_cvd_query_manifest.csv",
+  "queryRowCount": 16,
+  "analyses": {
+    "cvdChinaGlobal": {
+      "sourceFile": "examples/gbd-cvd-china-global-instance/source_exports/gbd_cvd_china_global_1990_2023.csv",
+      "sourceSha256": "04fe316583e715d970af720be23087e62011aefbf74f8ff7b2a1de66da96b763",
+      "sourceRowCount": 32,
+      "sourceCitationFile": "examples/gbd-cvd-china-global-instance/source_exports/gbd_cvd_citation.txt",
+      "sourceCitationSha256": "4f01bb224f7f08e792758770cada651494ee8df008e3787a4906f08b8d0885cd",
+      "queryRowCount": 16,
+      "queryDimensions": [
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "China",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Rate",
+          "cause": "Cardiovascular diseases",
+          "location": "Global",
+          "age": "Age-standardized",
+          "sex": "Both",
+          "year": "2023"
+        }
+      ],
+      "outputCsv": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "outputCsvSha256": "88b4431517e4794731c05eec5e00377eadfa9ec1d6c74c8d8fdc7196fd7a45cc",
+      "outputMarkdown": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.md",
+      "outputMarkdownSha256": "e14cd9b408e9d5f4efa4b84eb9664a5c10c6e737f5ae879d7b8d809883d18b0c",
+      "claimRegistryOutput": "examples/gbd-cvd-china-global-instance/claim_registry.source_backed.json",
+      "claimRegistryOutputSha256": "7db3897f9e795af89a5e67608771a94f11f7edc80823998452339230a73a69e7",
+      "downloadSourceType": "manual-gbd-results-tool-export",
+      "interpretationBoundary": "Disease-specific descriptive GBD burden analysis only. Counts and age-standardized rates must remain separate, uncertainty intervals must be retained, and no causal, clinical, mechanistic, or policy-effect claim is allowed."
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "gbd-query-profile-v1",
+  "profileStatus": "source-backed-manuscript-candidate",
+  "selectedCandidateId": "gbd-cvd-china-global-1990-2023",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "queryManifest": "examples/gbd-cvd-china-global-instance/gbd_cvd_query_manifest.csv",
+  "claimRegistry": "examples/gbd-cvd-china-global-instance/claim_registry.json",
+  "reportingFrame": {
+    "guideline": "GATHER-style transparency audit",
+    "guidelineUrl": "https://www.equator-network.org/reporting-guidelines/gather-statement/",
+    "applicability": "Disease-specific GBD burden estimates across locations and time.",
+    "reviewStatus": "The query design has a matching source export and provenance-backed derived summary. It is manuscript-candidate-ready but not submission-ready until citation, reuse, journal wording, and human review gates pass."
+  },
+  "release": {
+    "gbdRelease": "GBD 2023",
+    "versionId": "8352",
+    "releaseRecorded": true,
+    "sourceChecked": "2026-06-11",
+    "exportStatus": "source-export-present"
+  },
+  "dimensions": {
+    "cause": "Cardiovascular diseases",
+    "locations": ["China", "Global"],
+    "ageStrategies": ["All ages counts", "Age-standardized rates"],
+    "sex": "Both",
+    "years": ["1990", "2023"],
+    "measures": ["Deaths", "DALYs"],
+    "metrics": ["Number", "Rate"]
+  },
+  "metricPolicy": {
+    "allowedMetrics": ["Number", "Rate"],
+    "metricSeparationRequired": true,
+    "rateCountPercentMixingBoundary": "All-age counts and age-standardized rates must be written as separate claims. Do not combine number and rate changes in one sentence unless the transformation is explicitly defined."
+  },
+  "ageStandardization": {
+    "status": "planned-age-standardized-rates-plus-all-age-counts",
+    "evidenceRequirement": "Age-standardized rows must be present for rate trend claims. All ages rows may support burden counts only.",
+    "allAgesInterpretationRule": "All ages is a count category for this scaffold, not an age-standardized estimate.",
+    "boundary": "Do not compare China and global all-age rates unless both rows are confirmed to have the same age category and metric; prefer age-standardized rates for location comparisons."
+  },
+  "uncertaintyIntervalPolicy": {
+    "sourceFieldsRequired": ["lower", "upper"],
+    "narrativePolicy": "Every numeric CVD claim must carry uncertainty intervals from the exact GBD export rows. Avoid confidence-interval, p-value, causal, mechanism, or policy-effect wording.",
+    "reviewReadyRule": "Each claim must identify measure, metric, cause, location, age, sex, year, val, lower, and upper.",
+    "submissionBoundary": "Submission-ready claims require journal-specific UI wording and source-row traceability."
+  },
+  "citationPolicy": {
+    "source": "Institute for Health Metrics and Evaluation (IHME), Global Health Data Exchange (GHDx), GBD Results Tool",
+    "resultsToolUrl": "https://vizhub.healthdata.org/gbd-results/",
+    "gbdLandingPageUrl": "https://www.healthdata.org/gbd",
+    "dataUseAgreementUrl": "https://www.healthdata.org/Data-tools-practices/data-practices/ihme-free-charge-non-commercial-user-agreement",
+    "termsUrl": "https://www.healthdata.org/data-tools-practices/data-practices/terms-and-conditions",
+    "accessDate": "2026-06-11",
+    "citationStatus": "source-citation-recorded",
+    "citationReviewStatus": "reviewed-from-export-citation-human-confirmation-required",
+    "exportCitationTextFile": "examples/gbd-cvd-china-global-instance/source_exports/gbd_cvd_citation.txt",
+    "exportCitationTextSha256": "4f01bb224f7f08e792758770cada651494ee8df008e3787a4906f08b8d0885cd",
+    "minimumCitationFields": ["data steward", "GBD release", "version_id", "tool/export route", "access date", "query dimensions", "measure", "metric", "age category", "uncertainty interval fields"],
+    "manuscriptCitationDraft": "Institute for Health Metrics and Evaluation (IHME). GBD Results Tool. Global Health Data Exchange. GBD 2023, version_id 8352. Accessed 2026-06-11. https://vizhub.healthdata.org/gbd-results/",
+    "exportCitationDraft": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/.",
+    "recommendedManuscriptCitation": "Global Burden of Disease Collaborative Network. Global Burden of Disease Study 2023 (GBD 2023) Results. Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2024. Available from https://vizhub.healthdata.org/gbd-results/. Accessed 2026-06-11.",
+    "citationReviewFile": "examples/gbd-cvd-china-global-instance/gbd_cvd_citation_policy_review.md",
+    "finalSubmissionRequirement": "Confirm journal/IHME wording and reuse terms before submission-ready status."
+  },
+  "reuseBoundary": {
+    "status": "source-export-terms-review-required",
+    "reviewStatus": "reviewed-human-confirmation-required",
+    "rule": "Do not commit large GBD exports or package derivative datasets until IHME/GHDx terms are confirmed for the exact export.",
+    "repositoryPolicy": "This scaffold may be committed because it contains query metadata only. Source exports should remain small, provenance-tracked, and terms-compliant.",
+    "reviewFile": "examples/gbd-cvd-china-global-instance/gbd_cvd_reuse_review.md",
+    "sourceExportSizeBytes": 4953,
+    "derivedSummarySizeBytes": 1763,
+    "repositoryDecision": "This instance keeps a small manually exported CSV plus derived aggregate summary as a review fixture, but final public release requires human confirmation of IHME/GHDx reuse terms.",
+    "releasePackagingDecision": "Do not package the raw source export into release artifacts until reuse is confirmed; derived aggregate outputs may be packaged only with citation and reuse review notes.",
+    "submissionBoundary": "Submission-ready status requires human confirmation that the exact export, derived tables, and manuscript wording comply with IHME/GHDx and journal requirements."
+  },
+  "blockingRules": [
+    "Missing CVD-specific source export blocks numeric claims.",
+    "Missing age-standardized rows blocks age-standardized trend or location-comparison claims.",
+    "Missing lower/upper source fields blocks uncertainty-aware GBD claims.",
+    "Metric type ambiguity blocks rate/count comparisons.",
+    "Missing citation or reuse confirmation blocks submission packaging."
+  ]
+}

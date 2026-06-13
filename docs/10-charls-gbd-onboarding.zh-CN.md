@@ -206,6 +206,27 @@ CHARLS 重点风险：
 - 生物标志物、问卷变量、随访变量版本差异。
 - 数据使用条款和引用要求。
 
+### CHARLS 外部审核 blocker
+
+如果 CHARLS portal 显示“申请正在等待审核”，该状态应记录为外部 blocker，而不是
+项目失败。当前 `examples/charls-depression-cognition-instance/` 已记录：
+
+- 2008 CHARLS Pilot、2011 CHARLS Wave1、2020 CHARLS Wave5：2026-06-13
+  显示申请正在等待审核；
+- 2013 Wave2、2015 Wave3、2018 Wave4、Harmonized CHARLS：仍需申请或确认状态。
+
+在审核未通过前，不得把 CHARLS 实例写成完成分析，也不得伪造 codebook、变量映射、
+S3 结果或投稿结论。可以继续推进不依赖受限原始数据的工作，包括 S0/S1/S2 设计门禁、
+变量映射决策模板、非因果表述边界、NHANES/GBD 工作流、claim review、CI 和文档治理。
+
+审核通过后，再回到 P6-8/P6-9：
+
+1. 将官方 codebook/questionnaire 放入 `data/charls/codebooks/`；
+2. 运行 `rehearse_charls_codebook_import.py --require-input`；
+3. 将本地 raw data 放入 `data/charls/raw/` 的忽略目录；
+4. 运行 `validate_charls_local_dry_run.py --require-local-data`；
+5. 只有 S1/S2 `--require-ready` 通过后，才允许进入真实 CHARLS 分析。
+
 ## GBD
 
 适用场景：

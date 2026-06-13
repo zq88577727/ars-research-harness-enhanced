@@ -1,69 +1,106 @@
 {
-  "id": "gbd-burden-minimal-demo-claim-registry",
-  "manuscript": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
+  "id": "gbd-global-all-cause-burden-claim-registry",
+  "schemaVersion": "manuscript-claim-registry-v1",
+  "manuscript": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
+  "researchQuestion": "Can a minimal GBD Results-style export be traced from query dimensions to derived burden claims without being treated as a final manuscript topic?",
+  "targetStatement": "This fixture-only GBD demo preserves release, version, query dimensions, metric type, uncertainty intervals, and reuse/citation boundaries for workflow validation only.",
+  "scopeBoundary": "Fixture-only repository scaffold. Real manuscript work has moved to examples/gbd-cvd-china-global-instance/. Do not infer causality, mechanisms, clinical diagnoses, intervention effects, or country-specific policy conclusions from this default global all-cause endpoint.",
+  "claimDispositionPolicy": {
+    "internal-retain": "May remain in the repository as a traceability or teaching check, but must not be used as a manuscript result.",
+    "candidate-manuscript-claim": "May be drafted as a manuscript claim only after citation, reuse, query profile, uncertainty interval, and journal-specific wording gates pass.",
+    "upgrade-before-submission": "Must be replaced, removed, or promoted with source-complete evidence before real manuscript submission."
+  },
   "claims": [
     {
       "id": "gbd-demo-deaths",
-      "tier": "core",
+      "tier": "background",
       "type": "gbd-number-estimate",
+      "claimRole": "teaching-fixture",
+      "submissionDisposition": "internal-retain",
       "expectedText": "60,043,088.86 deaths",
       "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
       "sourceFields": ["Deaths", "Number", "Global", "All causes", "2023"],
-      "interpretationBoundary": "GBD Results-style teaching fixture; replace with approved export before manuscript use"
+      "interpretationBoundary": "Teaching fixture retained only to test traceability; not a manuscript result."
     },
     {
       "id": "gbd-demo-dalys",
-      "tier": "core",
+      "tier": "background",
       "type": "gbd-number-estimate",
+      "claimRole": "teaching-fixture",
+      "submissionDisposition": "internal-retain",
       "expectedText": "2,799,135,266.30 DALYs",
       "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
       "sourceFields": ["DALYs", "Number", "Global", "All causes", "2023"],
-      "interpretationBoundary": "GBD Results-style teaching fixture; replace with approved export before manuscript use"
+      "interpretationBoundary": "Teaching fixture retained only to test traceability; not a manuscript result."
     },
     {
       "id": "gbd-demo-derived-ratio",
-      "tier": "supporting",
+      "tier": "background",
       "type": "derived-check",
+      "claimRole": "teaching-fixture-derived-check",
+      "submissionDisposition": "internal-retain",
       "expectedText": "46.62 DALYs per death",
       "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.csv",
       "sourceFields": ["dalys_per_death"],
-      "interpretationBoundary": "Derived traceability check, not an epidemiologic interpretation"
+      "interpretationBoundary": "Internal arithmetic check for fixture reproducibility; not an epidemiologic interpretation."
     },
     {
       "id": "gbd-demo-boundary",
       "tier": "core",
       "type": "interpretation-boundary",
+      "claimRole": "teaching-fixture-boundary",
+      "submissionDisposition": "internal-retain",
       "expectedText": "workflow fixture, not a publishable disease-burden estimate",
       "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
       "sourceFields": ["Boundary paragraph"],
-      "interpretationBoundary": "Mandatory scaffold-to-production boundary"
+      "interpretationBoundary": "Required repository boundary explaining why fixture rows are not manuscript claims."
     },
     {
-      "id": "gbd-real-default-deaths",
+      "id": "gbd-global-2023-deaths",
       "tier": "core",
       "type": "gbd-number-estimate",
-      "expectedText": "60,043,088.86 deaths",
+      "claimRole": "candidate-manuscript-result",
+      "submissionDisposition": "internal-retain",
+      "expectedText": "60,043,088.86 deaths (UI 59,045,447.00-61,239,779.90)",
       "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
-      "sourceFields": ["Deaths", "Number", "Global", "All causes", "2023", "version_id 8352"],
-      "interpretationBoundary": "Real GBD Results Tool default endpoint output; verify query dimensions and citation before manuscript use"
+      "sourceFields": ["GBD 2023", "version_id 8352", "Deaths", "Number", "Global", "All causes", "All ages", "Both", "2023", "val", "lower", "upper"],
+      "metricBoundary": "Number estimate only; do not combine with rate or percent claims without explicit wording.",
+      "interpretationBoundary": "Fixture-only real default endpoint check retained for traceability; not a manuscript result after CVD targeted scaffold selection."
     },
     {
-      "id": "gbd-real-default-rate-change",
+      "id": "gbd-global-2023-dalys",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "claimRole": "candidate-manuscript-result",
+      "submissionDisposition": "internal-retain",
+      "expectedText": "2,799,135,266.30 DALYs (UI 2,566,897,218.51-3,084,150,438.57)",
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
+      "sourceFields": ["GBD 2023", "version_id 8352", "DALYs", "Number", "Global", "All causes", "All ages", "Both", "2023", "val", "lower", "upper"],
+      "metricBoundary": "Number estimate only; DALY interpretation must remain descriptive unless a manuscript-specific analytic frame is added.",
+      "interpretationBoundary": "Fixture-only real default endpoint check retained for traceability; not a manuscript result after CVD targeted scaffold selection."
+    },
+    {
+      "id": "gbd-global-death-rate-change-1990-2023",
       "tier": "supporting",
-      "type": "derived-check",
-      "expectedText": "a -17.14% relative change",
+      "type": "derived-change",
+      "claimRole": "candidate-manuscript-result",
+      "submissionDisposition": "internal-retain",
+      "expectedText": "a -17.14% relative change in the endpoint's rate scale",
       "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.csv",
-      "sourceFields": ["death_rate_percent_change_1990_2023"],
-      "interpretationBoundary": "Derived endpoint-scale check; not a standalone epidemiologic conclusion"
+      "sourceFields": ["death_rate_1990", "death_rate_2023", "death_rate_percent_change_1990_2023"],
+      "metricBoundary": "Derived from endpoint rate values; not age-standardized and not a causal trend explanation.",
+      "interpretationBoundary": "Fixture-only real default endpoint trend check retained for traceability; not a manuscript result after CVD targeted scaffold selection."
     },
     {
-      "id": "gbd-real-default-boundary",
+      "id": "gbd-global-all-cause-scope-boundary",
       "tier": "core",
       "type": "interpretation-boundary",
-      "expectedText": "real GBD Results Tool endpoint output used for workflow demonstration",
+      "claimRole": "candidate-manuscript-boundary",
+      "submissionDisposition": "internal-retain",
+      "expectedText": "A submission-ready GBD manuscript still requires source citation",
       "sourceFile": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
       "sourceFields": ["Boundary paragraph"],
-      "interpretationBoundary": "Real data source requires citation, query documentation, and reuse-term confirmation before submission"
+      "interpretationBoundary": "Retained as a repository boundary explaining why all-cause default endpoint claims are no longer promoted beyond fixture-only status."
     }
   ]
 }

@@ -42,6 +42,15 @@ COMMANDS = [
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/gbd-burden-minimal-demo"],
     ["python3", "scripts/fetch_gbd_export.py", "--dry-run"],
     ["python3", "harness/validators/validate_gbd_minimal_demo.py"],
+    ["python3", "harness/validators/validate_gbd_submission_readiness.py", "--require-topic-upgrade-decision"],
+    ["python3", "harness/validators/validate_gbd_targeted_scaffold.py"],
+    ["python3", "scripts/generate_gbd_targeted_results.py", "--project", "examples/gbd-cvd-china-global-instance", "--dry-run"],
+    ["python3", "harness/scripts/apply_gbd_cvd_claim_review_decisions.py"],
+    ["python3", "harness/scripts/generate_gbd_cvd_claim_review_helper.py"],
+    ["python3", "harness/validators/validate_gbd_cvd_manuscript_fragment.py"],
+    ["python3", "harness/validators/validate_gbd_cvd_submission_package.py", "--allow-missing-source-export"],
+    ["python3", "harness/validators/validate_gbd_public_release_safety.py"],
+    ["python3", "harness/validators/validate_gbd_cvd_submission_readiness.py", "--require-manuscript-review-ready"],
     ["python3", "harness/scripts/generate_readiness_report.py"],
 ]
 

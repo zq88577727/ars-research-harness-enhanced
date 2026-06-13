@@ -1,0 +1,127 @@
+{
+  "id": "gbd-cvd-china-global-claim-registry",
+  "schemaVersion": "manuscript-claim-registry-v1",
+  "manuscript": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.md",
+  "selectedCandidateId": "gbd-cvd-china-global-1990-2023",
+  "researchQuestion": "How did the cardiovascular disease burden in China compare with the global burden from 1990 to 2023 in GBD 2023?",
+  "targetStatement": "This descriptive GBD analysis will compare cardiovascular disease deaths and DALYs for China and the global population using all-age counts and age-standardized rates after a matching GBD export is verified.",
+  "scopeBoundary": "Targeted scaffold only until source exports and provenance exist. Do not infer causality, mechanisms, clinical diagnoses, intervention effects, or policy effects from modeled GBD estimates.",
+  "claimDispositionPolicy": {
+    "pending-export": "Claim skeleton is allowed for study design but must not appear as a numeric manuscript result until source rows, derived outputs, and provenance exist.",
+    "candidate-manuscript-claim": "May be drafted only after export-backed source fields, UI, citation, reuse, and query-profile gates pass.",
+    "submission-ready": "Allowed only after strict submission gate and human citation/reuse review pass."
+  },
+  "claims": [
+    {
+      "id": "gbd-cvd-china-global-rq-boundary",
+      "tier": "core",
+      "type": "research-question-boundary",
+      "claimRole": "targeted-manuscript-boundary",
+      "submissionDisposition": "candidate-manuscript-claim",
+      "expectedText": "cardiovascular disease burden in China compared with the global burden from 1990 to 2023",
+      "sourceFile": "examples/gbd-cvd-china-global-instance/gbd_cvd_query_manifest.csv",
+      "sourceFields": [
+        "cause",
+        "location",
+        "age",
+        "sex",
+        "year",
+        "measure",
+        "metric"
+      ],
+      "interpretationBoundary": "Descriptive disease-burden scope only; no causal, clinical, mechanism, or policy-effect claims."
+    },
+    {
+      "id": "gbd-cvd-deaths-count-change-china",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "claimRole": "source-backed-candidate-result",
+      "submissionDisposition": "candidate-manuscript-claim",
+      "expectedText": "All-age CVD deaths in China changed from 3,303,961.86 (UI 2,797,927.14-3,795,995.79) in 1990 to 4,501,842.59 in 2023 (UI 3,855,077.51-5,013,029.84).",
+      "sourceFile": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "sourceFields": [
+        "location",
+        "measure",
+        "metric",
+        "count_age",
+        "rate_age",
+        "1990",
+        "2023",
+        "val",
+        "lower",
+        "upper"
+      ],
+      "metricBoundary": "Number estimate only; do not describe as rate or age-standardized.",
+      "interpretationBoundary": "Source-backed descriptive GBD candidate claim; final citation, reuse, journal wording, and strict submission gate still required."
+    },
+    {
+      "id": "gbd-cvd-dalys-count-change-china",
+      "tier": "core",
+      "type": "gbd-number-estimate",
+      "claimRole": "source-backed-candidate-result",
+      "submissionDisposition": "candidate-manuscript-claim",
+      "expectedText": "All-age CVD DALYs in China changed from 81,454,987.01 (UI 68,389,231.42-94,748,209.77) in 1990 to 89,327,031.66 in 2023 (UI 78,881,688.75-97,824,746.45).",
+      "sourceFile": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "sourceFields": [
+        "location",
+        "measure",
+        "metric",
+        "count_age",
+        "rate_age",
+        "1990",
+        "2023",
+        "val",
+        "lower",
+        "upper"
+      ],
+      "metricBoundary": "Number estimate only; do not describe as rate or age-standardized.",
+      "interpretationBoundary": "Source-backed descriptive GBD candidate claim; final citation, reuse, journal wording, and strict submission gate still required."
+    },
+    {
+      "id": "gbd-cvd-death-rate-comparison-china-global",
+      "tier": "core",
+      "type": "gbd-age-standardized-rate-comparison",
+      "claimRole": "source-backed-candidate-result",
+      "submissionDisposition": "candidate-manuscript-claim",
+      "expectedText": "The age-standardized CVD death rate changed from 496.65 (UI 420.03-571.17) to 208.03 (UI 178.08-233.08) in China and from 375.51 (UI 346.66-401.06) to 214.94 (UI 194.23-229.57) globally.",
+      "sourceFile": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "sourceFields": [
+        "location",
+        "measure",
+        "metric",
+        "count_age",
+        "rate_age",
+        "1990",
+        "2023",
+        "val",
+        "lower",
+        "upper"
+      ],
+      "metricBoundary": "Age-standardized rate only; keep separate from all-age count claims.",
+      "interpretationBoundary": "Source-backed descriptive GBD candidate claim; final citation, reuse, journal wording, and strict submission gate still required."
+    },
+    {
+      "id": "gbd-cvd-daly-rate-comparison-china-global",
+      "tier": "supporting",
+      "type": "gbd-age-standardized-rate-comparison",
+      "claimRole": "source-backed-candidate-result",
+      "submissionDisposition": "candidate-manuscript-claim",
+      "expectedText": "The age-standardized CVD DALY rate changed from 10065.67 (UI 8607.08-11541.62) to 4059.34 (UI 3593.00-4444.04) in China and from 8061.62 (UI 7403.37-8632.63) to 4863.82 (UI 4460.87-5192.31) globally.",
+      "sourceFile": "examples/gbd-cvd-china-global-instance/results/gbd_cvd_china_global_summary.csv",
+      "sourceFields": [
+        "location",
+        "measure",
+        "metric",
+        "count_age",
+        "rate_age",
+        "1990",
+        "2023",
+        "val",
+        "lower",
+        "upper"
+      ],
+      "metricBoundary": "Age-standardized rate only; keep separate from all-age count claims.",
+      "interpretationBoundary": "Source-backed descriptive GBD candidate claim; final citation, reuse, journal wording, and strict submission gate still required."
+    }
+  ]
+}

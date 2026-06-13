@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import sys
 from decimal import Decimal, ROUND_HALF_UP
@@ -20,6 +21,14 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def matches(row: dict[str, str], dimensions: dict[str, str]) -> bool:
     return all(row.get(key) == value for key, value in dimensions.items() if value)
 
@@ -30,6 +39,161 @@ def find_row(rows: list[dict[str, str]], dimensions: dict[str, str], measure: di
     if year:
         filters["year"] = year
     return next((row for row in rows if matches(row, filters)), None)
+
+
+def query_rows_for_source(query_rows: list[dict[str, str]], source_file: str) -> list[dict[str, str]]:
+    return [row for row in query_rows if row.get("export_file") == source_file]
+
+
+def query_row_dimensions(row: dict[str, str]) -> dict[str, str]:
+    return {
+        key: row.get(key, "")
+        for key in ["gbd_release", "measure", "metric", "cause", "location", "age", "sex", "year"]
+        if row.get(key)
+    }
+
+
+def validate_provenance(
+    root: Path,
+    analysis_manifest: dict,
+    query_rows: list[dict[str, str]],
+    analyses: dict,
+    failures: list[dict],
+) -> dict:
+    provenance_file = analysis_manifest.get("provenanceFile")
+    if not provenance_file:
+        failures.append({"check": "provenance_file_declared"})
+        return {}
+    provenance_path = root / provenance_file
+    if not provenance_path.exists():
+        failures.append({"check": "provenance_file_exists", "path": provenance_file})
+        return {}
+    provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+    if provenance.get("schemaVersion") != "gbd-provenance-v1":
+        failures.append({"check": "provenance_schema", "actual": provenance.get("schemaVersion")})
+    if provenance.get("queryRowCount") != len(query_rows):
+        failures.append({"check": "provenance_query_row_count", "actual": provenance.get("queryRowCount"), "expected": len(query_rows)})
+    provenance_analyses = provenance.get("analyses", {})
+    for label, config in analyses.items():
+        item = provenance_analyses.get(label)
+        if not item:
+            failures.append({"check": "provenance_analysis_present", "analysis": label})
+            continue
+        source = root / config["sourceFile"]
+        output_csv = root / config["outputCsv"]
+        output_md = root / config["outputMarkdown"]
+        if item.get("sourceFile") != config["sourceFile"]:
+            failures.append({"check": "provenance_source_file", "analysis": label})
+        if source.exists() and item.get("sourceSha256") != sha256_file(source):
+            failures.append({"check": "provenance_source_hash", "analysis": label})
+        if output_csv.exists() and item.get("outputCsvSha256") != sha256_file(output_csv):
+            failures.append({"check": "provenance_output_csv_hash", "analysis": label})
+        if output_md.exists() and item.get("outputMarkdownSha256") != sha256_file(output_md):
+            failures.append({"check": "provenance_output_markdown_hash", "analysis": label})
+        expected_query_count = len(query_rows_for_source(query_rows, config["sourceFile"]))
+        if item.get("queryRowCount") != expected_query_count:
+            failures.append(
+                {
+                    "check": "provenance_analysis_query_row_count",
+                    "analysis": label,
+                    "actual": item.get("queryRowCount"),
+                    "expected": expected_query_count,
+                }
+            )
+        if item.get("interpretationBoundary") != config.get("interpretationBoundary"):
+            failures.append({"check": "provenance_interpretation_boundary", "analysis": label})
+        expected_source_type = config.get("download", {}).get("sourceType", "local-fixture")
+        if item.get("downloadSourceType") != expected_source_type:
+            failures.append({"check": "provenance_download_source_type", "analysis": label})
+    return provenance
+
+
+def validate_query_profile(
+    root: Path,
+    manifest: dict,
+    analysis_manifest: dict,
+    query_rows: list[dict[str, str]],
+    failures: list[dict],
+) -> dict:
+    query_profile = analysis_manifest.get("queryProfile")
+    if not query_profile:
+        failures.append({"check": "query_profile_declared"})
+        return {}
+    if manifest.get("queryProfile") != query_profile:
+        failures.append({"check": "query_profile_manifest_link", "actual": manifest.get("queryProfile"), "expected": query_profile})
+    profile_path = root / query_profile
+    if not profile_path.exists():
+        failures.append({"check": "query_profile_exists", "path": query_profile})
+        return {}
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    if profile.get("schemaVersion") != "gbd-query-profile-v1":
+        failures.append({"check": "query_profile_schema", "actual": profile.get("schemaVersion")})
+    release = profile.get("release", {})
+    if not release.get("releaseRecorded"):
+        failures.append({"check": "query_profile_release_recorded"})
+    real_config = analysis_manifest.get("analyses", {}).get("realDefault", {})
+    real_dimensions = real_config.get("dimensionFilter", {})
+    if release.get("gbdRelease") != real_dimensions.get("gbd_release"):
+        failures.append({"check": "query_profile_gbd_release", "actual": release.get("gbdRelease"), "expected": real_dimensions.get("gbd_release")})
+    if release.get("versionId") != real_dimensions.get("version_id"):
+        failures.append({"check": "query_profile_version_id", "actual": release.get("versionId"), "expected": real_dimensions.get("version_id")})
+
+    dimensions = profile.get("dimensions", {})
+    for row in query_rows:
+        for field in ["cause", "location", "age", "sex"]:
+            if row.get(field) != dimensions.get(field):
+                failures.append({"check": "query_profile_dimension_match", "field": field, "actual": row.get(field), "expected": dimensions.get(field)})
+        if row.get("year") not in set(dimensions.get("years", [])):
+            failures.append({"check": "query_profile_year_allowed", "year": row.get("year")})
+
+    metric_policy = profile.get("metricPolicy", {})
+    allowed_metrics = set(metric_policy.get("allowedMetrics", []))
+    query_metrics = {row.get("metric") for row in query_rows if row.get("metric")}
+    if not query_metrics <= allowed_metrics:
+        failures.append({"check": "query_profile_metric_allowed", "actual": sorted(query_metrics), "allowed": sorted(allowed_metrics)})
+    if not metric_policy.get("metricSeparationRequired"):
+        failures.append({"check": "query_profile_metric_separation_required"})
+    if not metric_policy.get("rateCountPercentMixingBoundary"):
+        failures.append({"check": "query_profile_metric_boundary"})
+
+    age_standardization = profile.get("ageStandardization", {})
+    if age_standardization.get("status") not in {"not-age-standardized", "age-standardized", "mixed-requires-stratified-labeling"}:
+        failures.append({"check": "query_profile_age_standardization_status", "actual": age_standardization.get("status")})
+    if not age_standardization.get("boundary"):
+        failures.append({"check": "query_profile_age_standardization_boundary"})
+
+    ui_policy = profile.get("uncertaintyIntervalPolicy", {})
+    required_ui_fields = set(ui_policy.get("sourceFieldsRequired", []))
+    if not {"lower", "upper"} <= required_ui_fields:
+        failures.append({"check": "query_profile_ui_fields"})
+    for source_file in {row.get("export_file") for row in query_rows if row.get("export_file")}:
+        source_path = root / source_file
+        if source_path.exists():
+            rows = read_csv(source_path)
+            if rows:
+                missing_ui = sorted(required_ui_fields - set(rows[0]))
+                if missing_ui:
+                    failures.append({"check": "query_profile_source_ui_columns", "source": source_file, "missing": missing_ui})
+                elif any(not row.get("lower") or not row.get("upper") for row in rows):
+                    failures.append({"check": "query_profile_source_ui_values", "source": source_file})
+    if not ui_policy.get("submissionBoundary"):
+        failures.append({"check": "query_profile_ui_submission_boundary"})
+
+    citation = profile.get("citationPolicy", {})
+    required_citation_fields = set(citation.get("minimumCitationFields", []))
+    if not {"data steward", "GBD release", "tool/export route", "access date", "query dimensions"} <= required_citation_fields:
+        failures.append({"check": "query_profile_citation_minimum_fields"})
+    if citation.get("citationStatus") not in {"required-before-submission", "manuscript-review-ready", "complete", "submission-ready"}:
+        failures.append({"check": "query_profile_citation_status", "actual": citation.get("citationStatus")})
+    if not citation.get("resultsToolUrl"):
+        failures.append({"check": "query_profile_results_tool_url"})
+
+    reuse = profile.get("reuseBoundary", {})
+    if not reuse.get("rule") or not reuse.get("repositoryPolicy"):
+        failures.append({"check": "query_profile_reuse_boundary"})
+    if not profile.get("blockingRules"):
+        failures.append({"check": "query_profile_blocking_rules"})
+    return profile
 
 
 def validate_analysis_config(root: Path, config: dict, failures: list[dict], label: str) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
@@ -101,12 +265,17 @@ def validate(root: Path, demo: Path) -> dict:
     real_config = analyses.get("realDefault")
     if not fixture_config:
         failures.append({"check": "analysis_manifest_fixture"})
-    if not real_config and manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export":
+    real_export_statuses = {"minimal-demo-plus-real-default-export", "fixture-only-plus-real-default-export"}
+    if not real_config and manifest.get("capabilityStatus") in real_export_statuses:
         failures.append({"check": "analysis_manifest_real_default"})
-    if manifest.get("capabilityStatus") not in {"minimal-demo", "minimal-demo-plus-real-default-export"}:
+    if manifest.get("capabilityStatus") not in {"minimal-demo", "minimal-demo-plus-real-default-export", "fixture-only-plus-real-default-export"}:
         failures.append({"check": "capability_status", "actual": manifest.get("capabilityStatus")})
     if manifest.get("analysisManifest") != str(analysis_manifest_path.relative_to(root)):
         failures.append({"check": "analysis_manifest_link", "actual": manifest.get("analysisManifest")})
+    query_profile = validate_query_profile(root, manifest, analysis_manifest, read_csv(query_path) if query_path.exists() else [], failures)
+    provenance_file = analysis_manifest.get("provenanceFile")
+    if manifest.get("provenanceFile") != provenance_file:
+        failures.append({"check": "provenance_manifest_link", "actual": manifest.get("provenanceFile"), "expected": provenance_file})
     if not manifest.get("teachingFixture"):
         failures.append({"check": "teaching_fixture_declared"})
 
@@ -121,6 +290,14 @@ def validate(root: Path, demo: Path) -> dict:
             for column in REQUIRED_QUERY_COLUMNS:
                 if not row.get(column):
                     failures.append({"check": "query_dimension_filled", "column": column, "row": row.get("measure")})
+            source_file = row.get("export_file", "")
+            source_path = root / source_file
+            if source_file and source_path.exists():
+                source_rows = read_csv(source_path)
+                if not any(matches(source_row, query_row_dimensions(row)) for source_row in source_rows):
+                    failures.append({"check": "query_row_matches_source", "source": source_file, "dimensions": query_row_dimensions(row)})
+
+    provenance = validate_provenance(root, analysis_manifest, query_rows, analyses, failures)
 
     manuscript_parts = []
     if fixture_config:
@@ -152,7 +329,7 @@ def validate(root: Path, demo: Path) -> dict:
         if (root / fixture_config["outputMarkdown"]).exists():
             manuscript_parts.append((root / fixture_config["outputMarkdown"]).read_text(encoding="utf-8"))
 
-    if manifest.get("capabilityStatus") == "minimal-demo-plus-real-default-export" and real_config:
+    if manifest.get("capabilityStatus") in real_export_statuses and real_config:
         real_rows, real_summary_rows = validate_analysis_config(root, real_config, failures, "realDefault")
         if real_rows:
             for field in ["source_endpoint", "downloaded_on", "source_note"]:
@@ -199,6 +376,10 @@ def validate(root: Path, demo: Path) -> dict:
         "ok": not failures,
         "demo": str(demo),
         "claimCount": len(registry.get("claims", [])),
+        "queryProfile": analysis_manifest.get("queryProfile"),
+        "queryProfileStatus": query_profile.get("profileStatus") if query_profile else None,
+        "provenanceFile": analysis_manifest.get("provenanceFile"),
+        "provenanceAnalysisCount": len(provenance.get("analyses", {})) if provenance else 0,
         "claimChecks": claim_checks,
         "failures": failures,
     }

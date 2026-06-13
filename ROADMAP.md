@@ -21,6 +21,10 @@ hardening.
    approved data, variable/query maps, S3 outputs, and S7 audits exist.
 4. Reduce drift between data source manifests, project templates, and example
    manifests by treating `data_sources/*.json` as the source-of-truth layer.
+5. Treat CHARLS portal approval as an external blocker: continue NHANES, GBD,
+   claim-review, CI, and documentation hardening while waiting for approved
+   CHARLS files, then resume P6-8/P6-9 after local codebook and raw data are
+   available.
 
 ## Production-Hardening Targets
 
@@ -29,7 +33,7 @@ hardening.
 2. Add a stronger claim extraction workflow that classifies candidate numeric
    sentences as `core`, `supporting`, `background`, or `non-claim`.
 3. Add one real CHARLS analysis walkthrough after data-use requirements are
-   confirmed by the user.
+   confirmed by the user and the current portal review blocker is closed.
 4. Add one real GBD query-to-table-to-figure walkthrough using a documented
    Results Tool export or approved API route.
 5. Improve artifact governance by moving large generated packages to releases

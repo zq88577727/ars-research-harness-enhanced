@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "gbd-provenance-v1",
+  "analysisManifest": "examples/gbd-burden-minimal-demo/gbd_analysis_manifest.json",
+  "queryManifest": "examples/gbd-burden-minimal-demo/gbd_query_manifest.csv",
+  "queryRowCount": 6,
+  "analyses": {
+    "fixture": {
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",
+      "sourceSha256": "45ab26c760a09f9c8187c759507398eb3ad6c472f59b5cbb87cc862670328cbd",
+      "sourceRowCount": 2,
+      "matchingSourceRows": 2,
+      "queryRowCount": 2,
+      "queryDimensions": [
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        }
+      ],
+      "outputCsv": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.csv",
+      "outputCsvSha256": "c825f6fb2e6c7a6a6501935d72f35311b717ce5ff4235bc2938853409272b604",
+      "outputMarkdown": "examples/gbd-burden-minimal-demo/results/gbd_minimal_summary.md",
+      "outputMarkdownSha256": "983d1e225e26c9002170fba2466608c106007dc9c2d093274c130a004d1bf484",
+      "downloadSourceType": "local-fixture",
+      "sourceEndpoint": "",
+      "downloadedOn": "",
+      "interpretationBoundary": "Teaching fixture for workflow traceability; not a publishable burden estimate until replaced with an approved GBD export and full citation."
+    },
+    "realDefault": {
+      "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_real_default_data.csv",
+      "sourceSha256": "55bb93d9847c553513bc0ae7175b8c6b0204df7339ee28dc99d80eb802db5639",
+      "sourceRowCount": 204,
+      "matchingSourceRows": 204,
+      "queryRowCount": 4,
+      "queryDimensions": [
+        {
+          "measure": "Deaths",
+          "metric": "Number",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "DALYs",
+          "metric": "Number",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "1990"
+        },
+        {
+          "measure": "Deaths",
+          "metric": "Rate",
+          "cause": "All causes",
+          "location": "Global",
+          "age": "All ages",
+          "sex": "Both",
+          "year": "2023"
+        }
+      ],
+      "outputCsv": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.csv",
+      "outputCsvSha256": "f6dd3ff66aca08fe06dda32039707a438143f4d6240bc0ccd17af4f4ea94d757",
+      "outputMarkdown": "examples/gbd-burden-minimal-demo/results/gbd_real_default_summary.md",
+      "outputMarkdownSha256": "9aa930200ee11a02ee6d48887162ca03f84bc95623b9b458bcfa34f42f1ba608",
+      "downloadSourceType": "gbd-default-data-json",
+      "sourceEndpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
+      "downloadedOn": "2026-06-11",
+      "interpretationBoundary": "Real GBD Results Tool default endpoint output for workflow demonstration; verify query dimensions, citation, and redistribution terms before manuscript use."
+    }
+  }
+}

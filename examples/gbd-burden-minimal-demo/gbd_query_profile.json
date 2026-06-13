@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "gbd-query-profile-v1",
+  "profileStatus": "manuscript-review-ready",
+  "dataSourceManifest": "data_sources/gbd.json",
+  "analysisManifest": "examples/gbd-burden-minimal-demo/gbd_analysis_manifest.json",
+  "queryManifest": "examples/gbd-burden-minimal-demo/gbd_query_manifest.csv",
+  "provenanceFile": "examples/gbd-burden-minimal-demo/results/gbd_provenance.json",
+  "reportingFrame": {
+    "guideline": "GATHER-style transparency audit",
+    "guidelineUrl": "https://www.equator-network.org/reporting-guidelines/gather-statement/",
+    "applicability": "Health estimates across time or space using GBD Results Tool outputs.",
+    "reviewStatus": "The profile is ready for manuscript-level human review against GATHER-style transparency expectations, but not final submission."
+  },
+  "release": {
+    "gbdRelease": "GBD 2023",
+    "versionId": "8352",
+    "releaseRecorded": true,
+    "sourceChecked": "2026-06-11"
+  },
+  "dimensions": {
+    "cause": "All causes",
+    "location": "Global",
+    "age": "All ages",
+    "sex": "Both",
+    "years": ["1990", "2023"]
+  },
+  "metricPolicy": {
+    "allowedMetrics": ["Number", "Rate"],
+    "metricSeparationRequired": true,
+    "rateCountPercentMixingBoundary": "Counts, rates, percentages, and age-standardized estimates must not be mixed in one claim unless the transformation is explicitly defined."
+  },
+  "ageStandardization": {
+    "status": "not-age-standardized",
+    "evidence": "The selected query uses All ages rows from the GBD Results Tool default endpoint. The manuscript candidate claims must describe these as all-age estimates and must not label the rate as age-standardized.",
+    "allAgesInterpretationRule": "All ages is a GBD age category, not an age-standardized estimate. Any age-standardized claim requires explicit age-standardized rows and separate claim registry entries.",
+    "boundary": "Do not compare all-age rates with age-standardized rates, and do not interpret all-age rates as age-adjusted."
+  },
+  "uncertaintyIntervalPolicy": {
+    "sourceFieldsRequired": ["lower", "upper"],
+    "narrativePolicy": "Manuscript candidate claims must report uncertainty intervals as UI lower-upper values from the selected GBD export rows. The wording must avoid p-values, confidence intervals, causal certainty, or model precision claims unless those are separately supported.",
+    "reviewReadyRule": "For each numeric GBD claim, the registry must identify the exact source row and whether lower/upper values are carried into the prose.",
+    "submissionBoundary": "Submission-ready GBD claims must keep UI interpretation consistent with the selected measure, metric, year, and age category, and must undergo journal-specific wording review."
+  },
+  "citationPolicy": {
+    "source": "Institute for Health Metrics and Evaluation (IHME), Global Health Data Exchange (GHDx), GBD Results Tool",
+    "resultsToolUrl": "https://vizhub.healthdata.org/gbd-results/",
+    "gbdLandingPageUrl": "https://www.healthdata.org/gbd",
+    "dataUseAgreementUrl": "https://www.healthdata.org/Data-tools-practices/data-practices/ihme-free-charge-non-commercial-user-agreement",
+    "termsUrl": "https://www.healthdata.org/data-tools-practices/data-practices/terms-and-conditions",
+    "accessDate": "2026-06-11",
+    "citationStatus": "manuscript-review-ready",
+    "minimumCitationFields": ["data steward", "GBD release", "version_id", "tool/export route", "access date", "query dimensions", "measure", "metric", "age category", "uncertainty interval fields"],
+    "manuscriptCitationDraft": "Institute for Health Metrics and Evaluation (IHME). GBD Results Tool. Global Health Data Exchange. GBD 2023, version_id 8352. Accessed 2026-06-11. https://vizhub.healthdata.org/gbd-results/",
+    "finalSubmissionRequirement": "Before submission, confirm the journal's required citation format and IHME/GHDx data-use wording; replace this draft if the GBD export page provides a release-specific citation."
+  },
+  "reuseBoundary": {
+    "status": "manuscript-review-ready-not-redistributable",
+    "rule": "The committed small export may be used for repository review and manuscript drafting only while citation and data-use links are recorded. Do not redistribute larger exports, package derivative datasets for release, or claim unrestricted reuse until IHME/GHDx terms are manually confirmed.",
+    "repositoryPolicy": "Keep only small, provenance-tracked exports and derived tables in the repository. Larger or restricted exports belong outside git and should be regenerated or attached as approved release artifacts only when terms permit.",
+    "submissionBoundary": "Submission-ready status requires human confirmation that the exact export, derived tables, and manuscript wording comply with IHME/GHDx and journal requirements."
+  },
+  "blockingRules": [
+    "Missing GBD release or version_id blocks real manuscript claims.",
+    "Missing lower/upper source fields blocks uncertainty-aware GBD claims.",
+    "Metric type ambiguity blocks rate/count/percent comparisons.",
+    "Missing citation or reuse boundary blocks submission packaging."
+  ]
+}

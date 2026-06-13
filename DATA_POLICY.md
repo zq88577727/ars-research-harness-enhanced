@@ -53,6 +53,15 @@ should not be committed unless the export terms, size, and citation requirements
 make redistribution appropriate. Manuscript text must distinguish counts,
 rates, percentages, age-standardized estimates, and uncertainty intervals.
 
+For the CVD China/global manuscript-review instance, the repository contains a
+small source export, a bundled export citation, and derived aggregate summaries
+for validation. These files are treated as review fixtures, not as a general
+GBD redistribution service. The P7-12 citation and reuse reviews must remain
+with the instance, and final release packaging or journal submission requires
+human confirmation of IHME/GHDx terms for the exact source export and derived
+tables. Do not package raw GBD source exports into public releases until that
+confirmation is recorded.
+
 ## Local Raw-Data Convention
 
 Use ignored local directories for raw inputs:

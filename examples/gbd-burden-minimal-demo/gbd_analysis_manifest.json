@@ -1,6 +1,8 @@
 {
   "id": "gbd-burden-minimal-demo-analysis",
   "description": "Manifest-driven analysis plan for the GBD minimal demo. This controls source exports, required dimensions, outputs, and interpretation boundaries.",
+  "queryProfile": "examples/gbd-burden-minimal-demo/gbd_query_profile.json",
+  "provenanceFile": "examples/gbd-burden-minimal-demo/results/gbd_provenance.json",
   "analyses": {
     "fixture": {
       "sourceFile": "examples/gbd-burden-minimal-demo/source_exports/gbd_results_minimal_fixture.csv",

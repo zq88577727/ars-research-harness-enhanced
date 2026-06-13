@@ -2,14 +2,20 @@
   "projectType": "gbd-burden-project",
   "dataSource": "gbd",
   "dataSourceManifest": "data_sources/gbd.json",
-  "capabilityStatus": "minimal-demo-plus-real-default-export",
-  "title": "GBD burden minimal teaching demo",
-  "researchQuestion": "Can a minimal GBD Results-style export be traced from query dimensions to derived burden claims?",
+  "capabilityStatus": "fixture-only-plus-real-default-export",
+  "title": "GBD burden fixture-only teaching demo",
+  "researchQuestion": "Can a minimal GBD Results-style export be traced from query dimensions to derived burden claims without being treated as a final manuscript topic?",
   "rawDataDirectory": "examples/gbd-burden-minimal-demo/source_exports",
   "derivedDataDirectory": "examples/gbd-burden-minimal-demo/results",
   "queryManifest": "examples/gbd-burden-minimal-demo/gbd_query_manifest.csv",
+  "queryProfile": "examples/gbd-burden-minimal-demo/gbd_query_profile.json",
   "analysisManifest": "examples/gbd-burden-minimal-demo/gbd_analysis_manifest.json",
+  "provenanceFile": "examples/gbd-burden-minimal-demo/results/gbd_provenance.json",
   "claimRegistry": "examples/gbd-burden-minimal-demo/claim_registry.json",
+  "claimReviewChecklist": "examples/gbd-burden-minimal-demo/gbd_claim_review_checklist.csv",
+  "manuscriptReviewDraft": "examples/gbd-burden-minimal-demo/gbd_manuscript_review_draft.md",
+  "topicUpgradeDecision": "examples/gbd-burden-minimal-demo/gbd_topic_upgrade_decision.md",
+  "targetedQueryCandidates": "examples/gbd-burden-minimal-demo/gbd_targeted_query_candidates.csv",
   "accessStatus": {
     "accountRegistered": true,
     "queryDefined": true,
@@ -35,5 +41,5 @@
   "teachingFixture": true,
   "realDefaultDataEndpoint": "https://vizhub.healthdata.org/gbd-results/php/default_data.php?start_year=1990&version=8352",
   "realDefaultDataDownloadedOn": "2026-06-11",
-  "manuscriptBoundary": "This fixture proves workflow traceability only; replace with an approved GBD export before manuscript submission."
+  "manuscriptBoundary": "This fixture proves workflow traceability only. Real manuscript work has moved to examples/gbd-cvd-china-global-instance/."
 }
