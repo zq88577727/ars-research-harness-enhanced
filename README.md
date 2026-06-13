@@ -82,6 +82,18 @@ sources and an explicit external-omics boundary file when bioinformatics
 evidence is requested. These scaffolds are planning artifacts only: they do not
 download data, run analyses, or create manuscript-ready claims.
 
+Generate manuscript blueprints from the instantiated scaffolds:
+
+```bash
+python3 harness/scripts/generate_manuscript_blueprint.py \
+  --manifest examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/instantiation_manifest.json
+python3 harness/validators/validate_manuscript_blueprints.py
+```
+
+The blueprint step creates candidate titles, a research-question frame, Methods
+sections, table/figure shells, and a draft claim registry. It remains a
+blueprint, not a manuscript draft or source-backed result.
+
 Start a CHARLS or GBD run after data access/export is ready:
 
 ```bash

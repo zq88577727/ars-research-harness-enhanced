@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "manuscript-blueprint-v1",
+  "status": "blueprint-draft-not-manuscript",
+  "project": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls",
+  "sourceProjectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json",
+  "dataSource": "charls",
+  "titleCandidates": [
+    "Depression, cognition, cardiovascular burden, and bioinformatics boundary plan: a longitudinal aging cohort manuscript",
+    "Depression, cognition, cardiovascular burden, and bioinformatics boundary plan: protocol-ready analysis blueprint"
+  ],
+  "researchQuestion": "Among middle-aged and older adults, how is depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults related to longitudinal changes in aging-related outcomes after wave linkage and attrition assessment?",
+  "manuscriptType": "longitudinal aging cohort manuscript",
+  "reportingGuidelinePath": "STROBE/RECORD depending on linkage and reporting frame",
+  "methodsFramework": [
+    "Data source, waves, and access status",
+    "Study population and eligibility criteria",
+    "Wave linkage and temporal ordering",
+    "Exposure, outcome, and covariate definitions",
+    "Attrition, missingness, and follow-up assessment",
+    "Weight and target-population decision",
+    "Longitudinal statistical model",
+    "Sensitivity analyses",
+    "Ethics, data-use boundary, and reproducibility"
+  ],
+  "tableFigureShell": [
+    {
+      "id": "table1",
+      "label": "Baseline characteristics by exposure group"
+    },
+    {
+      "id": "table2",
+      "label": "Wave linkage, attrition, and missingness summary"
+    },
+    {
+      "id": "table3",
+      "label": "Longitudinal association estimates"
+    },
+    {
+      "id": "figure1",
+      "label": "Cohort construction and follow-up flow"
+    },
+    {
+      "id": "figure2",
+      "label": "Outcome trajectory or predicted-risk plot"
+    }
+  ],
+  "claimRegistryDraft": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/claim_registry.draft.json",
+  "readinessGate": {
+    "minimumNextStage": "S3 data execution and S7 integrity check before numeric manuscript claims",
+    "blockedUntil": [
+      "dataset-specific design gate is reviewed",
+      "source data/export provenance exists",
+      "claim registry entries are source-backed",
+      "methods/results consistency gate passes"
+    ]
+  },
+  "boundary": "Use temporal association or trajectory language only unless a defensible causal design is added.",
+  "nextStage": "P8-4 dataset-specific writing adapters"
+}

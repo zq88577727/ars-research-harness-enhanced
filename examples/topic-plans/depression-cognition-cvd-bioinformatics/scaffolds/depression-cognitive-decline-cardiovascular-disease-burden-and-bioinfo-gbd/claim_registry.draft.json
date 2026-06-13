@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "draft-claim-registry-v1",
+  "status": "draft-not-source-backed",
+  "project": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd",
+  "sourceProjectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/project_manifest.json",
+  "claims": [
+    {
+      "id": "depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd-scope-boundary",
+      "tier": "core",
+      "type": "scope-boundary",
+      "claimRole": "methods-boundary",
+      "submissionDisposition": "draft-only-not-source-backed",
+      "expectedText": "What are the burden and time trends for diseases or outcomes related to depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults across locations, years, age groups, and sex strata?",
+      "sourceFile": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/project_manifest.json",
+      "sourceFields": [
+        "researchQuestion",
+        "dataSource",
+        "topicPlanDesign"
+      ],
+      "evidenceStatus": "scaffold-only",
+      "interpretationBoundary": "Use descriptive burden and trend language only; do not infer patient-level risk factors, mechanisms, or intervention effects."
+    },
+    {
+      "id": "depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd-methods-readiness",
+      "tier": "core",
+      "type": "methods-readiness",
+      "claimRole": "gate-blocker",
+      "submissionDisposition": "draft-only-not-source-backed",
+      "expectedText": "GBD analysis claims are blocked until S3 outputs and S7 integrity checks exist.",
+      "sourceFile": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/workflow-run.json",
+      "sourceFields": [
+        "stages",
+        "risks"
+      ],
+      "evidenceStatus": "not-source-backed",
+      "interpretationBoundary": "Planning claim only; must not appear as a numeric result."
+    }
+  ]
+}

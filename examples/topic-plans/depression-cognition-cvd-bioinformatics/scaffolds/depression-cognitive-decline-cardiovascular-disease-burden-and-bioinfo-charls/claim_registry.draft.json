@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "draft-claim-registry-v1",
+  "status": "draft-not-source-backed",
+  "project": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls",
+  "sourceProjectManifest": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json",
+  "claims": [
+    {
+      "id": "depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls-scope-boundary",
+      "tier": "core",
+      "type": "scope-boundary",
+      "claimRole": "methods-boundary",
+      "submissionDisposition": "draft-only-not-source-backed",
+      "expectedText": "Among middle-aged and older adults, how is depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults related to longitudinal changes in aging-related outcomes after wave linkage and attrition assessment?",
+      "sourceFile": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json",
+      "sourceFields": [
+        "researchQuestion",
+        "dataSource",
+        "topicPlanDesign"
+      ],
+      "evidenceStatus": "scaffold-only",
+      "interpretationBoundary": "Use temporal association or trajectory language only unless a defensible causal design is added."
+    },
+    {
+      "id": "depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls-methods-readiness",
+      "tier": "core",
+      "type": "methods-readiness",
+      "claimRole": "gate-blocker",
+      "submissionDisposition": "draft-only-not-source-backed",
+      "expectedText": "CHARLS analysis claims are blocked until S3 outputs and S7 integrity checks exist.",
+      "sourceFile": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/workflow-run.json",
+      "sourceFields": [
+        "stages",
+        "risks"
+      ],
+      "evidenceStatus": "not-source-backed",
+      "interpretationBoundary": "Planning claim only; must not appear as a numeric result."
+    }
+  ]
+}
