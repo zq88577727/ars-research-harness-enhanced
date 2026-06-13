@@ -232,7 +232,7 @@ python3 harness/validators/validate_gbd_targeted_scaffold.py --require-export
 Run the GBD CVD submission-readiness gate:
 
 ```bash
-python3 harness/validators/validate_gbd_cvd_submission_readiness.py --require-manuscript-review-ready
+python3 harness/validators/validate_gbd_cvd_submission_readiness.py --require-manuscript-review-ready --allow-missing-source-export
 python3 harness/validators/validate_gbd_cvd_submission_readiness.py --require-submission-ready
 ```
 

@@ -224,7 +224,7 @@ def validate_claim_wording(claims: list[dict], summary_path: Path, failures: lis
     return {"sourceBackedClaimCount": len(source_backed)}
 
 
-def validate(project: Path, require_manuscript_review_ready: bool, require_submission_ready: bool) -> dict:
+def validate(project: Path, require_manuscript_review_ready: bool, require_submission_ready: bool, allow_missing_source_export: bool) -> dict:
     failures: list[dict] = []
     blockers: list[str] = []
     warnings: list[dict] = []
@@ -270,13 +270,20 @@ def validate(project: Path, require_manuscript_review_ready: bool, require_submi
     summary_md_path = root_path(analysis.get("outputMarkdown", ""))
 
     for label, path in [
-        ("source_export", source_path),
         ("source_citation", citation_path),
         ("summary_csv", summary_path),
         ("summary_markdown", summary_md_path),
     ]:
         if not str(path) or not path.exists():
             failures.append({"check": f"{label}_exists", "path": str(path)})
+    if not str(source_path) or not source_path.exists():
+        if allow_missing_source_export:
+            warnings.append({
+                "check": "source_export_missing_public_release_mode",
+                "path": str(source_path),
+            })
+        else:
+            failures.append({"check": "source_export_exists", "path": str(source_path)})
 
     if manifest.get("capabilityStatus") != "source-backed-manuscript-candidate":
         blockers.append(f"project capabilityStatus is {manifest.get('capabilityStatus')}; expected source-backed-manuscript-candidate")
@@ -362,6 +369,7 @@ def validate(project: Path, require_manuscript_review_ready: bool, require_submi
         "status": status,
         "requireManuscriptReviewReady": require_manuscript_review_ready,
         "requireSubmissionReady": require_submission_ready,
+        "allowMissingSourceExport": allow_missing_source_export,
         "queryProfile": rel(query_profile_path),
         "provenanceFile": rel(provenance_path),
         "summaryCsv": rel(summary_path),
@@ -384,8 +392,9 @@ def main() -> int:
     parser.add_argument("--project", default=rel(DEFAULT_PROJECT))
     parser.add_argument("--require-manuscript-review-ready", action="store_true")
     parser.add_argument("--require-submission-ready", action="store_true")
+    parser.add_argument("--allow-missing-source-export", action="store_true")
     args = parser.parse_args()
-    result = validate(Path(args.project), args.require_manuscript_review_ready, args.require_submission_ready)
+    result = validate(Path(args.project), args.require_manuscript_review_ready, args.require_submission_ready, args.allow_missing_source_export)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 1
 

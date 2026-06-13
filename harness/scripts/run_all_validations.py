@@ -50,7 +50,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_gbd_cvd_manuscript_fragment.py"],
     ["python3", "harness/validators/validate_gbd_cvd_submission_package.py", "--allow-missing-source-export"],
     ["python3", "harness/validators/validate_gbd_public_release_safety.py"],
-    ["python3", "harness/validators/validate_gbd_cvd_submission_readiness.py", "--require-manuscript-review-ready"],
+    ["python3", "harness/validators/validate_gbd_cvd_submission_readiness.py", "--require-manuscript-review-ready", "--allow-missing-source-export"],
     ["python3", "harness/scripts/generate_readiness_report.py"],
 ]
 

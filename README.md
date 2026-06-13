@@ -2,7 +2,7 @@
 
 A checkpoint-first academic research workflow harness. This repository turns an AI-assisted paper workflow into a traceable, reproducible, human-confirmed process.
 
-The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults. NHANES is the repository's complete closed-loop example. CHARLS now has local-only restricted-data manifests and validators, but remains scaffold-only until user-downloaded files are placed outside git. GBD includes a small public default-endpoint export for workflow demonstration plus manifest-driven scaffolding, but it is not a completed publishable GBD burden analysis and does not include restricted data.
+The included case study uses the NHANES 2017-2018 public-use files to build a manuscript package on HbA1c-defined undiagnosed diabetes among self-reported non-diabetic U.S. adults. NHANES is the repository's complete closed-loop example. CHARLS now has local-only restricted-data manifests and validators, but remains scaffold-only until user-downloaded files are placed outside git. GBD includes a fixture-only minimal demo and a source-backed CVD China/global manuscript-candidate instance. The CVD instance has query, provenance, derived-summary, citation/reuse, and claim-review gates, but it is not submission-ready and does not redistribute the raw GBD source export.
 
 ![Research-to-Paper Harness](assets/diagrams/01-overview-japanese-handdrawn.png)
 
@@ -19,9 +19,10 @@ Core properties:
 - validator-backed workflow status
 - artifact trail for every stage
 - complete NHANES example that can be reused as a template
-- explicit capability boundaries: NHANES is a complete teaching case; CHARLS
-  and GBD are scaffolded adapters until the user supplies approved data exports,
-  variable/query maps, analysis outputs, and source-specific citations
+- explicit capability boundaries: NHANES is a complete teaching case; CHARLS is
+  scaffolded until approved local data/codebooks are available; GBD has both a
+  fixture-only minimal demo and a CVD source-backed manuscript candidate that
+  still requires human citation, reuse, journal, and submission review
 - enhanced manuscript-number, reference, reporting-checklist, journal-profile,
   environment-lock, and reviewer-response trace validators
 - CI validation, optional Crossref/PubMed literature checks, structured claim
@@ -95,6 +96,7 @@ Key outputs:
 - `examples/nhanes-undiagnosed-diabetes/results/`
 - `examples/nhanes-undiagnosed-diabetes/submission_package/manuscript_final_with_tables_figures.docx`
 - `examples/gbd-burden-minimal-demo/`
+- `examples/gbd-cvd-china-global-instance/`
 
 Enhanced validation details are documented in
 [docs/08-enhanced-validation-roadmap.md](docs/08-enhanced-validation-roadmap.md).
@@ -106,6 +108,8 @@ Study-design support boundaries are documented in
 [docs/11-study-design-support-matrix.md](docs/11-study-design-support-matrix.md).
 Artifact retention rules are documented in
 [docs/12-artifact-governance.md](docs/12-artifact-governance.md).
+Post-release public-repository audits are documented in
+[docs/13-post-release-audit-p7-15.md](docs/13-post-release-audit-p7-15.md).
 Repository data-use rules are documented in [DATA_POLICY.md](DATA_POLICY.md).
 
 ## Workflow
