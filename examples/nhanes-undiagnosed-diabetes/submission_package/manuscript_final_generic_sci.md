@@ -250,11 +250,11 @@ Among self-reported non-diabetic U.S. adults in NHANES 2017-2018, HbA1c-defined 
 
 ## Figure 1
 
-Study population selection. File: `figures/figure1_flow.png`.
+Study population selection. File: `../results/S8b/figure1_flow.png`.
 
 ## Figure 2
 
-Weighted prevalence of HbA1c-defined undiagnosed diabetes by subgroup. File: `figures/figure2_subgroup_prevalence.png`.
+Weighted prevalence of HbA1c-defined undiagnosed diabetes by subgroup. File: `../results/S8b/figure2_subgroup_prevalence.png`.
 
 ## Table 1
 

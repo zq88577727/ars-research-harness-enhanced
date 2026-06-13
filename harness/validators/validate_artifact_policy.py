@@ -127,6 +127,29 @@ def validate(policy_path: Path) -> dict:
         "ok": not any(f["check"].startswith("reviewed_docx") for f in failures),
     })
 
+    canonical_figures = []
+    for item in policy.get("reviewedCanonicalFigures", []):
+        canonical = item.get("canonicalPath", "")
+        removed_duplicates = item.get("removedDuplicatePaths", [])
+        canonical_exists = canonical in tracked_or_staged and (ROOT / canonical).is_file()
+        duplicate_hits = [path for path in removed_duplicates if (ROOT / path).exists()]
+        canonical_figures.append({
+            "id": item.get("id"),
+            "canonicalPath": canonical,
+            "decision": item.get("decision"),
+            "canonicalExists": canonical_exists,
+            "removedDuplicateHits": duplicate_hits,
+        })
+        if not canonical_exists:
+            failures.append({"check": "canonical_figure_exists", "id": item.get("id"), "path": canonical})
+        if duplicate_hits:
+            failures.append({"check": "canonical_figure_duplicate_removed", "id": item.get("id"), "paths": duplicate_hits})
+    checks.append({
+        "check": "reviewedCanonicalFigures",
+        "count": len(canonical_figures),
+        "ok": not any(f["check"].startswith("canonical_figure") for f in failures),
+    })
+
     duplicate_groups = []
     for group in policy.get("reviewedDuplicateGroups", []):
         paths = group.get("paths", [])
@@ -168,6 +191,7 @@ def validate(policy_path: Path) -> dict:
         "checks": checks,
         "reviewedLargeArtifacts": reviewed_large_present,
         "sourceExportCsvs": source_export_csvs,
+        "canonicalFigures": canonical_figures,
         "duplicateGroups": duplicate_groups,
         "warnings": warnings,
         "failures": failures,

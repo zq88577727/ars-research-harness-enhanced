@@ -32,12 +32,12 @@ Tracked figure copies:
 
 | Pair | Size | SHA-256 status | Decision |
 | --- | ---: | --- | --- |
-| `results/S8b/figure1_flow.png` and `submission_package/figures/figure1_flow.png` | 168,271 bytes each | identical | Keep pending a single-source figure refactor. |
-| `results/S8b/figure2_subgroup_prevalence.png` and `submission_package/figures/figure2_subgroup_prevalence.png` | 293,949 bytes each | identical | Keep pending a single-source figure refactor. |
+| `results/S8b/figure1_flow.png` and historical `submission_package/figures/figure1_flow.png` copy | 168,271 bytes each before refactor | identical before refactor | P7-17b removed the submission-package copy and retained `results/S8b/figure1_flow.png` as canonical. |
+| `results/S8b/figure2_subgroup_prevalence.png` and historical `submission_package/figures/figure2_subgroup_prevalence.png` copy | 293,949 bytes each before refactor | identical before refactor | P7-17b removed the submission-package copy and retained `results/S8b/figure2_subgroup_prevalence.png` as canonical. |
 
-Decision: do not delete either copy in this pass. The results copies are cited
-by revision traces and checkpoints; the submission-package copies are listed in
-the package manifest and consumed by the DOCX builder.
+Decision: P7-17b completed the single-source refactor. The results copies are
+the canonical files cited by revision traces and checkpoints; the DOCX builder
+now embeds those canonical files directly.
 
 ### GBD Minimal Demo CSV
 
@@ -74,10 +74,33 @@ as the duplicate NHANES figure copies and the legacy GBD real default CSV.
 
 ## Next Cleanup Batch
 
-The next P7-17 batch should choose exactly one artifact class:
+## P7-17b Single-Source Figure Refactor
 
-1. NHANES figure single-source refactor.
-2. GBD minimal-demo real default CSV replacement or migration.
-3. NHANES large intermediate CSV replacement by checksums or smaller summaries.
+P7-17b promotes `examples/nhanes-undiagnosed-diabetes/results/S8b/` to the
+canonical location for NHANES generated figures.
+
+Implemented decisions:
+
+- remove duplicate PNG copies from `submission_package/figures/`;
+- keep `results/S8b/figure1_flow.png` and
+  `results/S8b/figure2_subgroup_prevalence.png` as the only tracked figure
+  files;
+- update `manuscript_final_generic_sci.md` to cite the canonical result paths;
+- update `scripts/build_submission_docx.py` so the submission DOCX embeds the
+  canonical result figures directly;
+- update `package_manifest.csv` so it no longer lists removed duplicate PNG
+  copies;
+- update `harness/artifact_policy.json` so future duplicate figure copies are
+  blocked by `validate_artifact_policy.py`.
+
+The generated DOCX remains a tracked teaching deliverable, but its embedded
+figures now come from a single canonical source.
+
+## Next Cleanup Batch
+
+The next P7-17 batch should choose exactly one remaining artifact class:
+
+1. GBD minimal-demo real default CSV replacement or migration.
+2. NHANES large intermediate CSV replacement by checksums or smaller summaries.
 
 Each batch should run full validation and GitHub Actions independently.

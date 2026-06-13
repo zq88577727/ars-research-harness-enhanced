@@ -112,24 +112,24 @@
       "rationale": "Legacy GBD default endpoint CSV remains referenced by query manifest, provenance, and claim registry. Replace in a separate scoped commit only after the demo is converted to a smaller fixture or local-only export route."
     }
   ],
-  "reviewedDuplicateGroups": [
+  "reviewedCanonicalFigures": [
     {
-      "id": "nhanes-figure1-flow-results-and-submission-copy",
-      "paths": [
-        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure1_flow.png",
+      "id": "nhanes-figure1-flow",
+      "canonicalPath": "examples/nhanes-undiagnosed-diabetes/results/S8b/figure1_flow.png",
+      "removedDuplicatePaths": [
         "examples/nhanes-undiagnosed-diabetes/submission_package/figures/figure1_flow.png"
       ],
-      "decision": "keep-pending-single-source-refactor",
-      "rationale": "The results copy is referenced by revision trace/checkpoints; the submission copy is referenced by the final package manifest and DOCX builder."
+      "decision": "single-source-results-s8b",
+      "rationale": "The results/S8b figure is the generator output and is referenced by revision traces/checkpoints. The submission DOCX builder embeds this canonical file directly."
     },
     {
-      "id": "nhanes-figure2-subgroup-results-and-submission-copy",
-      "paths": [
-        "examples/nhanes-undiagnosed-diabetes/results/S8b/figure2_subgroup_prevalence.png",
+      "id": "nhanes-figure2-subgroup-prevalence",
+      "canonicalPath": "examples/nhanes-undiagnosed-diabetes/results/S8b/figure2_subgroup_prevalence.png",
+      "removedDuplicatePaths": [
         "examples/nhanes-undiagnosed-diabetes/submission_package/figures/figure2_subgroup_prevalence.png"
       ],
-      "decision": "keep-pending-single-source-refactor",
-      "rationale": "The results copy is referenced by revision trace/checkpoints; the submission copy is referenced by the final package manifest and DOCX builder."
+      "decision": "single-source-results-s8b",
+      "rationale": "The results/S8b figure is the generator output and is referenced by revision traces/checkpoints. The submission DOCX builder embeds this canonical file directly."
     }
   ],
   "reviewedDocxArtifacts": [

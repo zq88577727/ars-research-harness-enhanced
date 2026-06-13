@@ -15,6 +15,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PACKAGE_DIR = REPO_ROOT / "examples" / "nhanes-undiagnosed-diabetes" / "submission_package"
+DEFAULT_RESULTS_DIR = REPO_ROOT / "examples" / "nhanes-undiagnosed-diabetes" / "results" / "S8b"
 
 
 def set_cell_shading(cell, fill: str) -> None:
@@ -138,7 +139,7 @@ def configure_document(doc: Document) -> None:
         style.paragraph_format.space_after = Pt(5)
 
 
-def build_docx(package_dir: Path = DEFAULT_PACKAGE_DIR) -> Path:
+def build_docx(package_dir: Path = DEFAULT_PACKAGE_DIR, results_dir: Path = DEFAULT_RESULTS_DIR) -> Path:
     source_md = package_dir / "manuscript_final_generic_sci.md"
     output_docx = package_dir / "manuscript_final_with_tables_figures.docx"
 
@@ -212,20 +213,20 @@ def build_docx(package_dir: Path = DEFAULT_PACKAGE_DIR) -> Path:
             pending_table_caption = None
             continue
 
-        if "File: `figures/figure1_flow.png`" in line:
+        if "File: `../results/S8b/figure1_flow.png`" in line or "File: `figures/figure1_flow.png`" in line:
             p = doc.add_paragraph("Figure 1. Study population selection.")
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             style_paragraph(p, size=9, bold=True)
-            doc.add_picture(str(package_dir / "figures" / "figure1_flow.png"), width=Inches(5.8))
+            doc.add_picture(str(results_dir / "figure1_flow.png"), width=Inches(5.8))
             doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
             idx += 1
             continue
 
-        if "File: `figures/figure2_subgroup_prevalence.png`" in line:
+        if "File: `../results/S8b/figure2_subgroup_prevalence.png`" in line or "File: `figures/figure2_subgroup_prevalence.png`" in line:
             p = doc.add_paragraph("Figure 2. Weighted prevalence of HbA1c-defined undiagnosed diabetes by subgroup.")
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             style_paragraph(p, size=9, bold=True)
-            doc.add_picture(str(package_dir / "figures" / "figure2_subgroup_prevalence.png"), width=Inches(6.5))
+            doc.add_picture(str(results_dir / "figure2_subgroup_prevalence.png"), width=Inches(6.5))
             doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
             idx += 1
             continue
@@ -249,5 +250,6 @@ def build_docx(package_dir: Path = DEFAULT_PACKAGE_DIR) -> Path:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build a DOCX manuscript with embedded tables and figures.")
     parser.add_argument("--package-dir", type=Path, default=DEFAULT_PACKAGE_DIR)
+    parser.add_argument("--results-dir", type=Path, default=DEFAULT_RESULTS_DIR)
     args = parser.parse_args()
-    print(build_docx(args.package_dir.resolve()))
+    print(build_docx(args.package_dir.resolve(), args.results_dir.resolve()))
