@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "topic-research-plan-v1",
+  "topic": "depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults",
+  "title": "Depression, cognition, cardiovascular burden, and bioinformatics boundary plan",
+  "status": "planning-only-not-analysis",
+  "domains": [
+    "cardiometabolic",
+    "aging_neuropsych",
+    "disease_burden"
+  ],
+  "omicsRequested": true,
+  "omicsTerms": [
+    "bioinformatics"
+  ],
+  "recommendedDataSources": [
+    "charls",
+    "gbd"
+  ],
+  "datasetScores": [
+    {
+      "id": "charls",
+      "score": 8,
+      "supportLevel": "primary",
+      "matchedTerms": [
+        "cognitive",
+        "decline",
+        "depression",
+        "older"
+      ],
+      "role": "aging, depression/cognition/function, chronic disease, and longitudinal trajectory route; cannot provide molecular mechanism or omics evidence without external omics databases",
+      "reasons": [
+        "CHARLS can support longitudinal designs after wave linkage and attrition planning.",
+        "CHARLS is designed for aging, cognition, depression, and social/health trajectories."
+      ],
+      "design": {
+        "studyDesign": "longitudinal cohort or wave-specific cross-sectional aging analysis",
+        "reportingGuideline": "STROBE/RECORD depending on linkage and reporting frame",
+        "requiredGate": "S1/S2 design gate with wave linkage, temporal ordering, attrition, missingness, and weight decision",
+        "claimBoundary": "temporal association or trajectory language only unless a defensible causal design is added"
+      }
+    },
+    {
+      "id": "gbd",
+      "score": 6,
+      "supportLevel": "primary",
+      "matchedTerms": [
+        "burden",
+        "cardiovascular"
+      ],
+      "role": "disease-burden, mortality/DALY, trend, location, metric, and uncertainty-interval route; cannot provide molecular mechanism or omics evidence without external omics databases",
+      "reasons": [
+        "GBD cause hierarchies can frame disease-specific burden questions.",
+        "GBD is suitable for descriptive disease-burden, mortality, and DALY analyses."
+      ],
+      "design": {
+        "studyDesign": "descriptive disease burden or comparative trend analysis",
+        "reportingGuideline": "GATHER-style source transparency plus journal requirements",
+        "requiredGate": "query profile with release, measure, metric, cause, location, age, sex, year, UI, citation, and reuse review",
+        "claimBoundary": "burden/trend description with uncertainty intervals; no patient-level risk-factor or mechanism claims"
+      }
+    },
+    {
+      "id": "nhanes",
+      "score": 0,
+      "supportLevel": "not_recommended",
+      "matchedTerms": [],
+      "role": "optional only; cross-sectional phenotype, exposure, laboratory, lifestyle, and survey-weighted association route if the topic is reframed to fit this dataset",
+      "reasons": [],
+      "design": {
+        "studyDesign": "cross-sectional complex survey analysis",
+        "reportingGuideline": "STROBE",
+        "requiredGate": "S2 survey-weighted analysis plan before S3 execution",
+        "claimBoundary": "association and weighted prevalence only; no causal language and no clinical diagnosis from a single measurement"
+      }
+    }
+  ],
+  "candidateResearchQuestions": [
+    {
+      "id": "charls-longitudinal",
+      "dataSource": "CHARLS",
+      "question": "Among middle-aged and older adults, how is depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults related to longitudinal changes in aging-related outcomes after wave linkage and attrition assessment?",
+      "status": "scaffold_until_local_data_ready"
+    },
+    {
+      "id": "gbd-burden-trend",
+      "dataSource": "GBD",
+      "question": "What are the burden and time trends for diseases or outcomes related to depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults across locations, years, age groups, and sex strata?",
+      "status": "query_profile_required_before_claims"
+    },
+    {
+      "id": "omics-extension",
+      "dataSource": "External omics databases",
+      "question": "What molecular signatures or pathways related to depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults can be evaluated using GEO/TCGA/GTEx or other omics sources?",
+      "status": "not_supported_by_nhanes_charls_gbd_only"
+    }
+  ],
+  "manuscriptWorkflow": [
+    {
+      "stage": "S0",
+      "task": "intake topic, target population, disease/outcome, intended database combination, and data-access status"
+    },
+    {
+      "stage": "S1",
+      "task": "convert broad topic into dataset-specific answerable research questions"
+    },
+    {
+      "stage": "S1b",
+      "task": "decide whether the paper is epidemiology-only or requires a separate omics data module; NHANES/CHARLS/GBD cannot prove molecular mechanism alone"
+    },
+    {
+      "stage": "S2",
+      "task": "write analysis plan and dataset-specific gate: survey weights, wave linkage, or GBD query profile"
+    },
+    {
+      "stage": "S3",
+      "task": "execute or import validated results; do not draft numeric claims before this stage"
+    },
+    {
+      "stage": "S4",
+      "task": "interpret results with study-design boundaries and uncertainty intervals where applicable"
+    },
+    {
+      "stage": "S5",
+      "task": "build paper outline and table/figure shell"
+    },
+    {
+      "stage": "S6",
+      "task": "draft manuscript sections with cautious causal and diagnostic language"
+    },
+    {
+      "stage": "S7",
+      "task": "claim registry, citation registry, data provenance, and guideline checklist audit"
+    },
+    {
+      "stage": "S8",
+      "task": "review/revision simulation and response trace"
+    },
+    {
+      "stage": "S9",
+      "task": "final manuscript package and readiness report"
+    }
+  ],
+  "requiredHumanDecisions": [
+    "Confirm the target population and disease/outcome scope.",
+    "Choose one primary dataset route before analysis execution.",
+    "Confirm local access status for CHARLS and any restricted data.",
+    "Confirm GBD release/query dimensions and citation/reuse boundary before using GBD claims.",
+    "Decide whether external omics databases are required for a bioinformatics manuscript."
+  ],
+  "cautionLanguage": [
+    "Do not write cross-sectional associations as causal effects.",
+    "Do not write single laboratory measurements or survey responses as definitive clinical diagnoses.",
+    "Do not write descriptive public-database analyses as mechanistic studies.",
+    "Do not draft manuscript-ready numeric claims until S3 outputs and S7 claim/citation audits exist.",
+    "NHANES, CHARLS, and GBD are not sufficient for transcriptomic/genomic/single-cell mechanism claims; add GEO/TCGA/GTEx or equivalent omics sources if the paper requires bioinformatics evidence."
+  ],
+  "nextActions": [
+    "Use this plan as S0/S1 input, not as completed analysis.",
+    "Instantiate a dataset-specific project only after choosing the primary route.",
+    "Run the relevant design gate before S3 analysis and manuscript numeric claims."
+  ]
+}

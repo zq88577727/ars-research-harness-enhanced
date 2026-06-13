@@ -57,6 +57,18 @@ python3 harness/scripts/apply_claim_review_decisions.py
 python3 harness/validators/validate_charls_local_dry_run.py
 ```
 
+Plan a manuscript route from a broad medical topic:
+
+```bash
+python3 harness/scripts/plan_research_from_topic.py \
+  --topic "depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults" \
+  --output examples/topic-plans/depression-cognition-cvd-bioinformatics
+```
+
+The topic planner recommends whether NHANES, CHARLS, and/or GBD fit the topic,
+states the study-design boundary, and flags when external omics databases such
+as GEO/TCGA/GTEx are required for bioinformatics or mechanism claims.
+
 Start a CHARLS or GBD run after data access/export is ready:
 
 ```bash

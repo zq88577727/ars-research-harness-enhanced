@@ -1,0 +1,12 @@
+{
+  "workflow": "academic-research-suite-checkpoint-first",
+  "sourcePlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "currentStage": "S0",
+  "checkpointFirst": true,
+  "status": "topic-plan-only",
+  "recommendedDataSources": [
+    "charls",
+    "gbd"
+  ],
+  "nextRequiredStage": "S0 intake confirmation and S1 research question refinement"
+}
