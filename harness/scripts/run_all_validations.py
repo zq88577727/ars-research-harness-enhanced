@@ -30,6 +30,7 @@ COMMANDS = [
     ["python3", "harness/validators/validate_topic_plan.py"],
     ["python3", "harness/validators/validate_topic_scaffolds.py"],
     ["python3", "harness/validators/validate_manuscript_blueprints.py"],
+    ["python3", "harness/validators/validate_dataset_writing_adapters.py"],
     ["python3", "harness/validators/validate_project_scaffold.py", "examples/charls-aging-template"],
     ["python3", "harness/validators/validate_charls_design_gate.py"],
     ["python3", "harness/scripts/import_charls_codebook_extract.py", "--input", "examples/charls-aging-template/charls_codebook_import_sample.csv", "--dry-run"],

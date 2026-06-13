@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "dataset-writing-adapter-v1",
+  "status": "adapter-shell-not-final-manuscript",
+  "project": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls",
+  "sourceBlueprint": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/manuscript_blueprint.json",
+  "dataSource": "charls",
+  "adapterType": "charls-longitudinal-cohort-writing-adapter",
+  "methodsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/methods_shell.md",
+  "resultsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/results_shell.md",
+  "methodsSections": [
+    "Study design and CHARLS waves",
+    "Participants, eligibility, and wave linkage",
+    "Exposure, outcome, and covariate definitions",
+    "Temporal ordering and follow-up",
+    "Attrition, missingness, and weight decision",
+    "Longitudinal statistical analysis",
+    "Sensitivity analyses",
+    "Ethics and restricted-data use statement"
+  ],
+  "resultsSections": [
+    "Cohort construction and follow-up",
+    "Baseline characteristics",
+    "Longitudinal association estimates",
+    "Attrition and sensitivity analyses"
+  ],
+  "requiredLanguage": [
+    "longitudinal association",
+    "wave linkage",
+    "attrition"
+  ],
+  "prohibitedLanguage": [
+    "caused",
+    "prevented",
+    "mechanism",
+    "clinical diagnosis"
+  ],
+  "boundary": "Use temporal association or trajectory language only unless a defensible causal design is added.",
+  "blockedUntil": [
+    "S3 data execution exists",
+    "source/export provenance exists",
+    "claim registry is source-backed",
+    "S7 integrity and citation checks pass"
+  ],
+  "nextStage": "P8-5 end-to-end user demo"
+}

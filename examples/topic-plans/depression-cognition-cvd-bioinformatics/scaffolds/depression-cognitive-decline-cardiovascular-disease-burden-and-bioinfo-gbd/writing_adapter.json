@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "dataset-writing-adapter-v1",
+  "status": "adapter-shell-not-final-manuscript",
+  "project": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd",
+  "sourceBlueprint": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/manuscript_blueprint.json",
+  "dataSource": "gbd",
+  "adapterType": "gbd-disease-burden-writing-adapter",
+  "methodsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/methods_shell.md",
+  "resultsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/results_shell.md",
+  "methodsSections": [
+    "GBD release, data source, and citation policy",
+    "Query dimensions and source-export provenance",
+    "Measures, metrics, age groups, sex strata, and locations",
+    "Age-standardization and all-age count rules",
+    "Uncertainty interval interpretation",
+    "Derived summaries and trend calculations",
+    "Reuse boundary and reproducibility"
+  ],
+  "resultsSections": [
+    "Query profile and included estimates",
+    "All-age counts with uncertainty intervals",
+    "Age-standardized rates with uncertainty intervals",
+    "Temporal changes and location comparisons"
+  ],
+  "requiredLanguage": [
+    "GBD release",
+    "uncertainty interval",
+    "age-standardized",
+    "all-age count"
+  ],
+  "prohibitedLanguage": [
+    "patient-level",
+    "risk factor effect",
+    "mechanism",
+    "intervention effect"
+  ],
+  "boundary": "Use descriptive burden and trend language only; do not infer patient-level risk factors, mechanisms, or intervention effects.",
+  "blockedUntil": [
+    "S3 data execution exists",
+    "source/export provenance exists",
+    "claim registry is source-backed",
+    "S7 integrity and citation checks pass"
+  ],
+  "nextStage": "P8-5 end-to-end user demo"
+}

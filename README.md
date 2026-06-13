@@ -94,6 +94,19 @@ The blueprint step creates candidate titles, a research-question frame, Methods
 sections, table/figure shells, and a draft claim registry. It remains a
 blueprint, not a manuscript draft or source-backed result.
 
+Generate dataset-specific writing adapters:
+
+```bash
+python3 harness/scripts/generate_dataset_writing_adapter.py \
+  --manifest examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/instantiation_manifest.json
+python3 harness/validators/validate_dataset_writing_adapters.py
+```
+
+The adapter step creates Methods and Results shells that enforce dataset
+language boundaries: NHANES cross-sectional survey writing, CHARLS longitudinal
+cohort writing, and GBD disease-burden writing. External omics remains
+placeholder-only until a real omics module exists.
+
 Start a CHARLS or GBD run after data access/export is ready:
 
 ```bash
