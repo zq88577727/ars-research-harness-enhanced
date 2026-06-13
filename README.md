@@ -110,6 +110,8 @@ Artifact retention rules are documented in
 [docs/12-artifact-governance.md](docs/12-artifact-governance.md).
 Post-release public-repository audits are documented in
 [docs/13-post-release-audit-p7-15.md](docs/13-post-release-audit-p7-15.md).
+Repository artifact cleanup planning is documented in
+[docs/14-artifact-cleanup-plan-p7-16.md](docs/14-artifact-cleanup-plan-p7-16.md).
 Repository data-use rules are documented in [DATA_POLICY.md](DATA_POLICY.md).
 
 ## Workflow
