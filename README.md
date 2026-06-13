@@ -107,6 +107,17 @@ language boundaries: NHANES cross-sectional survey writing, CHARLS longitudinal
 cohort writing, and GBD disease-burden writing. External omics remains
 placeholder-only until a real omics module exists.
 
+Generate an end-to-end topic-to-manuscript demo report:
+
+```bash
+python3 harness/scripts/run_topic_to_manuscript_demo.py \
+  examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json
+python3 harness/validators/validate_topic_to_manuscript_demo.py
+```
+
+The demo report summarizes the topic plan, instantiated projects, blueprints,
+writing shells, and readiness blockers in one auditable artifact.
+
 Start a CHARLS or GBD run after data access/export is ready:
 
 ```bash

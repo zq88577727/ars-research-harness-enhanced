@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "topic-to-manuscript-demo-report-v1",
+  "status": "demo-ready-not-submission-ready",
+  "topic": "depression, cognitive decline, cardiovascular disease burden, and bioinformatics mechanisms in older adults",
+  "sourceTopicPlan": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+  "workflowChain": [
+    {
+      "stage": "P8-1 topic plan",
+      "artifact": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json"
+    },
+    {
+      "stage": "P8-2 project scaffolds",
+      "artifact": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/instantiation_manifest.json"
+    },
+    {
+      "stage": "P8-3 manuscript blueprints",
+      "artifact": "project-level manuscript_blueprint.json files"
+    },
+    {
+      "stage": "P8-4 writing adapters",
+      "artifact": "project-level writing_adapter.json and shell files"
+    }
+  ],
+  "projects": [
+    {
+      "dataSource": "charls",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls",
+      "status": "supported-demo-project",
+      "manuscriptType": "longitudinal aging cohort manuscript",
+      "blueprint": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/manuscript_blueprint.json",
+      "writingAdapter": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/writing_adapter.json",
+      "methodsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/methods_shell.md",
+      "resultsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/results_shell.md",
+      "readiness": "not-ready-for-results-or-submission",
+      "blockedUntil": [
+        "S3 data execution exists",
+        "source/export provenance exists",
+        "claim registry is source-backed",
+        "S7 integrity and citation checks pass"
+      ]
+    },
+    {
+      "dataSource": "gbd",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd",
+      "status": "supported-demo-project",
+      "manuscriptType": "GBD descriptive disease-burden manuscript",
+      "blueprint": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/manuscript_blueprint.json",
+      "writingAdapter": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/writing_adapter.json",
+      "methodsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/methods_shell.md",
+      "resultsShell": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/results_shell.md",
+      "readiness": "not-ready-for-results-or-submission",
+      "blockedUntil": [
+        "S3 data execution exists",
+        "source/export provenance exists",
+        "claim registry is source-backed",
+        "S7 integrity and citation checks pass"
+      ]
+    },
+    {
+      "dataSource": "external_omics",
+      "projectDir": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-external-omics",
+      "status": "external-omics-boundary",
+      "boundaryArtifact": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-external-omics/external_omics_required.md",
+      "nextRequired": "P10 external omics module before mechanism claims."
+    }
+  ],
+  "checks": [
+    {
+      "check": "topicPlan",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.json",
+      "ok": true
+    },
+    {
+      "check": "topicPlanMarkdown",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/topic_plan.md",
+      "ok": true
+    },
+    {
+      "check": "workflowSeed",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/workflow-seed.json",
+      "ok": true
+    },
+    {
+      "check": "instantiationManifest",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/instantiation_manifest.json",
+      "ok": true
+    },
+    {
+      "check": "charls.projectManifest",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/project_manifest.json",
+      "ok": true
+    },
+    {
+      "check": "charls.workflowRun",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/workflow-run.json",
+      "ok": true
+    },
+    {
+      "check": "charls.manuscriptBlueprint",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/manuscript_blueprint.json",
+      "ok": true
+    },
+    {
+      "check": "charls.claimRegistryDraft",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/claim_registry.draft.json",
+      "ok": true
+    },
+    {
+      "check": "charls.writingAdapter",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/writing_adapter.json",
+      "ok": true
+    },
+    {
+      "check": "charls.methodsShell",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/methods_shell.md",
+      "ok": true
+    },
+    {
+      "check": "charls.resultsShell",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-charls/results_shell.md",
+      "ok": true
+    },
+    {
+      "check": "gbd.projectManifest",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/project_manifest.json",
+      "ok": true
+    },
+    {
+      "check": "gbd.workflowRun",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/workflow-run.json",
+      "ok": true
+    },
+    {
+      "check": "gbd.manuscriptBlueprint",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/manuscript_blueprint.json",
+      "ok": true
+    },
+    {
+      "check": "gbd.claimRegistryDraft",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/claim_registry.draft.json",
+      "ok": true
+    },
+    {
+      "check": "gbd.writingAdapter",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/writing_adapter.json",
+      "ok": true
+    },
+    {
+      "check": "gbd.methodsShell",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/methods_shell.md",
+      "ok": true
+    },
+    {
+      "check": "gbd.resultsShell",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-gbd/results_shell.md",
+      "ok": true
+    },
+    {
+      "check": "external_omics.boundary",
+      "path": "examples/topic-plans/depression-cognition-cvd-bioinformatics/scaffolds/depression-cognitive-decline-cardiovascular-disease-burden-and-bioinfo-external-omics/external_omics_required.md",
+      "ok": true
+    }
+  ],
+  "boundary": "This demo proves topic-to-project startup and writing scaffolding. It does not prove data access, analysis execution, source-backed results, omics support, or submission readiness.",
+  "ok": true
+}
